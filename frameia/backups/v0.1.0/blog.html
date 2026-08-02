@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Frame [IA]</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Paleta Premium - TEMA CLARO ULTRA-MODERNO */
+        :root {
+            --fundo-light: #F8F9FA; 
+            --fundo-card: #FFFFFF; 
+            --texto-titulo: #111111; 
+            --texto-corpo: #555555; 
+            --azul-tech: #004AAD;
+            --verde-neon: #00E676; 
+            --verde-app: #00C853; 
+            --laranja-frame: #ff6b35;
+            --laranja-azul-grad: linear-gradient(135deg, #ff6b35 0%, #004AAD 100%);
+            --borda-suave: rgba(0, 0, 0, 0.05); 
+            --sombra-card: 0 20px 40px rgba(0, 0, 0, 0.03);
+            --sombra-hover: 0 30px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--fundo-light); }
+        ::-webkit-scrollbar-thumb { background: #CCCCCC; border-radius: 10px; border: 2px solid var(--fundo-light); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--laranja-frame); }
+
+        ::selection { background: var(--laranja-frame); color: #FFF; }
+        ::-moz-selection { background: var(--laranja-frame); color: #FFF; }
+
+        body {
+            background-color: var(--fundo-light);
+            color: var(--texto-corpo);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4 { 
+            font-family: 'Poppins', sans-serif; 
+            color: var(--texto-titulo); 
+            letter-spacing: -0.5px; 
+            text-wrap: balance;
+        }
+        a { text-decoration: none; }
+
+        .text-gradient {
+            background: var(--laranja-azul-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .arrow { 
+            display: inline-block; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .card-blog:hover .blog-link .arrow,
+        .btn-vazado:hover .arrow { 
+            transform: translateX(6px); 
+        }
+
+        /* MODAL E PORTAL DO CLIENTE (LIGHT THEME) */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000; display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-box {
+            position: relative; transform: translateY(20px); transition: transform 0.4s ease;
+            background: #FFFFFF; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); border: 1px solid var(--borda-suave);
+        }
+        .modal-overlay.ativo { display: flex; opacity: 1; }
+        .modal-overlay.ativo .modal-box { transform: translateY(0); }
+        
+        .fechar-modal {
+            position: absolute; top: 20px; right: 25px; font-size: 2rem;
+            cursor: pointer; color: var(--texto-corpo); line-height: 1; transition: color 0.3s ease;
+        }
+        .fechar-modal:hover { color: var(--laranja-frame); }
+
+        /* AJUSTES FINOS DO PORTAL NO MODO CLARO DO BLOG */
+        .modal-box .portal-card {
+            padding: 16px 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 15px !important;
+            text-decoration: none !important;
+            border-radius: 16px !important;
+            width: 100% !important;
+            min-height: auto !important;
+            transition: all 0.3s ease !important;
+            box-sizing: border-box !important;
+            margin-bottom: 15px !important;
+        }
+
+        .modal-box .portal-card:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        .modal-box .portal-card.card-cash {
+            border: 1px solid rgba(0, 200, 83, 0.3) !important;
+            background: rgba(0, 200, 83, 0.03) !important;
+        }
+        .modal-box .portal-card.card-cash:hover {
+            transform: translateY(-4px) !important;
+            border-color: rgba(0, 200, 83, 0.6) !important;
+            box-shadow: 0 10px 25px rgba(0, 200, 83, 0.15) !important;
+        }
+        .modal-box .portal-card.card-cash:hover .portal-seta {
+            background: var(--verde-app) !important;
+        }
+
+        .modal-box .portal-card.card-reaction {
+            border: 1px solid rgba(255, 107, 53, 0.3) !important;
+            background: rgba(255, 107, 53, 0.03) !important;
+        }
+        .modal-box .portal-card.card-reaction:hover {
+            transform: translateY(-4px) !important;
+            border-color: rgba(255, 107, 53, 0.6) !important;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.15) !important;
+        }
+        .modal-box .portal-card.card-reaction:hover .portal-seta {
+            background: var(--laranja-frame) !important;
+        }
+
+        .modal-box .portal-card:hover .portal-seta svg {
+            stroke: #FFFFFF !important;
+        }
+
+        .modal-box .portal-icon-box {
+            width: 52px !important;
+            min-width: 52px !important;
+            height: 52px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: #111111 !important;
+            border-radius: 12px !important;
+            flex-shrink: 0 !important;
+        }
+
+        .modal-box .portal-info {
+            text-align: left !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            flex-grow: 1 !important;
+        }
+
+        .modal-box .portal-info h4 {
+            color: var(--texto-titulo) !important;
+            font-size: 1.3rem !important;
+            font-family: 'Poppins', sans-serif !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 1.2 !important;
+        }
+
+        .modal-box .portal-info p {
+            color: var(--texto-corpo) !important;
+            font-size: 0.85rem !important;
+            margin: 3px 0 0 0 !important;
+            padding: 0 !important;
+            line-height: 1.2 !important;
+            min-height: auto !important;
+        }
+
+        .modal-box .portal-seta {
+            width: 38px !important;
+            min-width: 38px !important;
+            height: 38px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        /* Formulario do Modal de Espera */
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; color: var(--texto-titulo); }
+        .form-group input {
+            width: 100%; padding: 15px; border: 1px solid var(--borda-suave);
+            border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 1rem;
+            background: #F8F9FA; color: var(--texto-titulo); transition: all 0.3s;
+        }
+        .form-group input:focus { outline: none; border-color: var(--laranja-frame); box-shadow: 0 0 10px rgba(255, 107, 53, 0.1); }
+
+        /* Header Minimalista Claro */
+        header {
+            padding: 20px 8%; 
+            display: flex; align-items: center; justify-content: space-between;
+            background: transparent; position: fixed; width: 100%; top: 0; z-index: 100;
+            border-bottom: 1px solid transparent; transition: all 0.4s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 8%; background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--borda-suave); box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .logo img { height: 65px; width: auto; margin-top: 6px; transition: transform 0.3s ease; }
+        header.scrolled .logo img { height: 55px; }
+        .logo img:hover { transform: scale(1.03); }
+
+        .menu-voltar {
+            color: var(--texto-corpo); font-size: 1.05rem; font-weight: 500;
+            transition: all 0.3s; display: flex; align-items: center; gap: 8px;
+        }
+        .menu-voltar:hover { color: var(--laranja-frame); transform: translateX(-5px); }
+        
+        .btn-vazado {
+            border: 1px solid var(--laranja-frame); color: var(--laranja-frame);
+            padding: 10px 28px; border-radius: 50px; font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-size: 0.95rem; cursor: pointer;
+            background: transparent;
+        }
+        .btn-vazado:hover { 
+            background: var(--laranja-frame); color: #FFFFFF; 
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.2); transform: scale(1.02);
+        }
+        .btn-vazado:active { transform: scale(0.98); }
+
+        /* Animações Fade-Up */
+        .fade-up {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; will-change: opacity, transform;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* Hero do Blog */
+        .hero-blog {
+            padding: 200px 8% 80px; text-align: center;
+            background-color: var(--fundo-light); border-bottom: 1px solid var(--borda-suave);
+        }
+        .tagline { color: var(--laranja-frame); font-weight: 800; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 25px; display: inline-block; text-transform: uppercase; background: rgba(255, 107, 53, 0.1); padding: 6px 16px; border-radius: 50px; border: 1px solid rgba(255, 107, 53, 0.2); }
+        .hero-blog h1 { font-size: 4rem; line-height: 1.15; margin-bottom: 20px; padding-bottom: 10px; letter-spacing: -2px; } 
+        .hero-blog p { font-size: 1.25rem; color: var(--texto-corpo); margin: 0 auto 40px; max-width: 750px; font-weight: 400; text-wrap: pretty;}
+
+        /* Filtro de Tags */
+        .tags-container {
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 60px;
+        }
+        .tag-filter {
+            padding: 10px 25px; border-radius: 50px; font-size: 0.95rem; font-weight: 500;
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--fundo-card); border: 1px solid var(--borda-suave); color: var(--texto-corpo); user-select: none;
+        }
+        .tag-filter:hover { border-color: var(--laranja-frame); color: var(--laranja-frame); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(255, 107, 53, 0.1); }
+        .tag-filter:active { transform: scale(0.95); }
+        .tag-filter.ativo { background: var(--laranja-frame); color: #FFF; border-color: var(--laranja-frame); box-shadow: 0 8px 20px rgba(255, 107, 53, 0.2); }
+
+        /* Grid do Blog */
+        .secao-blog { padding: 40px 8% 120px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        
+        .card-blog { 
+            background: var(--fundo-card); border-radius: 24px; overflow: hidden; 
+            border: 1px solid var(--borda-suave); box-shadow: var(--sombra-card);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); display: flex; flex-direction: column; cursor: pointer;
+        }
+        .card-blog:hover { transform: translateY(-10px) scale(1.02); box-shadow: var(--sombra-hover); border-color: rgba(0, 74, 173, 0.2); }
+        
+        .blog-img { 
+            width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; 
+            text-align: center; border-bottom: 4px solid var(--laranja-frame); position: relative; transition: filter 0.4s ease;
+        }
+        .card-blog:hover .blog-img { filter: brightness(1.1); }
+        
+        .blog-capa-texto {
+            color: #FFFFFF; font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 1px; line-height: 1.2; padding: 0 20px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); z-index: 2;
+        }
+
+        .blog-conteudo { padding: 35px 30px; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        .blog-tag { 
+            color: var(--laranja-frame); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; 
+            margin-bottom: 15px; display: inline-block; letter-spacing: 1px;
+            background: rgba(255, 107, 53, 0.1); padding: 5px 12px; border-radius: 6px; width: fit-content; white-space: nowrap; 
+        }
+        
+        .card-blog h3 { font-size: 1.4rem; margin-bottom: 15px; line-height: 1.3; color: var(--texto-titulo); min-height: 60px; }
+        .card-blog p { font-size: 1rem; color: var(--texto-corpo); margin-bottom: 25px; line-height: 1.6; flex-grow: 1; }
+        .blog-link { color: var(--azul-tech); font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
+        .card-blog:hover .blog-link { color: var(--laranja-frame); }
+
+        footer { text-align: center; padding: 80px 8% 60px; border-top: 1px solid var(--borda-suave); }
+        footer .logo-foter { height: 45px; margin-bottom: 25px; opacity: 0.9; }
+
+        @media (max-width: 1024px) { 
+            .grid-3 { grid-template-columns: repeat(2, 1fr); } 
+            .hero-blog h1 { font-size: 3.5rem; }
+        }
+        @media (max-width: 768px) {
+            header, header.scrolled { padding: 15px 5%; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); }
+            .logo img, header.scrolled .logo img { height: 50px; margin-top: 0; }
+            .menu-voltar { font-size: 1rem; margin-bottom: 5px; }
+            .btn-vazado { width: 100%; max-width: 300px; text-align: center; }
+            .hero-blog { padding: 200px 5% 60px; }
+            .hero-blog h1 { font-size: 2.5rem; letter-spacing: -1px; line-height: 1.1; }
+            .grid-3 { grid-template-columns: 1fr; gap: 30px; }
+            .secao-blog { padding: 20px 5% 80px; }
+            .card-blog h3 { min-height: auto; } 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PORTAL DO CLIENTE (LIGHT THEME) -->
+    <div class="modal-overlay" id="portalModal">
+        <div class="modal-box" style="text-align: center; width: 90%; max-width: 440px; padding: 45px 35px; background: #FFFFFF;">
+            <span class="fechar-modal" onclick="fecharModalPortal()">&times;</span>
+            <div style="margin-bottom: 20px; margin-top: 5px;">
+                <span class="tagline" style="color: var(--verde-app); background: rgba(0, 200, 83, 0.1); padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px; border: 1px solid rgba(0, 200, 83, 0.2); display: inline-block;">ÁREA DO CLIENTE</span>
+            </div>
+            <h3 style="font-size: 2.1rem; margin-bottom: 8px; color: var(--texto-titulo); letter-spacing: -1px; line-height: 1.15;">O seu Painel de<br>Comando</h3>
+            <p style="margin-bottom: 30px; font-size: 0.95rem; color: var(--texto-corpo);">Acesse as ferramentas do seu negócio.</p>
+
+            <!-- CARD: CASH -->
+            <a href="https://cash.frameia.com.br" class="portal-card card-cash">
+                <div class="portal-icon-box">
+                     <img src="assets/frame-cash-logo-clara.png" alt="Logo Cash" style="width: 80%; height: 80%; object-fit: contain; display: block;">
+                </div>
+                <div class="portal-info">
+                    <h4>Cash</h4>
+                    <p>Gestão Financeira</p>
+                </div>
+                <span class="portal-seta" style="background: rgba(0, 200, 83, 0.1);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--verde-app)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
+            </a>
+
+            <!-- CARD: REACTION -->
+            <a href="#" onclick="fecharModalPortal(); abrirModalEspera(); return false;" class="portal-card card-reaction">
+                <div class="portal-icon-box">
+                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--laranja-frame)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                </div>
+                <div class="portal-info">
+                    <h4>ReAction</h4>
+                    <p>Lista de Espera</p>
+                </div>
+                <span class="portal-seta" style="background: rgba(255, 107, 53, 0.1);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--laranja-frame)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MODAL DA LISTA DE ESPERA REACTION (LIGHT THEME) -->
+    <div class="modal-overlay" id="esperaModal">
+        <div class="modal-box" style="width: 90%; max-width: 440px; padding: 40px 35px; text-align: left;">
+            <span class="fechar-modal" onclick="fecharModalEspera()">&times;</span>
+            <span style="background: rgba(255, 107, 53, 0.1); color: var(--laranja-frame); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; display: inline-block; margin-bottom: 15px;">ACESSO ANTECIPADO</span>
+            
+            <h3 style="font-size: 1.6rem; margin-bottom: 15px; color: var(--texto-titulo); line-height: 1.2;">Não deixe clientes sem resposta.</h3>
+            <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--texto-corpo);">O ReAction lê as avaliações no Google e nas redes sociais e responde automaticamente com profissionalismo, 24h por dia.</p>
+            
+            <p style="margin-bottom: 25px; font-size: 0.9rem; color: var(--texto-titulo); background: #F8F9FA; padding: 12px; border-radius: 8px; border-left: 3px solid var(--laranja-frame);">
+                🔥 <strong>Esteja à frente da concorrência.</strong><br>
+                Cadastre o seu e-mail para ter acesso exclusivo ao lote inicial de lançamento.
+            </p>
+            
+            <form id="formEspera" action="https://formsubmit.co/contato@frameia.com.br" method="POST">
+                <input type="hidden" name="_cc" value="jadson@mjsv.com.br,mara@mjsv.com.br">
+                <input type="hidden" name="_subject" value="Nova Inscrição - Lista de Espera ReAction">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Seu e-mail profissional</label>
+                    <input type="email" name="Email" id="emailEspera" required placeholder="seu@email.com.br" style="padding: 15px;">
+                </div>
+                
+                <button type="submit" style="background: var(--laranja-frame); color: #FFF; width: 100%; padding: 16px; font-size: 1rem; border-radius: 12px; border: none; font-weight: 700; cursor: pointer;">Garantir o meu lugar &rarr;</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CABEÇALHO COM "PORTAL DO CLIENTE" -->
+    <header id="blog-header">
+        <a href="index" class="logo">
+            <img src="assets/logo-frameia-colorido.png" alt="Logo Frame IA">
+        </a>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <a href="sobre" class="menu-voltar" style="color: var(--texto-corpo); font-weight: 500; font-size: 1rem;">Sobre</a>
+            <a href="index" class="menu-voltar">&larr; Voltar para a Home</a>
+        </div>
+        <a href="#" onclick="abrirModalPortal(); return false;" class="btn-vazado">Portal do Cliente <span class="arrow">&rarr;</span></a>
+    </header>
+
+    <!-- HERO DO BLOG -->
+    <section class="hero-blog">
+        <span class="tagline fade-up">Conteúdo Estratégico</span>
+        <h1 class="text-gradient fade-up delay-1">Blog Frame [IA]</h1>
+        <p class="fade-up delay-2">A inteligência e as estratégias que usamos nos bastidores da nossa fábrica de software, prontas para você aplicar e transformar a sua rotina no piloto automático.</p>
+        
+        <div class="tags-container fade-up delay-3">
+            <div class="tag-filter ativo" data-filtro="todos">Todos os Artigos</div>
+            <div class="tag-filter" data-filtro="Pílulas de Produtividade">Pílulas de Produtividade</div>
+            <div class="tag-filter" data-filtro="Automação B2B">Automação B2B</div>
+            <div class="tag-filter" data-filtro="IA na Prática">IA na Prática</div>
+        </div>
+    </section>
+
+    <!-- GRADE DE ARTIGOS -->
+    <section class="secao-blog">
+        <div class="grid-3" id="gradeArtigos">
+
+            <!-- ARTIGO EM DESTAQUE NOVO: NOTEBOOKLM -->
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-notebooklm'">
+                <div class="blog-img" style="background: linear-gradient(135deg, #ff6b35 0%, #004AAD 100%);">
+                    <span class="blog-capa-texto">GUIA MESTRE<br>NOTEBOOKLM</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag" style="background: rgba(0, 74, 173, 0.1); color: var(--azul-tech);">IA na Prática</span>
+                    <h3>Guia Mestre NotebookLM: Inteligência Corporativa no Google</h3>
+                    <p>Transforme relatórios, POPs e reuniões em respostas precisas e sem alucinações usando o motor de IA mais refinado do Google.</p>
+                    <a href="artigos/artigo-notebooklm" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <!-- PÍLULAS DE PRODUTIVIDADE E OUTROS ARTIGOS -->
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-30'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">REVISÃO DE<br>CONTRATOS</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #30: Cláusulas perigosas ocultas nas entrelinhas contratuais?</h3>
+                    <p>Identifique brechas de risco financeiro, multas abusivas e obrigações operacionais em minutas e contratos complexos de forma automatizada usando IA.</p>
+                    <a href="artigos/artigo-pilula-30" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-29'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--laranja-frame) 0%, var(--azul-tech) 100%);">
+                    <span class="blog-capa-texto">MONITORAMENTO<br>CONCORRENTES</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #29: Sendo apanhado de surpresa pela concorrência?</h3>
+                    <p>Receba alertas resumidos, filtrados e contextualizados sobre lançamentos de tecnologias ou mudanças nas estratégias de concorrentes usando radares de IA.</p>
+                    <a href="artigos/artigo-pilula-29" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-28'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">PERSONAS<br>PARA DESIGN</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #28: Desenvolvendo produtos sem conhecer o cliente ideal?</h3>
+                    <p>Gere perfis detalhados de Personas de usuários finais e mapeie a jornada de consumo para orientar o desenvolvimento de novos produtos de forma cirúrgica com IA.</p>
+                    <a href="artigos/artigo-pilula-28" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-27'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--laranja-frame) 0%, var(--azul-tech) 100%);">
+                    <span class="blog-capa-texto">CÓDIGO<br>LEGADO</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #27: Medo de mexer em códigos antigos da empresa?</h3>
+                    <p>Gere comentários lógicos e documentações explicativas profundas para sistemas legados que ninguém mais sabe operar usando Inteligência Artificial avançada.</p>
+                    <a href="artigos/artigo-pilula-27" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-26'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">CHAMADOS<br>DE TI</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #26: Atendimento de suporte interno lento e travado?</h3>
+                    <p>Use Inteligência Artificial e NLP para ler descrições brutas de pedidos de assistência, classificar o problema e encaminhar automaticamente ao especialista correto.</p>
+                    <a href="artigos/artigo-pilula-26" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-25'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--laranja-frame) 0%, var(--azul-tech) 100%);">
+                    <span class="blog-capa-texto">PREVISÃO DE<br>DEMANDA</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #25: Sobras ou faltas de stock na operação?</h3>
+                    <p>Aplique modelos preditivos básicos e estatísticos em históricos de vendas para estimar a produção futura e as compras de forma automatizada.</p>
+                    <a href="artigos/artigo-pilula-25" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-24'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">RESUMO DE<br>VÍDEOS</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #24: Sem tempo para assistir a tutoriais de 2 horas?</h3>
+                    <p>Obtenha os pontos-chave, parâmetros exatos e guias passo a passo de webinars técnicos longos do YouTube sem assistir ao vídeo na íntegra usando IA.</p>
+                    <a href="artigos/artigo-pilula-24" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-23'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--laranja-frame) 0%, var(--azul-tech) 100%);">
+                    <span class="blog-capa-texto">TREINAMENTOS<br>SEGURANÇA</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #23: Treinamentos de segurança sem impacto visual?</h3>
+                    <p>Gere imagens ilustrativas e hiper-realistas de situações de risco específicas para usar em slides de DDS e cartilhas industriais através de IA.</p>
+                    <a href="artigos/artigo-pilula-23" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-22'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">NOVOS<br>FORNECEDORES</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #22: Horas perdidas a pesquisar novos fornecedores?</h3>
+                    <p>Realize varreduras profundas na web e crie tabelas comparativas de especificações técnicas de equipamentos e tecnologias em segundos usando IA.</p>
+                    <a href="artigos/artigo-pilula-22" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-21'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--laranja-frame) 0%, var(--azul-tech) 100%);">
+                    <span class="blog-capa-texto">FÓRMULAS<br>NO EXCEL</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #21: Preso em erros de fórmulas no Excel?</h3>
+                    <p>Peça para a IA explicar, corrigir ou programar fórmulas aninhadas e complexas a partir de linguagem natural em poucos segundos.</p>
+                    <a href="artigos/artigo-pilula-21" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-20'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">GESTÃO DE<br>TAREFAS</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #20: Notas de reunião sumindo no caos operacional?</h3>
+                    <p>Transforme anotações soltas e e-mails em blocos de tarefas organizados em quadros Kanban com prazos e responsáveis de forma automática.</p>
+                    <a href="artigos/artigo-pilula-20" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-19'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--laranja-frame) 0%, var(--azul-tech) 100%);">
+                    <span class="blog-capa-texto">ONBOARDING<br>ÁGIL</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #19: Gastando horas para treinar novos funcionários?</h3>
+                    <p>Crie roteiros de estudo visuais e quizzes técnicos personalizados baseados nos manuais da sua empresa de forma automática usando IA.</p>
+                    <a href="artigos/artigo-pilula-19" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-18'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">LOGS DE<br>ERRO</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #18: Linha parada por códigos de erro indecifráveis?</h3>
+                    <p>Cole o log de erro bruto do seu PLC ou sistema industrial e obtenha uma explicação em linguagem clara sobre a causa provável da falha em segundos.</p>
+                    <a href="artigos/artigo-pilula-18" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-17'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--laranja-frame) 0%, var(--azul-tech) 100%);">
+                    <span class="blog-capa-texto">CHECKLISTS<br>DE AUDITORIA</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #17: Falhas operacionais por falta de padronização?</h3>
+                    <p>Gere checklists detalhados e técnicos baseados rigorosamente nos parâmetros críticos de qualidade do seu processo específico com IA.</p>
+                    <a href="artigos/artigo-pilula-17" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-16'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">E-MAILS<br>DELICADOS</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #16: Travado na hora de escrever e-mails delicados?</h3>
+                    <p>Reescreva rascunhos brutos e ajuste o tom para ser mais diplomático, persuasivo ou executivo de forma instantânea.</p>
+                    <a href="artigos/artigo-pilula-16" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-15'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--laranja-frame) 0%, var(--azul-tech) 100%);">
+                    <span class="blog-capa-texto">DADOS DE<br>MANUTENÇÃO</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #15: Horas perdidas cruzando dados de manutenção?</h3>
+                    <p>Identifique padrões ocultos e correlações entre falhas de máquinas em grandes volumes de dados históricos instantaneamente com IA.</p>
+                    <a href="artigos/artigo-pilula-15" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-14'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">IDEAÇÃO<br>COM IA</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #14: Reuniões de Kaizen sem novas ideias?</h3>
+                    <p>A criatividade humana tem limites. Descubra como utilizar a IA como parceiro de brainstorming incansável para sugerir dezenas de melhorias práticas.</p>
+                    <a href="artigos/artigo-pilula-14" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-13'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--laranja-frame) 0%, var(--azul-tech) 100%);">
+                    <span class="blog-capa-texto">TRADUÇÃO<br>TÉCNICA</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #13: Manuais em outros idiomas a travar a operação?</h3>
+                    <p>Traduza PDFs inteiros de manuais técnicos de máquinas estrangeiras mantendo a formatação e os diagramas originais de forma instantânea com IA.</p>
+                    <a href="artigos/artigo-pilula-13" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-12'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">PROGRAMAÇÃO<br>COM IA</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #12: Fim das horas perdidas a tentar programar</h3>
+                    <p>A barreira técnica já não é desculpa. Transforme as suas ideias em código pronto a usar em VBA ou Python apenas descrevendo o que precisa em linguagem natural.</p>
+                    <a href="artigos/artigo-pilula-12" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-11'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">ORÇAMENTOS<br>RÁPIDOS</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #11: Fim das horas perdidas a comparar compras</h3>
+                    <p>Como a IA pode extrair dados de múltiplos PDFs e consolidar tudo numa tabela comparativa de orçamentos de forma instantânea e sem custos ocultos.</p>
+                    <a href="artigos/artigo-pilula-11" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-10'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">APRESENTAÇÕES<br>INSTANTÂNEAS</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #10: Fim das horas perdidas a criar slides</h3>
+                    <p>Veja como a IA pode gerar slides profissionais e gráficos de alto impacto baseados apenas no texto bruto do seu relatório de gestão.</p>
+                    <a href="artigos/artigo-pilula-10" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-09'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">INSPEÇÃO<br>VISUAL</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #09: Fim dos defeitos na linha de produção</h3>
+                    <p>Saiba como treinar modelos de Visão Computacional para identificar anomalias sem precisar de escrever uma única linha de código.</p>
+                    <a href="artigos/artigo-pilula-09" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-08'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">NORMAS<br>TÉCNICAS</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #08: Fim das horas perdidas a caçar cláusulas</h3>
+                    <p>Transforme os seus PDFs estáticos em fontes de consulta inteligente. Encontre respostas em NRs e ISOs em segundos através de buscas semânticas.</p>
+                    <a href="artigos/artigo-pilula-08" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-07'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">ESCALAS<br>AUTOMÁTICAS</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #07: Fim das horas a montar escalas de turno</h3>
+                    <p>Como algoritmos de otimização podem gerar escalas automáticas que respeitam leis trabalhistas e folgas, sem que perca horas em planilhas.</p>
+                    <a href="artigos/artigo-pilula-07" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-06'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">E-MAILS<br>PRIORIZADOS</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #06: Fim das horas perdidas na triagem de e-mails</h3>
+                    <p>Pare de ler e-mails de baixa prioridade. Descubra como a IA pode ler o sentimento de cada mensagem e enviar alertas apenas para o que é crítico.</p>
+                    <a href="artigos/artigo-pilula-06" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-05'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">LEITURA<br>MÁGICA</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #05: Chega de horas perdidas digitando dados</h3>
+                    <p>O fim da digitação dupla no chão de fábrica. Como usar Visão Computacional (OCR) para extrair dados de formulários de papel direto para o Excel.</p>
+                    <a href="artigos/artigo-pilula-05" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+            
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-04'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">Causa Raiz<br>com IA</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #04: Acelerando a Análise de Causa Raiz</h3>
+                    <p>Chega de horas perdidas no diagrama de Ishikawa. Acelere a investigação de falhas e a técnica dos 5 Porquês usando Inteligência Artificial.</p>
+                    <a href="artigos/artigo-pilula-04" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-03'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%);">
+                    <span class="blog-capa-texto">POPs em Minutos</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #03: Criando POPs do Zero em Minutos</h3>
+                    <p>Documentar processos não precisa ser um pesadelo. Aprenda a estruturar Procedimentos Operacionais Padrão usando IA para garantir escala e qualidade.</p>
+                    <a href="artigos/artigo-pilula-03" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-02'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%); border-bottom-color: var(--azul-tech);">
+                    <span class="blog-capa-texto">Atas Automáticas</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #02: Fim das Horas Perdidas com Atas</h3>
+                    <p>Como a IA atua como seu ouvinte. Transforme reuniões em atas perfeitas e crie automações que lançam tarefas direto no Trello com responsáveis e prazos.</p>
+                    <a href="artigos/artigo-pilula-02" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-pilula-01'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--azul-tech) 0%, var(--verde-neon) 100%); color: #FFF;">
+                    <span class="blog-capa-texto">Dados Limpos</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Pílulas de Produtividade</span>
+                    <h3>Pílula #01: Pare de Formatar Planilhas Manualmente</h3>
+                    <p>Aprenda a usar o Jeito Rápido (Copilot) e o Profissional (Python) para formatar bases de dados brutas instantaneamente enquanto você toma café.</p>
+                    <a href="artigos/artigo-pilula-01" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-automacao-8020'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--verde-neon) 0%, #004d27 100%); border-bottom-color: var(--verde-app);">
+                    <span class="blog-capa-texto">A Regra 80/20</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">Automação B2B</span>
+                    <h3>IA + Automação: Como Ganhar Tempo Livre Hoje</h3>
+                    <p>Pare de trabalhar duro, comece a trabalhar inteligente. Inverta a regra 80/20 do seu tempo descobrindo o poder de ferramentas combinadas como Fireflies, Copilot e Julius AI.</p>
+                    <a href="artigos/artigo-automacao-8020" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" onclick="window.location.href='artigos/artigo-5-formas-praticas'">
+                <div class="blog-img" style="background: linear-gradient(135deg, var(--laranja-frame) 0%, var(--azul-tech) 100%);">
+                    <span class="blog-capa-texto">IA no Dia a Dia</span>
+                </div>
+                <div class="blog-conteudo">
+                    <span class="blog-tag">IA na Prática</span>
+                    <h3>5 Formas Práticas de Usar IA no Dia a Dia</h3>
+                    <p>Muito além do ChatGPT. Conheça +15 ferramentas para descomplicar sua rotina, desde o Estudo Inteligente até Geração de Imagens exclusivas e Apresentações de Impacto.</p>
+                    <a href="artigos/artigo-5-formas-praticas" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="fade-up">
+        <img src="assets/logo-frameia-colorido.png" alt="Logo Frame IA" class="logo-foter">
+        <p style="font-size: 0.95rem; font-weight: 500;">&copy; 2026 Frame [IA] - Tecnologia para Pequenos Negócios. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function abrirModalPortal() {
+            const modal = document.getElementById('portalModal');
+            if(modal) modal.classList.add('ativo');
+        }
+
+        function fecharModalPortal() {
+            const modal = document.getElementById('portalModal');
+            if(modal) modal.classList.remove('ativo');
+        }
+
+        function abrirModalEspera() {
+            const modal = document.getElementById('esperaModal');
+            if(modal) modal.classList.add('ativo');
+        }
+
+        function fecharModalEspera() {
+            const modal = document.getElementById('esperaModal');
+            if(modal) modal.classList.remove('ativo');
+        }
+
+        window.onclick = function(event) {
+            const modalPortal = document.getElementById('portalModal');
+            const modalEspera = document.getElementById('esperaModal');
+            
+            if (event.target === modalPortal) fecharModalPortal();
+            if (event.target === modalEspera) fecharModalEspera();
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('blog-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.fade-up');
+            elements.forEach(el => observer.observe(el));
+            
+            setTimeout(() => {
+                document.querySelectorAll('.hero-blog .fade-up').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }, 100);
+
+            // SISTEMA DE FILTRAGEM DE ARTIGOS
+            const botoesFiltro = document.querySelectorAll('.tag-filter');
+            const cartoesArtigos = document.querySelectorAll('.card-blog');
+
+            botoesFiltro.forEach(botao => {
+                botao.addEventListener('click', function() {
+                    botoesFiltro.forEach(b => b.classList.remove('ativo'));
+                    this.classList.add('ativo');
+
+                    const categoriaDesejada = this.getAttribute('data-filtro').trim();
+
+                    cartoesArtigos.forEach(card => {
+                        const tagElemento = card.querySelector('.blog-tag');
+                        const categoriaCard = tagElemento ? tagElemento.textContent.trim() : '';
+
+                        if (categoriaDesejada === 'todos' || categoriaCard.toLowerCase() === categoriaDesejada.toLowerCase()) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
