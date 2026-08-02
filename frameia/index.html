@@ -11,7 +11,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Paleta Premium Frame [IA] v0.1.4 */
+        /* Paleta Premium Frame [IA] v0.1.3 */
         :root {
             --fundo-black: #0B0B0B;
             --grafite-dark: #141414;
@@ -153,7 +153,7 @@
         .modal-info a { color: var(--verde-neon); font-weight: 600; text-decoration: none; transition: opacity 0.3s;}
         .modal-info a:hover { opacity: 0.8; }
 
-        /* PORTAL DO CLIENTE - CARDS COM IMAGENS DAS LOGOS ANEXADAS */
+        /* PORTAL DO CLIENTE - CARDS SUTIS & ELEGANTES */
         .modal-box .portal-card {
             padding: 16px 20px !important;
             display: flex !important;
@@ -201,22 +201,16 @@
         }
 
         .modal-box .portal-icon-box {
-            width: 52px !important;
-            min-width: 52px !important;
-            height: 52px !important;
+            width: 48px !important;
+            min-width: 48px !important;
+            height: 48px !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             background: #111111 !important;
-            border-radius: 14px !important;
+            border-radius: 12px !important;
             border: 1px solid rgba(255,255,255,0.08) !important;
             flex-shrink: 0 !important;
-            overflow: hidden !important;
-        }
-        .modal-box .portal-icon-box img {
-            width: 85% !important;
-            height: 85% !important;
-            object-fit: contain !important;
         }
 
         .modal-box .portal-info {
@@ -373,7 +367,7 @@
         .card-glass h3 { font-size: 2.2rem; margin-bottom: 12px; }
         .card-glass p { color: var(--cinza-texto); margin-bottom: 25px; min-height: 70px; line-height: 1.6; }
 
-        /* ESTILO ELEGANTE DA SEÇÃO DE SERVIÇOS v0.1.4 */
+        /* ESTILO ELEGANTE DA SEÇÃO DE SERVIÇOS v0.1.3 */
         .servicos-sutil-box {
             background: rgba(20, 20, 20, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -532,7 +526,7 @@
 </head>
 <body>
 
-    <!-- PORTAL DO CLIENTE COM IMAGENS ANEXADAS -->
+    <!-- PORTAL DO CLIENTE -->
     <div class="modal-overlay" id="portalModal">
         <div class="modal-box" style="text-align: center; width: 90%; max-width: 440px; padding: 45px 35px; background: linear-gradient(145deg, #1A1A1A 0%, #111111 100%); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 40px 80px rgba(0,0,0,0.8); border-radius: 24px;">
             
@@ -545,10 +539,10 @@
             <h3 style="font-size: 2.1rem; margin-bottom: 8px; color: #FFFFFF; letter-spacing: -1px; line-height: 1.15;">O seu Painel de<br>Comando</h3>
             <p style="margin-bottom: 25px; font-size: 0.95rem; color: #A0A0A0;">Acesse as ferramentas do seu negócio.</p>
 
-            <!-- CARD: CASH (LOGOTIPO ANEXADO) -->
-            <a href="https://cash.frameia.com.br" target="_blank" class="portal-card card-cash">
+            <!-- CARD: CASH -->
+            <a href="https://cash.frameia.com.br" class="portal-card card-cash">
                 <div class="portal-icon-box">
-                     <img src="assets/cash-logo-green.png" alt="Logo Cash by Frame IA">
+                     <img src="assets/frame-cash-logo-clara.png" alt="Logo Cash" style="width: 80%; height: 80%; object-fit: contain; display: block;">
                 </div>
                 <div class="portal-info">
                     <h4>Cash</h4>
@@ -559,10 +553,10 @@
                 </span>
             </a>
 
-            <!-- CARD: REACTION (LOGOTIPO ANEXADO) -->
-            <a href="https://reaction.frameia.com.br" target="_blank" class="portal-card card-reaction">
+            <!-- CARD: REACTION (AGORA ATIVO BETA) -->
+            <a href="https://reaction.frameia.com.br" class="portal-card card-reaction">
                 <div class="portal-icon-box">
-                     <img src="assets/reaction-logo-icon.png" alt="Logo ReAction">
+                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                 </div>
                 <div class="portal-info">
                     <h4>ReAction <span style="font-size: 0.65rem; color: var(--laranja-frame); background: rgba(255,107,53,0.15); padding: 2px 6px; border-radius: 4px; font-weight: bold;">BETA</span></h4>
@@ -573,7 +567,7 @@
                 </span>
             </a>
 
-            <!-- CARD: HUBITAT (EM BREVE) -->
+            <!-- CARD: HUBITAT (EM BREVE / EM IDEAÇÃO) -->
             <a href="#" onclick="fecharModalPortal(); abrirModalEsperaHubitat(); return false;" class="portal-card card-hubitat">
                 <div class="portal-icon-box">
                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A2BE2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 17 22 12"></polyline></svg>
@@ -625,7 +619,7 @@
         </div>
     </div>
     
-    <!-- MODAL DA LISTA DE ESPERA HUBITAT -->
+    <!-- MODAL DA LISTA DE ESPERA HUBITAT (IDEAÇÃO / CONDOMÍNIOS) -->
     <div class="modal-overlay" id="esperaHubitatModal">
         <div class="modal-box">
             <span class="fechar-modal" onclick="fecharModalEsperaHubitat()">&times;</span>
@@ -725,7 +719,7 @@
         </div>
     </section>
 
-    <!-- SEÇÃO SUTIL DE SERVIÇOS & PREÇOS -->
+    <!-- SEÇÃO SUTIL DE SERVIÇOS & PREÇOS (v0.1.3 - HUBITAT CONDOMÍNIOS EM IDEAÇÃO) -->
     <section id="servicos" class="secao" style="background-color: var(--grafite-dark); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
         <span class="tagline fade-up" style="text-align: center; color: var(--verde-neon);">TRANSPARÊNCIA E VALORES</span>
         <h2 class="secao-titulo fade-up delay-1">Preços Simples e Acessíveis</h2>
@@ -763,14 +757,14 @@
                 <a href="https://reaction.frameia.com.br" target="_blank" class="btn-secundario" style="color: var(--laranja-frame); margin-top: 10px;">Testar ReAction Beta &rarr;</a>
             </div>
 
-            <!-- BOX HUBITAT -->
+            <!-- BOX HUBITAT (CONDOMÍNIOS & RESIDENCIAIS EM IDEAÇÃO) -->
             <div class="servicos-sutil-box fade-up delay-3" style="border-color: rgba(138, 43, 226, 0.25);">
                 <div>
                     <span class="selo selo-breve">HUBITAT (EM BREVE)</span>
                     <h3 style="font-size:1.6rem; color:#FFF; margin-bottom:15px;">Gestão Residencial</h3>
                     
                     <div class="servicos-lista-item">
-                        <div>• <strong>Em Desenvolvimento:</strong> Solução focada na gestão inteligente de condomínio, residenciais e apartamentos.</div>
+                        <div>• <strong>Em Desenvolvimento:</strong> Solução focada na gestão inteligente de condomínios, residenciais e apartamentos.</div>
                         <div>• Cadastre seu e-mail para acompanhar as novidades durante o processo de ideação.</div>
                     </div>
                 </div>
