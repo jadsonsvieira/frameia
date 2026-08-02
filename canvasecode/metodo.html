@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Método C&C | Engenharia do Design Estratégico</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#004AAD',
+                            graphite: '#3A3A3A',
+                            green: '#00E676',
+                            bg: '#F8F8F8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* A CAMADA PREMIUM: Fundo de Prancheta (Grid Pattern) */
+        body { 
+            background-color: #F8F8F8; 
+            color: #3A3A3A; 
+            background-image: 
+                linear-gradient(rgba(0, 74, 173, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 74, 173, 0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #00E676 0%, #004AAD 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg { background: linear-gradient(135deg, #00E676 0%, #004AAD 100%); }
+        
+        /* Glassmorphism do Header e Cards */
+        .glass-header {
+            background: rgba(248, 248, 248, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .blueprint-line {
+            position: relative;
+        }
+        .blueprint-line::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, #004AAD, transparent);
+        }
+    </style>
+</head>
+<body class="antialiased font-sans">
+
+    <header class="glass-header fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center">
+                <img src="assets/logo.png" alt="Canvas & Code" class="h-10 md:h-12 hover:scale-105 transition-transform duration-300">
+            </a>
+
+            <nav class="hidden md:flex space-x-10 text-base font-medium text-gray-600">
+                <a href="index.html" class="hover:text-brand-blue transition-colors">Início</a>
+                <a href="index.html#servicos" class="hover:text-brand-blue transition-colors">Serviços</a>
+                <a href="#briefing" class="hover:text-brand-blue transition-colors">01. Briefing</a>
+                <a href="#laboratorio" class="hover:text-brand-blue transition-colors">02. Laboratório</a>
+                <a href="#montagem" class="hover:text-brand-blue transition-colors">03. Montagem</a>
+                <a href="#stress" class="hover:text-brand-blue transition-colors">04. Stress Test</a>
+            </nav>
+            <a href="contato.html" class="gradient-bg text-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-lg transition-all hover:-translate-y-0.5">
+                Aplicar o Método
+            </a>
+        </div>
+    </header>
+
+    <section class="relative pt-40 pb-20 px-6 glass-panel border-b border-gray-200/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-brand-blue font-bold text-xs tracking-widest uppercase">
+                Processo Registrado
+            </div>
+            <h1 class="font-display text-4xl md:text-6xl font-extrabold text-brand-graphite leading-tight mb-6">
+                A Engenharia por trás do <br><span class="gradient-text">Canvas & Code.</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl leading-relaxed italic">
+                "Não vendemos arte solta. Vendemos um processo rigoroso de construção de autoridade visual."
+            </p>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 py-20 space-y-32">
+
+        <section id="briefing" class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="blueprint-line">
+                <span class="font-mono text-brand-blue font-bold text-lg mb-4 block tracking-tighter">// ETAPA 01</span>
+                <h2 class="font-display text-3xl font-bold mb-6 text-brand-graphite">O Briefing de Máquina</h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    O erro mais comum do design amador é começar desenhando. No Método C&C, o design começa na <strong>palavra</strong>. Utilizamos o <strong>Google AI Studio Pro</strong> para atuar como um Estrategista de Marca sênior.
+                </p>
+                <div class="glass-panel p-6 rounded-2xl shadow-sm">
+                    <h4 class="font-display font-bold text-sm mb-3 text-brand-graphite">O que entregamos aqui:</h4>
+                    <ul class="text-sm space-y-2 text-gray-600">
+                        <li>• Estruturação semântica da marca.</li>
+                        <li>• Definição de 5 palavras-chave de autoridade.</li>
+                        <li>• Mapeamento de metáforas visuais não-óbvias.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="glass-panel p-8 rounded-[2rem] shadow-xl rotate-2">
+                <div class="bg-brand-graphite rounded-xl p-4 font-mono text-[10px] text-brand-green leading-tight">
+                    <span class="text-gray-400">// Prompt de Engenharia</span><br>
+                    "Atue como Diretor de Arte sênior... sugira metáforas visuais que fujam do óbvio... valide a psicologia das cores para o público B2B..."
+                </div>
+            </div>
+        </section>
+
+        <section id="laboratorio" class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="md:order-2 blueprint-line">
+                <span class="font-mono text-brand-blue font-bold text-lg mb-4 block tracking-tighter">// ETAPA 02</span>
+                <h2 class="font-display text-3xl font-bold mb-6 text-brand-graphite">O Laboratório Visual</h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Com os conceitos validados, materializamos ideias com agilidade extrema. Unimos o motor criativo da <strong>IA Generativa</strong> com o poder de escala do <strong>Canva Pro</strong>.
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                    Não buscamos o logo pronto na IA. Buscamos o <strong>símbolo bruto</strong> que transmita a essência do negócio, filtrando o que é ruído do que é autoridade.
+                </p>
+            </div>
+            <div class="md:order-1 relative">
+                <div class="w-full aspect-square bg-gradient-to-br from-brand-green/20 to-brand-blue/20 rounded-full blur-3xl absolute inset-0"></div>
+                <div class="relative glass-panel p-4 rounded-3xl shadow-2xl">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="bg-gray-100/50 h-32 rounded-lg"></div>
+                        <div class="bg-gray-200/50 h-32 rounded-lg"></div>
+                        <div class="bg-gray-200/50 h-32 rounded-lg"></div>
+                        <div class="bg-brand-blue/10 h-32 rounded-lg flex items-center justify-center border border-brand-blue/20">
+                            <span class="text-brand-blue text-xs font-bold font-mono">LAB_C&C</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="montagem" class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="blueprint-line">
+                <span class="font-mono text-brand-blue font-bold text-lg mb-4 block tracking-tighter">// ETAPA 03</span>
+                <h2 class="font-display text-3xl font-bold mb-6 text-brand-graphite">Montagem & Refino</h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Aqui é onde a estética ganha peso corporativo. Unimos o símbolo refinado à nossa tipografia padrão-ouro: <strong>Poppins</strong>. 
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                    Ajustamos o kerning (espaçamento), o alinhamento óptico e a hierarquia visual. O objetivo é que a marca seja legível em qualquer escala.
+                </p>
+            </div>
+            <div class="flex justify-center glass-panel p-10 rounded-[2.5rem] shadow-lg">
+                <div class="text-center">
+                    <div class="font-display text-5xl font-black text-brand-graphite tracking-tighter mb-2">CANVAS <span class="text-gray-300 font-normal">&</span> CODE</div>
+                    <div class="h-px w-full bg-brand-blue"></div>
+                    <div class="font-mono text-[10px] text-brand-blue mt-2 uppercase tracking-[0.5em]">Alinhamento Óptico 100%</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stress" class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="md:order-2 blueprint-line">
+                <span class="font-mono text-brand-blue font-bold text-lg mb-4 block tracking-tighter">// ETAPA 04</span>
+                <h2 class="font-display text-3xl font-bold mb-6 text-brand-graphite">O Stress Test</h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    A Prova de Fogo. Um logotipo não serve para ficar em um fundo branco perfeito. Ele precisa funcionar no <strong>mundo real</strong>.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex gap-4 items-start glass-panel p-3 rounded-xl shadow-sm">
+                        <div class="bg-brand-green text-white p-1 rounded-md text-[10px] font-bold">ON</div>
+                        <p class="text-sm text-gray-600 italic">Teste de contraste em fundos complexos.</p>
+                    </div>
+                    <div class="flex gap-4 items-start glass-panel p-3 rounded-xl shadow-sm">
+                        <div class="bg-brand-blue text-white p-1 rounded-md text-[10px] font-bold">ON</div>
+                        <p class="text-sm text-gray-600 italic">Legibilidade em dispositivos mobile.</p>
+                    </div>
+                    <div class="flex gap-4 items-start glass-panel p-3 rounded-xl shadow-sm">
+                        <div class="bg-brand-graphite text-white p-1 rounded-md text-[10px] font-bold">ON</div>
+                        <p class="text-sm text-gray-600 italic">Padronização para Decks High-Ticket.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:order-1 flex justify-center">
+                <div class="w-64 h-64 border-4 border-dashed border-brand-blue/30 rounded-xl flex items-center justify-center p-8 glass-panel shadow-inner">
+                    <span class="font-display font-bold text-brand-blue/20 text-6xl select-none">1080px</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white/90 backdrop-blur-sm border-t border-gray-200 py-16 px-6 text-center">
+        <h3 class="font-display text-2xl font-bold text-brand-graphite mb-8">O design é a primeira barreira entre o seu produto e o seu preço.</h3>
+        <a href="contato.html" class="inline-block gradient-bg text-white px-10 py-4 rounded-full font-bold shadow-xl shadow-brand-green/20 hover:scale-105 transition-transform">
+            Aplicar o Método na minha Marca
+        </a>
+        <div class="mt-16 text-gray-500 text-sm font-medium">
+            <p>Uma empresa <strong class="text-brand-graphite">MJSV Holding</strong></p>
+            <p class="mt-2 text-gray-400">&copy; 2026 Canvas & Code. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

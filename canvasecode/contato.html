@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Estratégica | Canvas & Code</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#004AAD',
+                            graphite: '#3A3A3A',
+                            green: '#00E676',
+                            bg: '#F8F8F8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* A CAMADA PREMIUM: Fundo de Prancheta (Grid/Dot Pattern) */
+        body { 
+            background-color: #F8F8F8; 
+            color: #3A3A3A; 
+            background-image: 
+                linear-gradient(rgba(0, 74, 173, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 74, 173, 0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #00E676 0%, #004AAD 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg { background: linear-gradient(135deg, #00E676 0%, #004AAD 100%); }
+        
+        /* Glassmorphism do Header */
+        .glass-header {
+            background: rgba(248, 248, 248, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Formulários e Inputs */
+        .input-field {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #004AAD;
+            box-shadow: 0 0 0 4px rgba(0, 74, 173, 0.05);
+            background: #FFFFFF;
+        }
+        
+        /* Efeito de Vidro para o Card do Formulário */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body class="antialiased font-sans min-h-screen flex flex-col">
+
+    <header class="glass-header fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center">
+                <img src="assets/logo.png" alt="Canvas & Code" class="h-10 md:h-12 hover:scale-105 transition-transform duration-300">
+            </a>
+            <nav class="hidden md:flex space-x-10 text-base font-medium text-gray-600">
+                <a href="index.html" class="hover:text-brand-blue transition-colors">Início</a>
+                <a href="index.html#servicos" class="hover:text-brand-blue transition-colors">Serviços</a>
+                <a href="metodo.html" class="hover:text-brand-blue transition-colors">O Método</a>
+                <a href="vitrine.html" class="hover:text-brand-blue transition-colors">Vitrine</a>
+            </nav>
+            <div class="text-xs font-mono font-bold text-brand-blue uppercase tracking-widest bg-brand-blue/10 px-4 py-2 rounded-full border border-brand-blue/20">
+                Análise Aberta
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-40 pb-20 px-6 relative z-10">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
+            
+            <div>
+                <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand-graphite leading-tight mb-8">
+                    Eleve o seu <br><span class="gradient-text">Padrão B2B.</span>
+                </h1>
+                <p class="text-lg text-gray-600 mb-12 leading-relaxed">
+                    Não trabalhamos com projetos genéricos. O Canvas & Code aceita apenas parceiros que buscam <strong>Autoridade Absoluta</strong> e entendem que o design é a armadura da sua tecnologia.
+                </p>
+                
+                <div class="space-y-8">
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center flex-shrink-0 border border-brand-blue/20">
+                            <span class="font-bold text-brand-blue">01</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-brand-graphite">Análise de GAP UX/UI</h4>
+                            <p class="text-sm text-gray-500">Identificamos onde a sua marca está a perder valor e preço no mercado.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 rounded-full bg-brand-green/10 flex items-center justify-center flex-shrink-0 border border-brand-green/20">
+                            <span class="font-bold text-brand-green">02</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-brand-graphite">Proposta High-Ticket</h4>
+                            <p class="text-sm text-gray-500">Desenhamos uma solução visual de excelência pronta para o negócio rodar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-8 md:p-10 rounded-[2.5rem] shadow-2xl shadow-brand-blue/10 border border-white">
+                <form action="#" class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Nome do Tomador de Decisão</label>
+                        <input type="text" placeholder="Ex: Jadson Vieira" class="input-field shadow-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">E-mail Corporativo</label>
+                        <input type="email" placeholder="nome@empresa.com.br" class="input-field shadow-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Empresa / Produto Tech</label>
+                        <input type="text" placeholder="Qual software ou marca vamos elevar?" class="input-field shadow-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">O seu maior desafio atual</label>
+                        <select class="input-field appearance-none shadow-sm text-gray-600 font-medium">
+                            <option>Melhorar Conversão (UI/UX)</option>
+                            <option>Criar Identidade Visual Premium</option>
+                            <option>Pitch Decks para Grandes Contratos</option>
+                            <option>Consultoria de Estética Corporativa</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="w-full gradient-bg text-white font-bold py-4 rounded-xl shadow-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-3 mt-4">
+                        Iniciar Projeto Estratégico
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12" 5 19 12 12 19"></polyline></svg>
+                    </button>
+                    
+                    <p class="text-[10px] text-center text-gray-400 font-mono mt-4">
+                        // Nossa equipe técnica analisará o seu perfil. Retorno em até 48h.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white/90 backdrop-blur-sm border-t border-gray-200 py-10 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:row justify-between items-center gap-4 text-xs text-gray-400 uppercase tracking-widest font-medium">
+            <p>Uma empresa <strong class="text-brand-graphite">MJSV Holding</strong></p>
+            <p>&copy; 2026 Canvas & Code. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

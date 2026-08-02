@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre a Frame [IA] | Soluções Fáceis para o Seu Negócio</title>
+    
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --fundo-light: #F8F9FA; 
+            --fundo-card: #FFFFFF; 
+            --texto-titulo: #111111; 
+            --texto-corpo: #444444; 
+            --azul-tech: #004AAD;
+            --verde-app: #00C853; 
+            --verde-app-grad: linear-gradient(135deg, #00E676 0%, #00A040 100%);
+            --laranja-frame: #ff6b35;
+            --laranja-azul-grad: linear-gradient(135deg, #ff6b35 0%, #004AAD 100%);
+            --borda-suave: rgba(0, 0, 0, 0.06); 
+            --sombra-card: 0 15px 35px rgba(0, 0, 0, 0.04);
+            --sombra-hover: 0 25px 50px rgba(0, 0, 0, 0.08);
+            --cinza-discreto: #6B7280;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--fundo-light); }
+        ::-webkit-scrollbar-thumb { background: #CCCCCC; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--laranja-frame); }
+
+        ::selection { background: var(--laranja-frame); color: #FFF; }
+
+        body {
+            background-color: var(--fundo-light);
+            color: var(--texto-corpo);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4 { 
+            font-family: 'Poppins', sans-serif; 
+            color: var(--texto-titulo); 
+            letter-spacing: -0.5px; 
+            text-wrap: balance;
+        }
+        a { text-decoration: none; }
+
+        .text-gradient {
+            background: var(--laranja-azul-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .arrow { 
+            display: inline-block; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .btn-vazado:hover .arrow,
+        .btn-app-verde:hover .arrow { 
+            transform: translateX(6px); 
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(0, 200, 83, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            will-change: opacity, transform;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* MODAL E PORTAL DO CLIENTE (LIGHT THEME) */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000; display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-box { 
+            position: relative; 
+            transform: translateY(20px); 
+            transition: transform 0.4s ease;
+            background: #FFFFFF;
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            border: 1px solid var(--borda-suave);
+        }
+        .modal-overlay.ativo { display: flex; opacity: 1; }
+        .modal-overlay.ativo .modal-box { transform: translateY(0); }
+        .fechar-modal { position: absolute; top: 20px; right: 25px; font-size: 2rem; cursor: pointer; color: var(--texto-corpo); transition: color 0.3s; }
+        .fechar-modal:hover { color: var(--laranja-frame); }
+
+        /* AJUSTES FINOS DO PORTAL NO MODO CLARO */
+        .modal-box .portal-card {
+            padding: 16px 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 15px !important;
+            text-decoration: none !important;
+            border-radius: 16px !important;
+            width: 100% !important;
+            min-height: auto !important;
+            transition: all 0.3s ease !important;
+            box-sizing: border-box !important;
+            margin-bottom: 15px !important;
+        }
+
+        .modal-box .portal-card:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        .modal-box .portal-card.card-cash {
+            border: 1px solid rgba(0, 200, 83, 0.3) !important;
+            background: rgba(0, 200, 83, 0.03) !important;
+        }
+        .modal-box .portal-card.card-cash:hover {
+            transform: translateY(-4px) !important;
+            border-color: rgba(0, 200, 83, 0.6) !important;
+            box-shadow: 0 10px 25px rgba(0, 200, 83, 0.15) !important;
+        }
+        .modal-box .portal-card.card-cash:hover .portal-seta {
+            background: var(--verde-app) !important;
+        }
+
+        .modal-box .portal-card.card-reaction {
+            border: 1px solid rgba(255, 107, 53, 0.3) !important;
+            background: rgba(255, 107, 53, 0.03) !important;
+        }
+        .modal-box .portal-card.card-reaction:hover {
+            transform: translateY(-4px) !important;
+            border-color: rgba(255, 107, 53, 0.6) !important;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.15) !important;
+        }
+        .modal-box .portal-card.card-reaction:hover .portal-seta {
+            background: var(--laranja-frame) !important;
+        }
+
+        .modal-box .portal-card:hover .portal-seta svg {
+            stroke: #FFFFFF !important;
+        }
+
+        .modal-box .portal-icon-box {
+            width: 52px !important;
+            min-width: 52px !important;
+            height: 52px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: #111111 !important;
+            border-radius: 12px !important;
+            flex-shrink: 0 !important;
+        }
+
+        .modal-box .portal-info {
+            text-align: left !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            flex-grow: 1 !important;
+        }
+
+        .modal-box .portal-info h4 {
+            color: var(--texto-titulo) !important;
+            font-size: 1.3rem !important;
+            font-family: 'Poppins', sans-serif !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 1.2 !important;
+        }
+
+        .modal-box .portal-info p {
+            color: var(--texto-corpo) !important;
+            font-size: 0.85rem !important;
+            margin: 3px 0 0 0 !important;
+            padding: 0 !important;
+            line-height: 1.2 !important;
+            min-height: auto !important;
+        }
+
+        .modal-box .portal-seta {
+            width: 38px !important;
+            min-width: 38px !important;
+            height: 38px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        /* Formulários do Modal Espera (Light) */
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; color: var(--texto-titulo); }
+        .form-group input {
+            width: 100%; padding: 15px; border: 1px solid var(--borda-suave);
+            border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 1rem;
+            background: #F8F9FA; color: var(--texto-titulo); transition: all 0.3s;
+        }
+        .form-group input:focus { outline: none; border-color: var(--laranja-frame); box-shadow: 0 0 10px rgba(255, 107, 53, 0.1); }
+
+        /* Header */
+        header {
+            padding: 20px 8%; 
+            display: flex; align-items: center; justify-content: space-between;
+            background: transparent; position: fixed; width: 100%; top: 0; z-index: 100;
+            transition: all 0.4s ease;
+        }
+        header.scrolled {
+            padding: 12px 8%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--borda-suave);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+        .logo img { height: 60px; width: auto; transition: transform 0.3s; }
+        header.scrolled .logo img { height: 50px; }
+        .menu-voltar { color: var(--texto-corpo); font-size: 1rem; font-weight: 500; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu-voltar:hover { color: var(--laranja-frame); transform: translateX(-4px); }
+        
+        .btn-vazado {
+            border: 1px solid var(--laranja-frame); color: var(--laranja-frame);
+            padding: 10px 24px; border-radius: 50px; font-weight: 600; font-size: 0.95rem; cursor: pointer; background: transparent;
+            transition: all 0.3s ease;
+        }
+        .btn-vazado:hover { background: var(--laranja-frame); color: #FFF; box-shadow: 0 8px 20px rgba(255, 107, 53, 0.2); }
+
+        /* Hero */
+        .hero-frame {
+            padding: 210px 8% 100px; 
+            text-align: center;
+            background-color: var(--fundo-light);
+            background-image: radial-gradient(rgba(0, 74, 173, 0.08) 1.5px, transparent 1.5px);
+            background-size: 28px 28px;
+            position: relative;
+            border-bottom: 1px solid var(--borda-suave);
+        }
+        .hero-frame::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 50% 20%, transparent 0%, var(--fundo-light) 85%);
+            z-index: 0;
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .tagline { color: var(--laranja-frame); font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 20px; display: inline-block; text-transform: uppercase; background: rgba(255, 107, 53, 0.08); padding: 6px 18px; border-radius: 50px; border: 1px solid rgba(255, 107, 53, 0.15); }
+        .hero-frame h1 { font-size: 3.8rem; line-height: 1.15; margin-bottom: 20px; letter-spacing: -2px; } 
+        .hero-frame p { font-size: 1.25rem; color: var(--texto-corpo); margin: 0 auto; max-width: 780px; font-weight: 400; }
+
+        /* Seção Propósito */
+        .secao { padding: 90px 8%; }
+        .historia-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .box-historia {
+            background: var(--fundo-card);
+            padding: 50px;
+            border-radius: 28px;
+            border: 1px solid var(--borda-suave);
+            box-shadow: var(--sombra-card);
+        }
+        .box-historia h2 { font-size: 2.2rem; margin-bottom: 20px; line-height: 1.2; }
+        .box-historia p { font-size: 1.05rem; color: var(--texto-corpo); margin-bottom: 18px; line-height: 1.7; }
+
+        /* Pilares simples */
+        .pilares-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+        .pilar-card {
+            background: var(--fundo-card);
+            border: 1px solid var(--borda-suave);
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: var(--sombra-card);
+            text-align: center;
+        }
+        .pilar-card h4 { font-size: 1.3rem; color: var(--azul-tech); margin-bottom: 12px; font-weight: 700; }
+        .pilar-card p { font-size: 0.95rem; color: var(--texto-corpo); }
+
+        /* Destaque Produto: Cash */
+        .destaque-produto {
+            background: var(--fundo-card);
+            border: 1px solid var(--borda-suave);
+            box-shadow: var(--sombra-hover);
+            border-radius: 32px;
+            padding: 70px 60px;
+            margin: 0 8% 80px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .lista-beneficios { list-style: none; margin: 25px 0 35px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .lista-beneficios li { color: var(--texto-corpo); font-size: 1rem; display: flex; align-items: flex-start; gap: 10px; font-weight: 500; }
+        .lista-beneficios li::before {
+            content: "✓"; color: var(--verde-app); font-weight: 800; font-size: 1rem;
+            background: rgba(0, 200, 83, 0.1); width: 24px; height: 24px;
+            display: flex; align-items: center; justify-content: center; border-radius: 50%;
+            flex-shrink: 0; margin-top: 2px;
+        }
+        .btn-app-verde {
+            background: var(--verde-app-grad); color: #FFFFFF; padding: 20px 40px; border-radius: 50px;
+            font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.1rem;
+            display: inline-block; box-shadow: 0 10px 25px rgba(0, 200, 83, 0.2);
+            transition: all 0.3s ease; border: none; cursor: pointer; width: 100%; text-align: center;
+        }
+        .btn-app-verde:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 200, 83, 0.3); }
+
+        /* Futuras Ferramentas */
+        .pipeline-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+        .card-pipeline { 
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--borda-suave); 
+            padding: 35px 28px; 
+            border-radius: 24px; 
+            box-shadow: var(--sombra-card);
+            transition: all 0.35s ease;
+            display: flex; flex-direction: column;
+        }
+        .card-pipeline:hover { transform: translateY(-8px); box-shadow: var(--sombra-hover); border-color: rgba(0, 74, 173, 0.2); }
+        .card-pipeline h3 { font-size: 1.35rem; margin-bottom: 10px; color: var(--texto-titulo); }
+        .card-pipeline p { color: var(--texto-corpo); font-size: 0.95rem; margin-bottom: 15px; flex-grow: 1; line-height: 1.6; }
+        
+        .status-badge { 
+            display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 50px; 
+            font-size: 0.72rem; font-weight: 800; margin-bottom: 18px; gap: 6px; width: fit-content;
+        }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .status-ativo { background: rgba(0, 200, 83, 0.1); color: var(--verde-app); border: 1px solid rgba(0, 200, 83, 0.2); }
+        .status-ativo .status-dot { background: var(--verde-app); animation: pulse-green 2s infinite; }
+        .status-futuro { background: rgba(255, 107, 53, 0.08); color: var(--laranja-frame); border: 1px solid rgba(255, 107, 53, 0.2); }
+        .status-futuro .status-dot { background: var(--laranja-frame); }
+
+        footer { text-align: center; padding: 70px 8% 50px; border-top: 1px solid var(--borda-suave); }
+        footer .logo-foter { height: 42px; margin-bottom: 20px; opacity: 0.9; }
+
+        @media (max-width: 992px) {
+            .hero-frame h1 { font-size: 3.2rem; }
+            .pilares-grid, .historia-grid, .pipeline-grid, .destaque-produto { grid-template-columns: 1fr; gap: 30px; }
+            .destaque-produto { padding: 45px 25px; text-align: center; }
+            .lista-beneficios { grid-template-columns: 1fr; text-align: left; }
+            .box-historia { padding: 35px 25px; }
+        }
+        @media (max-width: 768px) {
+            header, header.scrolled { padding: 15px 5%; flex-direction: column; gap: 10px; background: rgba(255, 255, 255, 0.95); }
+            .hero-frame { padding: 170px 5% 40px; }
+            .hero-frame h1 { font-size: 2.3rem; }
+            .secao { padding: 50px 5%; }
+            .destaque-produto { margin: 0 5% 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PORTAL DO CLIENTE (LIGHT THEME) -->
+    <div class="modal-overlay" id="portalModal">
+        <div class="modal-box" style="text-align: center; width: 90%; max-width: 440px; padding: 45px 35px; background: #FFFFFF;">
+            <span class="fechar-modal" onclick="fecharModalPortal()">&times;</span>
+            <div style="margin-bottom: 20px; margin-top: 5px;">
+                <span class="tagline" style="color: var(--verde-app); background: rgba(0, 200, 83, 0.1); padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px; border: 1px solid rgba(0, 200, 83, 0.2); display: inline-block;">ÁREA DO CLIENTE</span>
+            </div>
+            <h3 style="font-size: 2.1rem; margin-bottom: 8px; color: var(--texto-titulo); letter-spacing: -1px; line-height: 1.15;">O seu Painel de<br>Comando</h3>
+            <p style="margin-bottom: 30px; font-size: 0.95rem; color: var(--texto-corpo);">Acesse as ferramentas do seu negócio.</p>
+
+            <!-- CARD: CASH -->
+            <a href="https://cash.frameia.com.br" class="portal-card card-cash">
+                <div class="portal-icon-box">
+                     <img src="assets/frame-cash-logo-clara.png" alt="Logo Cash" style="width: 80%; height: 80%; object-fit: contain; display: block;">
+                </div>
+                <div class="portal-info">
+                    <h4>Cash</h4>
+                    <p>Gestão Financeira</p>
+                </div>
+                <span class="portal-seta" style="background: rgba(0, 200, 83, 0.1);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--verde-app)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
+            </a>
+
+            <!-- CARD: REACTION -->
+            <a href="#" onclick="fecharModalPortal(); abrirModalEspera(); return false;" class="portal-card card-reaction">
+                <div class="portal-icon-box">
+                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--laranja-frame)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                </div>
+                <div class="portal-info">
+                    <h4>ReAction</h4>
+                    <p>Lista de Espera</p>
+                </div>
+                <span class="portal-seta" style="background: rgba(255, 107, 53, 0.1);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--laranja-frame)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MODAL DA LISTA DE ESPERA REACTION (LIGHT THEME) -->
+    <div class="modal-overlay" id="esperaModal">
+        <div class="modal-box" style="width: 90%; max-width: 440px; padding: 40px 35px; text-align: left;">
+            <span class="fechar-modal" onclick="fecharModalEspera()">&times;</span>
+            <span style="background: rgba(255, 107, 53, 0.1); color: var(--laranja-frame); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; display: inline-block; margin-bottom: 15px;">ACESSO ANTECIPADO</span>
+            
+            <h3 style="font-size: 1.6rem; margin-bottom: 15px; color: var(--texto-titulo); line-height: 1.2;">Não deixe clientes sem resposta.</h3>
+            <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--texto-corpo);">O ReAction lê as avaliações no Google e nas redes sociais e responde automaticamente com profissionalismo, 24h por dia.</p>
+            
+            <p style="margin-bottom: 25px; font-size: 0.9rem; color: var(--texto-titulo); background: #F8F9FA; padding: 12px; border-radius: 8px; border-left: 3px solid var(--laranja-frame);">
+                🔥 <strong>Esteja à frente da concorrência.</strong><br>
+                Cadastre o seu e-mail para ter acesso exclusivo ao lote inicial de lançamento.
+            </p>
+            
+            <form id="formEspera" action="https://formsubmit.co/contato@frameia.com.br" method="POST">
+                <input type="hidden" name="_cc" value="jadson@mjsv.com.br,mara@mjsv.com.br">
+                <input type="hidden" name="_subject" value="Nova Inscrição - Lista de Espera ReAction">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Seu e-mail profissional</label>
+                    <input type="email" name="Email" id="emailEspera" required placeholder="seu@email.com.br" style="padding: 15px;">
+                </div>
+                
+                <button type="submit" class="btn-app-verde" style="padding: 16px; font-size: 1rem; border-radius: 12px;">Garantir o meu lugar &rarr;</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CABEÇALHO -->
+    <header id="projeto-header">
+        <a href="index" class="logo">
+            <img src="assets/logo-frameia-colorido.png" alt="Logo Frame IA">
+        </a>
+        <a href="index" class="menu-voltar">&larr; Voltar para a Home</a>
+        <a href="#" onclick="abrirModalPortal(); return false;" class="btn-vazado">Portal do Cliente <span class="arrow">&rarr;</span></a>
+    </header>
+
+    <!-- HERO DA PÁGINA SOBRE -->
+    <section class="hero-frame">
+        <div class="hero-content fade-up">
+            <span class="tagline">QUEM SOMOS E NO QUE ACREDITAMOS</span>
+            <h1 class="text-gradient">Inteligência Artificial sem complicação.</h1>
+            <p>A Frame [IA] nasceu para ajudar quem trabalha duro por conta própria. Criamos programas fáceis e diretos para você gastar menos tempo com papéis e planilhas e ter mais tempo para o que importa.</p>
+        </div>
+    </section>
+
+    <!-- PROPÓSITO E HISTÓRIA -->
+    <section class="secao">
+        <div class="historia-grid">
+            <div class="box-historia fade-up delay-1">
+                <span class="tagline" style="color: var(--azul-tech); background: rgba(0, 74, 173, 0.08); border-color: rgba(0, 74, 173, 0.15);">O NOSSO OBJETIVO</span>
+                <h2>Sua empresa funcionando no piloto automático.</h2>
+                <p>Sabemos como é a rotina de quem cuida da própria loja, oficina, consultório ou empresa: você precisa vender, atender, cobrar e ainda passar a noite anotando contas.</p>
+                <p>Nenhum pequeno empresário deveria perder horas do dia mexendo em computadores difíceis. Nossos sistemas funcionam pelo celular, por áudio ou foto, fazendo o trabalho pesado por você sem enrolação.</p>
+            </div>
+            <div class="fade-up delay-2" style="border-radius: 28px; overflow: hidden; box-shadow: var(--sombra-hover);">
+                <img src="assets/foto-ia-cinza.png" alt="Sistemas Frame IA" style="width: 100%; display: block;" loading="lazy">
+            </div>
+        </div>
+
+        <div class="pilares-grid fade-up delay-3">
+            <div class="pilar-card">
+                <h4>Fácil de Usar</h4>
+                <p>Se você sabe mandar um áudio ou tirar uma foto no celular, você já sabe usar tudo o que a gente cria.</p>
+            </div>
+            <div class="pilar-card">
+                <h4>Preço Justo</h4>
+                <p>Tecnologia moderna não precisa ser cara. Nossos planos foram feitos para caber no bolso do pequeno negócio.</p>
+            </div>
+            <div class="pilar-card">
+                <h4>Atendimento Humano</h4>
+                <p>Não te deixamos sozinho. Nossa equipe está sempre perto para ajudar você a usar os sistemas da melhor forma.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUTO EM DESTAQUE: CASH -->
+    <div class="destaque-produto fade-up">
+        <div>
+            <span class="status-badge status-ativo">
+                <div class="status-dot"></div>
+                SISTEMA PRONTO PARA USAR
+            </span>
+            <h2 style="font-size: 3rem; margin-bottom: 15px; letter-spacing: -1.5px;">Cash</h2>
+            <p style="font-size: 1.1rem; color: var(--texto-corpo);">O seu controle financeiro no celular. Mande uma foto do recibo ou um áudio dizendo quanto gastou. O Cash anota, organiza e te mostra na hora se o mês deu lucro.</p>
+            
+            <ul class="lista-beneficios">
+                <li>Anote despesas por foto ou voz.</li>
+                <li>Fim das contas perdidas em papel.</li>
+                <li>Dicas simples para economizar dinheiro.</li>
+                <li>Relatórios claros para você tomar decisões.</li>
+            </ul>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+            <a href="https://cash.frameia.com.br" class="btn-app-verde">Começar a Usar o Cash <span class="arrow">&rarr;</span></a>
+        </div>
+    </div>
+
+    <!-- O QUE VEM POR AÍ (SOLUÇÕES FUTURAS) -->
+    <section class="secao" style="padding-top: 10px;">
+        <div class="fade-up" style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <span class="tagline">O QUE ESTAMOS CRIANDO</span>
+            <h2 style="font-size: 2.6rem; margin-bottom: 15px;">Próximas Ferramentas</h2>
+            <p style="font-size: 1.1rem;">A Frame [IA] não para. Veja os novos programas que estamos preparando para facilitar a sua vida:</p>
+        </div>
+
+        <div class="pipeline-grid">
+            <!-- REACTION -->
+            <div class="card-pipeline fade-up delay-1">
+                <span class="status-badge status-ativo">
+                    <div class="status-dot"></div>
+                    PRESTES A LANÇAR
+                </span>
+                <h3>ReAction <br><span style="font-size: 0.8rem; font-weight: 500; color: var(--cinza-discreto);">(Respostas no Google)</span></h3>
+                <p>Responda a avaliações e comentários de clientes no Google e redes sociais de forma automática, mantendo o seu negócio sempre bem visto por todos.</p>
+            </div>
+            
+            <!-- HUBITAT -->
+            <div class="card-pipeline fade-up delay-2">
+                <span class="status-badge status-futuro">
+                    <div class="status-dot"></div>
+                    EM DESENVOLVIMENTO
+                </span>
+                <h3>Hubitat <br><span style="font-size: 0.8rem; font-weight: 500; color: var(--cinza-discreto);">(Gestão de Condomínios)</span></h3>
+                <p>Programa feito para facilitar a vida de síndicos e moradores. Organiza pagamentos, avisos, reservas e contas de condomínios e loteamentos sem dor de cabeça.</p>
+            </div>
+            
+            <!-- AGENTES / FUNCIONÁRIOS VIRTUAIS -->
+            <div class="card-pipeline fade-up delay-3">
+                <span class="status-badge status-futuro">
+                    <div class="status-dot"></div>
+                    EM DESENVOLVIMENTO
+                </span>
+                <h3>Funcionários Virtuais <br><span style="font-size: 0.8rem; font-weight: 500; color: var(--cinza-discreto);">(Agentes de IA)</span></h3>
+                <p>Assistentes de inteligência artificial criados para fazer o trabalho chato do escritório, como responder clientes, organizar mensagens e conferir documentos sozinhos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="fade-up">
+        <img src="assets/logo-frameia-colorido.png" alt="Logo Frame IA" class="logo-foter" loading="lazy">
+        <p style="font-size: 0.95rem; font-weight: 500;">&copy; 2026 Frame [IA] - Tecnologia Simples para Pequenos Negócios.</p>
+    </footer>
+
+    <script>
+        function abrirModalPortal() {
+            const modal = document.getElementById('portalModal');
+            if(modal) modal.classList.add('ativo');
+        }
+
+        function fecharModalPortal() {
+            const modal = document.getElementById('portalModal');
+            if(modal) modal.classList.remove('ativo');
+        }
+
+        function abrirModalEspera() {
+            const modal = document.getElementById('esperaModal');
+            if(modal) modal.classList.add('ativo');
+        }
+
+        function fecharModalEspera() {
+            const modal = document.getElementById('esperaModal');
+            if(modal) modal.classList.remove('ativo');
+        }
+
+        window.onclick = function(event) {
+            const modalPortal = document.getElementById('portalModal');
+            const modalEspera = document.getElementById('esperaModal');
+            
+            if (event.target === modalPortal) fecharModalPortal();
+            if (event.target === modalEspera) fecharModalEspera();
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('projeto-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.fade-up');
+            elements.forEach(el => observer.observe(el));
+            setTimeout(() => {
+                document.querySelectorAll('.hero-frame .fade-up').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

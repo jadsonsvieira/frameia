@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLevel | I/O Hub 4.0 Architecture Case Study</title>
+    
+    <link rel="icon" type="image/png" href="assets/img/favicon.png?v=2">
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png?v=2">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-pure-black: #090A0C;
+            --bg-chumbo-dark: #13161A;
+            --bg-chumbo-light: #1E2228;
+            --azul-tech: #004AAD;
+            --azul-glow: #0066FF;
+            --verde-chart: #00E676;
+            --cinza-forte: #B0B3B8;
+            --texto-branco: #FFFFFF;
+            --border-subtle: rgba(255, 255, 255, 0.05);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            scroll-behavior: smooth; 
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-pure-black); 
+            color: var(--cinza-forte); 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+
+        h1, h2, h3, h4 { 
+            font-family: 'Poppins', sans-serif; 
+            font-weight: 700; 
+            color: var(--texto-branco); 
+        }
+        
+        .container { 
+            max-width: 1280px; 
+            margin: 0 auto; 
+            padding: 0 32px; 
+        }
+
+        .section-padding { 
+            padding: 120px 0; 
+        }
+
+        ::-webkit-scrollbar { 
+            width: 10px; 
+        }
+
+        ::-webkit-scrollbar-track { 
+            background: var(--bg-pure-black); 
+        }
+
+        ::-webkit-scrollbar-thumb { 
+            background: var(--bg-chumbo-light); 
+            border-radius: 5px; 
+        }
+
+        ::-webkit-scrollbar-thumb:hover { 
+            background: var(--azul-tech); 
+        }
+
+        .badge-container { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 16px; 
+            margin-bottom: 24px; 
+        }
+
+        .badge {
+            display: inline-flex; 
+            align-items: center; 
+            background: rgba(0, 74, 173, 0.15); 
+            color: #79A7FF;
+            padding: 8px 18px; 
+            border-radius: 4px; 
+            font-size: 0.8rem; 
+            font-weight: 600;
+            letter-spacing: 1.5px; 
+            text-transform: uppercase; 
+            border: 1px solid rgba(0, 74, 173, 0.3);
+        }
+
+        .badge.success { 
+            background: rgba(0, 230, 118, 0.1); 
+            color: var(--verde-chart); 
+            border: 1px solid rgba(0, 230, 118, 0.2); 
+        }
+
+        .partner-logo { 
+            height: 20px; 
+            margin-left: 8px; 
+            filter: brightness(0) invert(1); 
+            opacity: 0.8; 
+        } 
+
+        .btn-group { 
+            display: flex; 
+            gap: 16px; 
+            justify-content: center; 
+            margin-top: 32px; 
+        }
+
+        .btn { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 10px; 
+            padding: 18px 36px; 
+            border-radius: 6px; 
+            font-family: 'Poppins', sans-serif; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            text-decoration: none; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            cursor: pointer; 
+            border: none; 
+        }
+
+        .btn-primary { 
+            background-color: var(--azul-tech); 
+            color: #fff; 
+            box-shadow: 0 8px 24px rgba(0, 74, 173, 0.3); 
+        }
+
+        .btn-primary:hover { 
+            background-color: var(--azul-glow); 
+            transform: translateY(-2px); 
+            box-shadow: 0 12px 32px rgba(0, 102, 255, 0.4); 
+        }
+
+        .btn-secondary { 
+            background-color: transparent; 
+            color: var(--texto-branco); 
+            border: 1px solid var(--bg-chumbo-light); 
+        }
+
+        .btn-secondary:hover { 
+            background-color: var(--bg-chumbo-dark); 
+            border-color: var(--azul-tech); 
+            transform: translateY(-2px); 
+        }
+
+        nav { 
+            padding: 24px 0; 
+            background-color: rgba(9, 10, 12, 0.85); 
+            backdrop-filter: blur(12px); 
+            border-bottom: 1px solid var(--border-subtle); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+        }
+
+        .nav-content { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        .logo-img { 
+            height: 60px; 
+            width: auto; 
+        }
+
+        .lang-switch { 
+            display: flex; 
+            background: var(--bg-chumbo-dark); 
+            padding: 4px; 
+            border-radius: 6px; 
+            border: 1px solid var(--border-subtle); 
+        }
+
+        .lang-btn { 
+            background: transparent; 
+            color: var(--cinza-forte); 
+            border: none; 
+            padding: 8px 16px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            font-family: 'Inter'; 
+            transition: all 0.2s; 
+        }
+
+        .lang-btn.active { 
+            background: var(--azul-tech); 
+            color: var(--texto-branco); 
+        }
+
+        .hero { 
+            text-align: center; 
+            padding: 120px 0 80px; 
+            position: relative; 
+        }
+
+        .hero h1 { 
+            font-size: 4.2rem; 
+            line-height: 1.1; 
+            margin-bottom: 28px; 
+            letter-spacing: -1.5px; 
+        }  
+        
+        /* Texto Gradiente Tecnológico */
+        .text-gradient { 
+            background: linear-gradient(90deg, var(--azul-glow), var(--verde-chart)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: -10px;
+        }
+        
+        .hero p { 
+            font-size: 1.35rem; 
+            max-width: 850px; 
+            margin: 0 auto 48px; 
+            color: #D1D5DB; 
+            font-weight: 300; 
+        }
+
+        .fullscreen-frame { 
+            margin-top: 80px; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            background: var(--bg-chumbo-dark); 
+            box-shadow: 0 40px 80px rgba(0,0,0,0.9); 
+            position: relative; 
+            aspect-ratio: 16/9; 
+        }
+
+        .frame-header { 
+            background: #191C21; 
+            padding: 12px 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            border-bottom: 1px solid var(--border-subtle); 
+        }
+
+        .frame-dot { 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            background: #ff5f56; 
+        }
+
+        .frame-dot:nth-child(2) { background: #ffbd2e; }
+        .frame-dot:nth-child(3) { background: #27c93f; }
+
+        .frame-title { 
+            font-family: monospace; 
+            font-size: 0.85rem; 
+            color: #6B7280; 
+            margin-left: 12px; 
+        }
+
+        .hero-print { 
+            width: 100%; 
+            height: calc(100% - 50px); 
+            object-fit: contain; 
+            display: block; 
+            padding: 1px; 
+            box-sizing: border-box;
+        }
+
+        .bento-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 24px; 
+            margin-top: 60px; 
+        }
+
+        .bento-item { 
+            background: var(--bg-chumbo-dark); 
+            padding: 48px 36px; 
+            border-radius: 10px; 
+            border: 1px solid var(--border-subtle); 
+            position: relative; 
+            transition: all 0.3s ease; 
+        }
+        
+        /* Glow Effect no Hover */
+        .bento-item:hover { 
+            border-color: var(--azul-tech); 
+            transform: translateY(-4px); 
+            box-shadow: 0 12px 40px rgba(0, 102, 255, 0.12); 
+        }
+        
+        .bento-item.large { grid-column: span 2; }
+        .bento-item i { font-size: 2.2rem; color: var(--azul-tech); margin-bottom: 24px; }
+        .bento-item h3 { font-size: 1.4rem; margin-bottom: 16px; }
+        .bento-item p { font-size: 1rem; color: var(--cinza-forte); }
+
+        .tech-tabs-section { 
+            background: var(--bg-chumbo-dark); 
+            border-y: 1px solid var(--border-subtle); 
+            padding: 100px 0; 
+            margin: 100px 0; 
+        }
+
+        .tabs-header { 
+            display: flex; 
+            justify-content: center; 
+            gap: 24px; 
+            margin-bottom: 60px; 
+        }
+
+        .tab-trigger { 
+            background: var(--bg-pure-black); 
+            color: var(--cinza-forte); 
+            border: 1px solid var(--border-subtle); 
+            padding: 16px 32px; 
+            font-family: 'Poppins', sans-serif; 
+            font-weight: 600; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+        }
+
+        .tab-trigger.active { 
+            background: var(--azul-tech); 
+            color: var(--texto-branco); 
+            border-color: var(--azul-tech); 
+        }
+        
+        .tab-content { 
+            display: none; 
+            align-items: flex-start; 
+            gap: 60px; 
+        }
+
+        .tab-content.active { display: flex; }
+        
+        .tab-text { flex: 1.2; }
+        .tab-text h3 { font-size: 2rem; margin-bottom: 20px; }
+        .tab-text p { font-size: 1.1rem; margin-bottom: 24px; }
+        .tab-text ul { list-style: none; }
+        .tab-text ul li { margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; font-size: 1rem; }
+        .tab-text ul li i { color: var(--azul-tech); margin-top: 4px; }
+        
+        .tab-visual { 
+            flex: 0.8; 
+            background: var(--bg-pure-black); 
+            border-radius: 8px; 
+            overflow: hidden; 
+            border: 1px solid var(--border-subtle); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); 
+        }
+
+        .tab-visual img { 
+            width: 100%; 
+            display: block; 
+            object-fit: cover; 
+            border-radius: 8px; 
+        }
+
+        .ecosystem-section { 
+            text-align: center; 
+            background: radial-gradient(circle at 50% 50%, #111827 0%, var(--bg-pure-black) 100%); 
+            border-radius: 16px; 
+            padding: 80px 40px; 
+            border: 1px solid rgba(0, 230, 118, 0.1); 
+            margin-top: 60px; 
+        }
+
+        .ecosystem-logo { 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 2.2rem; 
+            font-weight: 800; 
+            color: var(--texto-branco); 
+            margin-bottom: 20px; 
+        }
+
+        .ecosystem-logo span { color: var(--azul-tech); }
+
+        .lang-en { display: none; }
+        em { color: #d1d5db; font-style: italic; }
+
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3rem; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-item.large { grid-column: span 1; }
+            .tab-content { flex-direction: column; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="/" class="nav-logo">
+                <img src="assets/img/logo-iohub.png" alt="I/O Hub 4.0" class="logo-img">
+            </a>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="switchLanguage('pt')">PT</button>
+                <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero container">
+        <div class="badge-container">
+            <span class="badge">Unified Namespace (UNS)</span>
+            <span class="badge success">
+                Powered by Ignition Enterprise
+                <img src="assets/img/ignition-logo.png" alt="Ignition" class="partner-logo" onerror="this.style.display='none'">
+            </span>
+        </div>
+        
+        <div class="lang-pt">
+            <h1>Convergência TI/TA Real:<br>Do Chão de Fábrica à Diretoria em <span class="text-gradient">Milissegundos</span></h1>
+            <p>Apresentamos a arquitetura <strong>SmartLevel</strong>. Uma validação física e lógica de alto desempenho desenvolvida pelo I/O Hub 4.0 para erradicar silos de dados industriais e preparar plantas complexas para a era da Inteligência Artificial Analítica.</p>
+        </div>
+        <div class="lang-en">
+            <h1>True IT/OT Convergence:<br>From Shop Floor to the Boardroom in <span class="text-gradient">Milliseconds</span></h1>
+            <p>Introducing the <strong>SmartLevel</strong> architecture. A physical and logical high-performance validation engineered by I/O Hub 4.0 to eradicate industrial data silos and prime complex plants for the era of Predictive AI.</p>
+        </div>
+
+        <div class="btn-group">
+            <a href="#arquitetura" class="btn btn-primary">
+                <span class="lang-pt">Analisar Engenharia</span><span class="lang-en">Analyze Engineering</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="/#contato" class="btn btn-secondary">
+                <span class="lang-pt">Solicitar Diagnóstico</span><span class="lang-en">Request Diagnostic</span>
+            </a>
+        </div>
+
+        <div class="fullscreen-frame">
+            <div class="frame-header">
+                <div class="frame-dot"></div><div class="frame-dot"></div><div class="frame-dot"></div>
+                <div class="frame-title">perspective/views/Cockpit_SmartLevel.html</div>
+            </div>
+            <img src="assets/img/smartlevel-dashboard.png" alt="Ignition Perspective Real-Time Management Dashboard Cockpit" class="hero-print">
+        </div>
+    </header>
+
+    <section class="container section-padding">
+        <div class="lang-pt" style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-size: 2.8rem; margin-bottom: 16px;">O Custo Crítico da Infraestrutura Legada</h2>
+            <p style="max-width: 750px; margin: 0 auto; font-size: 1.1rem;">Por que os modelos tradicionais de automação industrial (pirâmide clássica) falham em entregar inteligência de negócios em tempo real?</p>
+        </div>
+        <div class="lang-en" style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-size: 2.8rem; margin-bottom: 16px;">The Critical Cost of Legacy Infrastructure</h2>
+            <p style="max-width: 750px; margin: 0 auto; font-size: 1.1rem;">Why do traditional industrial automation models (classic automation pyramid) fail to deliver real-time business intelligence?</p>
+        </div>
+
+        <div class="bento-grid">
+            <div class="bento-item large">
+                <i class="fa-solid fa-network-wired" style="color: #FF4757;"></i>
+                <div class="lang-pt">
+                    <h3>Saturação por Consultas Cíclicas</h3>
+                    <p>Sistemas antigos realizam requisições contínuas (<em>polling</em>). À medida que a fábrica adiciona instrumentação, a rede de TA congestiona, gerando lentidão absurda e perda de sincronismo nos históricos corporativos.</p>
+                </div>
+                <div class="lang-en">
+                    <h3>Polling Bottlenecks & Saturation</h3>
+                    <p>Legacy systems rely on point-to-point cyclic requests (<em>polling</em>). As the plant scales up its instrumentation, the OT network congests, causing unacceptable latency and data desynchronization.</p>
+                </div>
+            </div>
+            <div class="bento-item">
+                <i class="fa-solid fa-lock" style="color: #FF4757;"></i>
+                <div class="lang-pt">
+                    <h3>Monopólio de Fabricantes (Lock-in)</h3>
+                    <p>Grandes marcas cobram licenças fechadas de comunicação, tornando as indústrias reféns de tecnologias proprietárias e dificultando a extração de dados para a nuvem.</p>
+                </div>
+                <div class="lang-en">
+                    <h3>Vendor Lock-in Monopolies</h3>
+                    <p>Proprietary hardware manufacturers charge heavy taxations on communication drivers, blocking field data from scaling seamlessly into cloud architectures.</p>
+                </div>
+            </div>
+            <div class="bento-item">
+                <i class="fa-solid fa-folder-tree"></i>
+                <div class="lang-pt">
+                    <h3>Silos e Arquitetura Espaguete</h3>
+                    <p>Modificar um parâmetro exige reconfigurar pontes individuais em cada CLP, criando um ecossistema rígido, amarrado e propenso a falhas sistêmicas.</p>
+                </div>
+                <div class="lang-en">
+                    <h3>Data Silos & Spaghetti Architecture</h3>
+                    <p>Altering a parameter forces manual rewrites of point-to-point scripts across individual PLCs, making agile reconfiguration nearly impossible.</p>
+                </div>
+            </div>
+            <div class="bento-item large">
+                <i class="fa-solid fa-eye-slash" style="color: #FF4757;"></i>
+                <div class="lang-pt">
+                    <h3>Decisão Atrasada (Cegueira Operacional)</h3>
+                    <p>Sem convergência em tempo real, os gestores analisam as perdas de eficiência baseados em relatórios reativos do dia anterior. A arquitetura SmartLevel soluciona essa assimetria unificando os dados no momento em que ocorrem.</p>
+                </div>
+                <div class="lang-en">
+                    <h3>Delayed Decisions (Operational Blindness)</h3>
+                    <p>Without real-time convergence, executives diagnose efficiency drops reactively using day-old spreadsheets. SmartLevel eliminates this lag by unifying the enterprise namespace instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="arquitetura" class="tech-tabs-section">
+        <div class="container">
+            <div class="lang-pt" style="text-align: center; margin-bottom: 48px;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 12px;">Como o Dado Flui: O "Raio-X" da Stack</h2>
+                <p>Navegue pelas camadas validadas neste projeto para entender o isolamento e roteamento dos dados industriais.</p>
+            </div>
+            <div class="lang-en" style="text-align: center; margin-bottom: 48px;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 12px;">How the Data Flows: Tech Stack Deep Dive</h2>
+                <p>Explore the layers validated in this project to see how the data pipeline is structurally isolated and routed.</p>
+            </div>
+
+            <div class="tabs-header">
+                <button class="tab-trigger active" onclick="openTab(event, 'edge')">1. EDGE LAYER</button>
+                <button class="tab-trigger" onclick="openTab(event, 'middleware')">2. MIDDLEWARE</button>
+                <button class="tab-trigger" onclick="openTab(event, 'scada')">3. ENTERPRISE SCADA</button>
+            </div>
+
+            <div id="edge" class="tab-content active">
+                <div class="tab-text">
+                    <div class="lang-pt">
+                        <h3>Fronteira Física & Computação de Borda</h3>
+                        <p>O dado nasce de forma bruta no sensor de campo através de pulsos e é processado instantaneamente na borda.</p>
+                        <ul>
+                            <li><i class="fa-solid fa-microchip"></i> <div><strong>Filtro Matemático:</strong> O microcontrolador processa algoritmos em C++ isolando o ruído físico do sinal antes de enviá-lo.</div></li>
+                            <li><i class="fa-solid fa-code"></i> <div><strong>Tipagem de Dados Estrita:</strong> Conversão local para variáveis puras na fonte, blindando a rede contra flutuações e sobrecargas irrelevantes.</div></li>
+                        </ul>
+                    </div>
+                    <div class="lang-en">
+                        <h3>Physical Frontier & Edge Computing</h3>
+                        <p>Data originates as acoustic runtime pulses from the field sensor and is immediately processed right at the point of origin.</p>
+                        <ul>
+                            <li><i class="fa-solid fa-microchip"></i> <div><strong>Math Filtering:</strong> Microcontrollers execute native C++ filters to isolate industrial noise from the core metrics before broadcasting.</div></li>
+                            <li><i class="fa-solid fa-code"></i> <div><strong>Strict Local Datatypes:</strong> In-chip conversion to clean formats prior to serial broadcast, safeguarding downstream bandwidth.</div></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-visual">
+                    <img src="assets/img/smartlevel-edge.png" alt="Edge Hardware Validation Bench">
+                </div>
+            </div>
+
+            <div id="middleware" class="tab-content">
+                <div class="tab-text">
+                    <div class="lang-pt">
+                        <h3>Orquestração & Desacoplamento MQTT</h3>
+                        <p>A camada intermediária gerencia a ingestão e converte variáveis em um pacote estruturado para consumo global.</p>
+                        <ul>
+                            <li><i class="fa-solid fa-shuffle"></i> <div><strong>Gateway e Limpeza:</strong> O fluxo lê os dados brutos, realiza o tratamento limpo (<em>parsing</em>), aplica conversões decimais exatas (<em>Float</em>) e divide o trajeto dos dados (<em>Fork</em>) simultaneamente.</div></li>
+                            <li><i class="fa-solid fa-gears"></i> <div><strong>Roteamento em Barramento:</strong> Publicação orientada a eventos no servidor MQTT, criando uma estrutura de endereçamento padrão:<br> <em style="color:var(--verde-chart);">ex. Aramco/Refinaria_A/Tanque_01/Nivel</em></div></li>
+                        </ul>
+                    </div>
+                    <div class="lang-en">
+                        <h3>Data Orchestration & MQTT Decoupling</h3>
+                        <p>The middleware engine ingests input and formats the variable into structured payloads for non-intrusive global consumption.</p>
+                        <ul>
+                            <li><i class="fa-solid fa-shuffle"></i> <div><strong>Gateway & Cleaning:</strong> Handles continuous data stream <em>parsing</em>, explicit conversion to <em>Float</em> formats, and parallel data splitting (<em>Fork</em>).</div></li>
+                            <li><i class="fa-solid fa-gears"></i> <div><strong>Bus Routing:</strong> Event-driven message publishing to the MQTT Broker under a structured taxonomy:<br> <em style="color:var(--verde-chart);">e.g., Aramco/Refinery_A/Tank_01/Level</em></div></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-visual">
+                    <img src="assets/img/smartlevel-middleware.png" alt="Node-RED and MQTT Architecture">
+                </div>
+            </div>
+
+            <div id="scada" class="tab-content">
+                <div class="tab-text">
+                    <div class="lang-pt">
+                        <h3>Gêmeo Digital & Historiador de Alta Frequência</h3>
+                        <p>A camada superior converte a telemetria em inteligência gerencial e registros operacionais blindados.</p>
+                        <ul>
+                            <li><i class="fa-solid fa-cubes"></i> <div><strong>Interface Determinística:</strong> A tela é estruturada em coordenadas estritas, impedindo a quebra de layout e exibindo animações sem atrasos perceptíveis.</div></li>
+                            <li><i class="fa-solid fa-bell"></i> <div><strong>Gestão de Exceção Direta:</strong> A regra de alarme não está na tela, está embutida no núcleo do dado (Alta > 90% / Baixa < 10%). O sistema procura o operador, não o contrário.</div></li>
+                            <li><i class="fa-solid fa-chart-line"></i> <div><strong>Mecanismo de Séries Temporais:</strong> Armazenamento ativado com amostragem periódica precisa (1 segundo) para gerar gráficos temporais completos e robustos.</div></li>
+                        </ul>
+                    </div>
+                    <div class="lang-en">
+                        <h3>Digital Twin & High-Frequency Historian</h3>
+                        <p>The high-level platform translates field telemetry into immediate operational awareness and secured historical records.</p>
+                        <ul>
+                            <li><i class="fa-solid fa-cubes"></i> <div><strong>Deterministic UI:</strong> Screens structured under precise coordinate locking, preventing layout breaking with lag-free fluid animations.</div></li>
+                            <li><i class="fa-solid fa-bell"></i> <div><strong>Active Exception Management:</strong> Alarm rules are bound to the data core (High > 90% / Low < 10%), meaning the system actively alerts operators.</div></li>
+                            <li><i class="fa-solid fa-chart-line"></i> <div><strong>Time-Series Engine:</strong> Relational storage activated with precise 1-second sample rates to fuel dense and accurate historical trend charts.</div></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-visual">
+                    <img src="assets/img/smartlevel-scada.png" alt="Ignition SCADA Tag Configuration">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container section-padding" style="padding-top: 0;">
+        <div class="ecosystem-section">
+            <div class="ecosystem-logo">MJSV <span>Holding</span></div>
+            <div class="lang-pt">
+                <h4 style="font-size: 1.6rem; color: var(--texto-branco); margin-bottom: 16px;">Infraestrutura Preparada para IA Corporativa</h4>
+                <p style="max-width: 850px; margin: 0 auto; font-size: 1.1rem; color: var(--cinza-forte);">O I/O Hub 4.0 é o pilar de integração de engenharia industrial do ecossistema MJSV. Isso garante que toda a telemetria de chão de fábrica conectada por esta arquitetura nasça estruturada para alimentar diretamente algoritmos de Inteligência Artificial Corporativa, automações em lote (RPA) e painéis executivos avançados.</p>
+            </div>
+            <div class="lang-en">
+                <h4 style="font-size: 1.6rem; color: var(--texto-branco); margin-bottom: 16px;">Infrastructure Ready for Corporate AI</h4>
+                <p style="max-width: 850px; margin: 0 auto; font-size: 1.1rem; color: var(--cinza-forte);">I/O Hub 4.0 is the industrial engineering integration pillar of the MJSV ecosystem. This ensures that all shop floor telemetry bridged through this architecture is inherently structured to directly feed Corporate Artificial Intelligence algorithms, bulk automations (RPA), and advanced executive boards.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if(lang === 'en') {
+                document.querySelectorAll('.lang-pt').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
+            } else {
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-pt').forEach(el => el.style.display = 'block');
+            }
+        }
+
+        function openTab(evt, tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-trigger').forEach(trigger => trigger.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
