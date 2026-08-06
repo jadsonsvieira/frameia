@@ -1,0 +1,17 @@
+{
+    "site_id": "frameia",
+    "name": "Frame [IA]",
+    "domain": "frameia.com.br",
+    "version": "0.0.0",
+    "git_tag": "frameia-v0.0.0",
+    "last_updated": "2026-08-01T22:24:07.173761",
+    "description": "Automação e SaaS para Micro e Pequenas Empresas (Cash e ReAction)",
+    "history": [
+        {
+            "version": "0.0.0",
+            "tag": "frameia-v0.0.0",
+            "date": "2026-08-01T22:24:07.173816",
+            "notes": "Versão estável v0.0.0 original restaurada e publicada no Hostinger."
+        }
+    ]
+}

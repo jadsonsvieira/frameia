@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre a Frame [IA] | Inteligência e Automação para o Pequeno Negócio</title>
+    
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --fundo-black: #0B0B0B;
+            --grafite-dark: #141414;
+            --grafite-card: rgba(28, 28, 28, 0.65);
+            --azul-tech: #004AAD;
+            --verde-neon: #00E676;
+            --verde-wpp: #25D366;
+            --laranja-logo: #F26522;
+            --laranja-frame: #FF6B35;
+            --roxo-hubitat: #8A2BE2;
+            --branco: #FFFFFF;
+            --cinza-texto: #A8A8A8;
+            --cinza-discreto: #6B7280;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--fundo-black); }
+        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--laranja-frame); }
+
+        ::selection { background: var(--verde-neon); color: var(--fundo-black); }
+
+        body {
+            background-color: var(--fundo-black);
+            color: var(--branco);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 { 
+            font-family: 'Poppins', sans-serif; 
+            text-wrap: balance;
+        }
+        a { text-decoration: none; }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #00E676 0%, #004AAD 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .arrow { 
+            display: inline-block; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .btn-vazado:hover .arrow,
+        .btn-primario:hover .arrow,
+        .btn-whatsapp-sutil:hover .arrow { 
+            transform: translateX(6px); 
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            will-change: opacity, transform;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* Header com 'Serviços' */
+        header {
+            padding: 20px 8%; 
+            display: flex;
+            align-items: center;
+            background: transparent; 
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid transparent;
+            transition: all 0.4s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 8%;
+            background: rgba(11, 11, 11, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+        }
+        
+        .logo { display: flex; align-items: center; margin-right: auto; }
+        .logo img { height: 65px; width: auto; margin-top: 6px; transition: transform 0.3s ease; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); }
+        header.scrolled .logo img { height: 55px; }
+        .logo img:hover { transform: scale(1.03); }
+
+        .menu { margin-right: 40px; display: flex; align-items: center; }
+        .menu > a {
+            color: var(--cinza-texto);
+            margin: 0 18px; 
+            font-size: 1.05rem; 
+            font-weight: 500;
+            transition: color 0.3s, transform 0.2s;
+        }
+        .menu > a:hover, .menu > a.ativo { color: var(--branco); transform: translateY(-1px); }
+        
+        .btn-vazado {
+            border: 1px solid var(--verde-neon);
+            color: var(--verde-neon);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: transparent;
+            cursor: pointer;
+        }
+        .btn-vazado:hover { 
+            background: var(--verde-neon); 
+            color: var(--fundo-black); 
+            box-shadow: 0 0 18px rgba(0, 230, 118, 0.35);
+        }
+
+        .btn-primario {
+            background: var(--verde-neon);
+            color: var(--fundo-black);
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: inline-block;
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.25); 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primario:hover { 
+            transform: scale(1.05) translateY(-2px); 
+            box-shadow: 0 10px 25px rgba(0, 230, 118, 0.45); 
+        }
+
+        /* BOTÃO WHATSAPP SUTIL & ELEGANTE */
+        .btn-whatsapp-sutil {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--branco);
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: rgba(37, 211, 102, 0.08);
+            border: 1px solid rgba(37, 211, 102, 0.25);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-whatsapp-sutil:hover {
+            background: rgba(37, 211, 102, 0.18);
+            border-color: rgba(37, 211, 102, 0.5);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+        .btn-whatsapp-sutil svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--verde-wpp);
+        }
+
+        /* MODAIS E PORTAL DO CLIENTE */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
+            z-index: 1000; display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-box {
+            background: var(--grafite-dark); padding: 40px; border-radius: 24px;
+            width: 90%; max-width: 460px; border: 1px solid rgba(255,255,255,0.1);
+            position: relative; transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+        }
+        .modal-overlay.ativo { display: flex; opacity: 1; }
+        .modal-overlay.ativo .modal-box { transform: translateY(0); }
+        .fechar-modal { position: absolute; top: 20px; right: 25px; font-size: 2rem; cursor: pointer; color: var(--cinza-texto); transition: color 0.3s; }
+        .fechar-modal:hover { color: var(--laranja-frame); }
+
+        .modal-box .portal-card {
+            padding: 16px 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 15px !important;
+            text-decoration: none !important;
+            border-radius: 16px !important;
+            width: 100% !important;
+            transition: all 0.3s ease !important;
+            box-sizing: border-box !important;
+            margin-bottom: 14px !important;
+        }
+        .modal-box .portal-card:last-child { margin-bottom: 0 !important; }
+
+        .modal-box .portal-card.card-cash {
+            border: 1px solid rgba(0, 230, 118, 0.25) !important;
+            background: rgba(0, 230, 118, 0.03) !important;
+        }
+        .modal-box .portal-card.card-cash:hover {
+            transform: translateY(-3px) !important;
+            border-color: rgba(0, 230, 118, 0.6) !important;
+            box-shadow: 0 10px 25px rgba(0, 230, 118, 0.15) !important;
+        }
+
+        .modal-box .portal-card.card-reaction {
+            border: 1px solid rgba(255, 107, 53, 0.25) !important;
+            background: rgba(255, 107, 53, 0.03) !important;
+        }
+        .modal-box .portal-card.card-reaction:hover {
+            transform: translateY(-3px) !important;
+            border-color: rgba(255, 107, 53, 0.6) !important;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.15) !important;
+        }
+
+        .modal-box .portal-card.card-hubitat {
+            border: 1px solid rgba(138, 43, 226, 0.25) !important;
+            background: rgba(138, 43, 226, 0.03) !important;
+        }
+        .modal-box .portal-card.card-hubitat:hover {
+            transform: translateY(-3px) !important;
+            border-color: rgba(138, 43, 226, 0.6) !important;
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.15) !important;
+        }
+
+        .modal-box .portal-icon-box {
+            width: 48px !important;
+            min-width: 48px !important;
+            height: 48px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: #111111 !important;
+            border-radius: 12px !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
+            flex-shrink: 0 !important;
+            overflow: hidden !important;
+        }
+
+        .modal-box .portal-info {
+            text-align: left !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            flex-grow: 1 !important;
+        }
+
+        .modal-box .portal-info h4 {
+            color: #FFFFFF !important;
+            font-size: 1.2rem !important;
+            font-family: 'Poppins', sans-serif !important;
+            margin: 0 !important;
+            line-height: 1.2 !important;
+        }
+
+        .modal-box .portal-info p {
+            color: rgba(255,255,255,0.6) !important;
+            font-size: 0.8rem !important;
+            margin: 2px 0 0 0 !important;
+            line-height: 1.2 !important;
+        }
+
+        .modal-box .portal-seta {
+            width: 36px !important;
+            min-width: 36px !important;
+            height: 36px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        /* Hero Sobre */
+        .hero-sobre {
+            padding: 160px 8% 80px;
+            background: radial-gradient(circle at 50% 20%, rgba(0, 74, 173, 0.18) 0%, var(--fundo-black) 70%);
+            text-align: center;
+        }
+        .hero-sobre h1 {
+            font-size: 3.5rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+        }
+        .hero-sobre p {
+            font-size: 1.2rem;
+            color: var(--cinza-texto);
+            max-width: 850px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        /* Grid de Soluções Detalhadas */
+        .secao-solucoes-detalhadas {
+            padding: 80px 8%;
+            background: var(--grafite-dark);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .solucao-card-full {
+            background: rgba(26, 26, 26, 0.85);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 28px;
+            padding: 45px;
+            margin-bottom: 40px;
+            transition: all 0.35s ease;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .solucao-card-full:last-child { margin-bottom: 0; }
+        .solucao-card-full:hover {
+            border-color: rgba(0, 230, 118, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .solucao-card-full .solucao-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        .solucao-card-full h3 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--branco);
+        }
+        .solucao-card-full p {
+            color: var(--cinza-texto);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        .solucao-card-full ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        .solucao-card-full ul li {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .solucao-card-full ul li::before {
+            content: "✓";
+            color: var(--verde-neon);
+            font-weight: bold;
+        }
+        
+        /* PREVIEW UI CARDS ELEGANTES PARA O SOBRE (v0.2.1) */
+        .solucao-preview-card {
+            background: linear-gradient(145deg, rgba(20, 20, 20, 0.9) 0%, rgba(12, 12, 12, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 20px 40px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solucao-preview-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+        }
+        .card-cash-preview::before { background: linear-gradient(90deg, #00E676, #004AAD); }
+        .card-reaction-preview::before { background: linear-gradient(90deg, #FF6B35, #004AAD); }
+        .card-hubitat-preview::before { background: linear-gradient(90deg, #8A2BE2, #00E676); }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+        }
+        .preview-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .preview-body-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 14px 18px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        /* Seção Propósito & Liderança */
+        .secao-proposito {
+            padding: 100px 8%;
+        }
+        .proposito-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .proposito-card {
+            background: var(--grafite-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.35s ease;
+        }
+        .proposito-card:hover {
+            border-color: rgba(0, 230, 118, 0.3);
+            transform: translateY(-6px);
+        }
+        .proposito-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--branco);
+        }
+        .proposito-card p {
+            color: var(--cinza-texto);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        footer { text-align: center; padding: 60px 8% 40px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
+        .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; }
+        .social-links a { display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.05); color: var(--cinza-texto); transition: all 0.3s ease; }
+        .social-links a:hover { background: rgba(255,255,255,0.1); color: var(--verde-neon); transform: translateY(-4px) scale(1.1); }
+        .social-links svg { width: 20px; height: 20px; fill: currentColor; }
+
+        @media (max-width: 992px) {
+            .solucao-card-full { grid-template-columns: 1fr; gap: 30px; }
+            .proposito-grid { grid-template-columns: 1fr; }
+            .hero-sobre h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PORTAL DO CLIENTE -->
+    <div class="modal-overlay" id="portalModal">
+        <div class="modal-box" style="text-align: center; width: 90%; max-width: 440px; padding: 45px 35px; background: linear-gradient(145deg, #1A1A1A 0%, #111111 100%); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 40px 80px rgba(0,0,0,0.8); border-radius: 24px;">
+            
+            <span class="fechar-modal" onclick="fecharModalPortal()">&times;</span>
+            
+            <div style="margin-bottom: 20px; margin-top: 5px;">
+                <span style="color: #00E676; background: rgba(0, 230, 118, 0.1); padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px; border: 1px solid rgba(0, 230, 118, 0.2); display: inline-block;">ÁREA DO CLIENTE</span>
+            </div>
+            
+            <h3 style="font-size: 2.1rem; margin-bottom: 8px; color: #FFFFFF; letter-spacing: -1px; line-height: 1.15;">O seu Painel de<br>Comando</h3>
+            <p style="margin-bottom: 25px; font-size: 0.95rem; color: #A0A0A0;">Acesse as ferramentas do seu negócio.</p>
+
+            <!-- CARD: CASH -->
+            <a href="https://cash.frameia.com.br" target="_blank" class="portal-card card-cash">
+                <div class="portal-icon-box">
+                     <img src="assets/cash-logo-green.png" alt="Logo Cash" style="width: 80%; height: 80%; object-fit: contain; display: block;" onError="this.onerror=null; this.src='assets/frame-cash-logo-clara.png';">
+                </div>
+                <div class="portal-info">
+                    <h4>Cash</h4>
+                    <p>Gestão Financeira por Voz & Foto</p>
+                </div>
+                <span class="portal-seta" style="background: rgba(0, 230, 118, 0.1);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00E676" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
+            </a>
+
+            <!-- CARD: REACTION (BETA) -->
+            <a href="https://reaction.frameia.com.br" target="_blank" class="portal-card card-reaction">
+                <div class="portal-icon-box">
+                     <img src="assets/reaction-logo-icon.png" alt="Logo ReAction" style="width: 80%; height: 80%; object-fit: contain; display: block;" onError="this.onerror=null; this.innerHTML='🛡️';">
+                </div>
+                <div class="portal-info">
+                    <h4>ReAction <span style="font-size: 0.65rem; color: var(--laranja-frame); background: rgba(255,107,53,0.15); padding: 2px 6px; border-radius: 4px; font-weight: bold;">BETA</span></h4>
+                    <p>Gestão de Reputação Automática</p>
+                </div>
+                <span class="portal-seta" style="background: rgba(255, 107, 53, 0.1);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
+            </a>
+
+            <!-- CARD: HUBITAT (EM BREVE) -->
+            <a href="#" onclick="fecharModalPortal(); abrirModalEsperaHubitat(); return false;" class="portal-card card-hubitat">
+                <div class="portal-icon-box">
+                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A2BE2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 17 22 12"></polyline></svg>
+                </div>
+                <div class="portal-info">
+                    <h4>Hubitat <span style="font-size: 0.65rem; color: #B19FFB; background: rgba(138,43,226,0.15); padding: 2px 6px; border-radius: 4px; font-weight: bold;">EM BREVE</span></h4>
+                    <p>Gestão Residencial & Condomínios</p>
+                </div>
+                <span class="portal-seta" style="background: rgba(138, 43, 226, 0.1);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A2BE2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- MODAL DE CONTATO -->
+    <div class="modal-overlay" id="contatoModal">
+        <div class="modal-box">
+            <span class="fechar-modal" onclick="fecharModal()">&times;</span>
+            <h3 style="font-size: 1.8rem; margin-bottom: 10px; color: var(--branco);">Fale com a nossa equipe</h3>
+            <p style="margin-bottom: 25px; font-size: 0.95rem; color: var(--cinza-texto);">Deixe seus contatos e ligaremos para entender como podemos te ajudar.</p>
+            
+            <form id="formContato" action="https://formsubmit.co/contato@frameia.com.br" method="POST">
+                <input type="hidden" name="_cc" value="jadson@mjsv.com.br,mara@mjsv.com.br">
+                <input type="hidden" name="_subject" value="Novo Contato via Sobre - Frame [IA]">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                
+                <div style="margin-bottom: 15px;">
+                    <input type="text" name="Nome" required placeholder="Como você se chama?" style="width:100%; padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:#000; color:#FFF;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <input type="email" name="Email" required placeholder="O seu melhor e-mail" style="width:100%; padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:#000; color:#FFF;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <input type="tel" name="Telefone" required placeholder="WhatsApp ou Telefone" style="width:100%; padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:#000; color:#FFF;">
+                </div>
+                <button type="submit" class="btn-primario" style="width: 100%; padding: 15px;">Quero que me liguem</button>
+            </form>
+            <div style="margin-top: 15px; text-align: center;">
+                <a href="https://api.whatsapp.com/send?phone=5585992125971&text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20equipe%20da%20Frame%20%5BIA%5D" target="_blank" class="btn-whatsapp-sutil" style="width:100%; justify-content:center;">Falar no WhatsApp: (85) 99212-5971</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL LISTA HUBITAT -->
+    <div class="modal-overlay" id="esperaHubitatModal">
+        <div class="modal-box">
+            <span class="fechar-modal" onclick="fecharModalEsperaHubitat()">&times;</span>
+            <span style="background: rgba(138, 43, 226, 0.15); color: #B19FFB; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; display: inline-block; margin-bottom: 15px;">EM IDEAÇÃO & DESENVOLVIMENTO</span>
+            <h3 style="font-size: 1.6rem; margin-bottom: 12px; color: var(--branco);">Hubitat: Gestão de Condomínios e Residenciais</h3>
+            <p style="margin-bottom: 20px; font-size: 0.95rem; color: var(--cinza-texto);">Um ecossistema inteligente sendo desenhado para simplificar a rotina de condomínios, residenciais e apartamentos.</p>
+            <form action="https://formsubmit.co/contato@frameia.com.br" method="POST">
+                <input type="hidden" name="_cc" value="jadson@mjsv.com.br,mara@mjsv.com.br">
+                <input type="hidden" name="_subject" value="Interesse Registrado - Hubitat Condomínios">
+                <input type="hidden" name="_captcha" value="false">
+                <div style="margin-bottom: 15px;">
+                    <input type="email" name="Email" required placeholder="O seu e-mail de contato" style="width:100%; padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:#000; color:#FFF;">
+                </div>
+                <button type="submit" class="btn-primario" style="width: 100%; background: var(--roxo-hubitat); color: #FFF;">Acompanhar Novidades &rarr;</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- HEADER COM MENU 'SERVIÇOS' -->
+    <header id="main-header">
+        <a href="index.html" class="logo">
+            <img src="assets/logo-frameia.png" alt="Logo Frame IA">
+        </a>
+        <nav class="menu">
+            <a href="index.html#solucoes">Soluções</a>
+            <a href="index.html#servicos">Serviços</a>
+            <a href="sobre" class="ativo">Sobre</a>
+            <a href="blog">Blog</a>
+            <a href="index.html#time">O Time</a>
+        </nav>
+        <a href="#" onclick="abrirModalPortal(); return false;" class="btn-vazado">Área do Cliente <span class="arrow">&rarr;</span></a>
+    </header>
+
+    <!-- HERO SOBRE -->
+    <section class="hero-sobre fade-up">
+        <span style="color: var(--verde-neon); font-weight: 700; letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 15px; display: block;">QUEM SOMOS & O QUE CONSTRUÍMOS</span>
+        <h1>A tecnologia certa para a sua <br><span class="text-gradient">liberdade de tempo.</span></h1>
+        <p>A Frame [IA] nasceu com a missão clara de eliminar o trabalho braçal e repetitivo da rotina de pequenos empresários, autônomos e gestores. Desenvolvemos ecossistemas inteligentes, limpos e acessíveis para você focar no que realmente importa.</p>
+        <a href="https://api.whatsapp.com/send?phone=5585992125971&text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20equipe%20da%20Frame%20%5BIA%5D" target="_blank" class="btn-whatsapp-sutil">
+            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg> Falar no WhatsApp: (85) 99212-5971 <span class="arrow">&rarr;</span>
+        </a>
+    </section>
+
+    <!-- SOLUÇÕES DETALHADAS COM CARDS PREVIEW ELEGANTE -->
+    <section id="solucoes-detalhadas" class="secao-solucoes-detalhadas">
+        <div style="text-align: center; margin-bottom: 60px;" class="fade-up">
+            <span style="color: var(--azul-tech); font-weight: 700; letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase;">NOSSO PORTFÓLIO DE SOLUÇÕES</span>
+            <h2 style="font-size: 2.8rem; margin-top: 10px;">Automação na Prática</h2>
+        </div>
+
+        <!-- CASH DETALHADO -->
+        <div class="solucao-card-full fade-up delay-1">
+            <div>
+                <span class="solucao-badge" style="background: rgba(0, 230, 118, 0.1); color: var(--verde-neon); border: 1px solid rgba(0, 230, 118, 0.3);">DISPONÍVEL AGORA</span>
+                <h3>Cash by Frame [IA]</h3>
+                <p>Economize 5h por semana na gestão financeira do seu negócio. Faça lançamentos enviando mensagens de voz ou fotos dos seus recibos no celular, sem planilhas chatas.</p>
+                <ul>
+                    <li>Lançamento automático de entradas e saídas por áudio e foto</li>
+                    <li>Relatórios de caixa diários, lucro real e fluxo de caixa inteligente</li>
+                    <li>Sem curva de aprendizado: tão fácil de usar quanto mandar um WhatsApp</li>
+                </ul>
+                <a href="https://cash.frameia.com.br" target="_blank" class="btn-primario" style="padding: 12px 30px;">Testar Cash Agora</a>
+            </div>
+            
+            <!-- PREVIEW CARD ELEGANTE: CASH -->
+            <div class="solucao-preview-card card-cash-preview">
+                <div class="preview-header">
+                    <div class="preview-title">
+                        <span style="color: var(--verde-neon); font-size: 1.3rem;">📱</span> Cash • WhatsApp IA
+                    </div>
+                    <span style="font-size: 0.7rem; color: var(--verde-neon); background: rgba(0, 230, 118, 0.12); padding: 3px 8px; border-radius: 4px; font-weight: bold;">AUTOMÁTICO</span>
+                </div>
+                <div class="preview-body-item">
+                    <span>🎙️ <i>"Áudio: Almoço cliente R$ 85,00"</i></span>
+                    <span style="color: var(--verde-neon); font-size: 0.8rem; font-weight: 600;">✓ Registrado</span>
+                </div>
+                <div class="preview-body-item">
+                    <span>📸 <i>Foto do Recibo / Comprovante</i></span>
+                    <span style="color: var(--verde-neon); font-size: 0.8rem; font-weight: 600;">✓ Categorizado</span>
+                </div>
+                <div style="margin-top: 5px; font-size: 0.85rem; color: rgba(255,255,255,0.6); text-align: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
+                    📊 Lucro Real Diário Atualizado no Celular
+                </div>
+            </div>
+        </div>
+
+        <!-- REACTION DETALHADO -->
+        <div class="solucao-card-full fade-up delay-2" style="border-color: rgba(255, 107, 53, 0.25);">
+            <div>
+                <span class="solucao-badge" style="background: rgba(255, 107, 53, 0.12); color: var(--laranja-frame); border: 1px solid rgba(255, 107, 53, 0.3);">VERSÃO BETA DISPONÍVEL</span>
+                <h3>ReAction by Frame [IA]</h3>
+                <p>O seu motor de reputação e respostas automáticas. O ReAction analisa avaliações e mensagens de clientes no Google e redes sociais, respondendo a cada cliente com profissionalismo e inteligência em tempo real.</p>
+                <ul>
+                    <li>Respostas personalizadas a avaliações no Google Meu Negócio</li>
+                    <li>Zero clientes sem resposta e maior pontuação de atendimento</li>
+                    <li>Calibragem do tom de voz da IA para combinar exatamente com a sua marca</li>
+                </ul>
+                <a href="https://reaction.frameia.com.br" target="_blank" class="btn-primario" style="padding: 12px 30px; background: var(--laranja-frame); color: #FFF;">Acessar ReAction Beta</a>
+            </div>
+
+            <!-- PREVIEW CARD ELEGANTE: REACTION -->
+            <div class="solucao-preview-card card-reaction-preview">
+                <div class="preview-header">
+                    <div class="preview-title">
+                        <span style="color: var(--laranja-frame); font-size: 1.3rem;">🛡️</span> ReAction • Google & Redes
+                    </div>
+                    <span style="font-size: 0.7rem; color: var(--laranja-frame); background: rgba(255, 107, 53, 0.12); padding: 3px 8px; border-radius: 4px; font-weight: bold;">EM TEMPO REAL</span>
+                </div>
+                <div class="preview-body-item" style="flex-direction: column; align-items: flex-start; gap: 5px;">
+                    <span style="color: #FFD700; font-size: 0.85rem;">⭐⭐⭐⭐⭐ <i>"Melhor atendimento da região!"</i></span>
+                    <span style="color: rgba(255,255,255,0.7); font-size: 0.8rem; margin-top: 4px; border-left: 2px solid var(--laranja-frame); padding-left: 8px;">
+                        🤖 <strong>ReAction IA:</strong> "Ficamos muito felizes em te atender bem! Volte sempre!"
+                    </span>
+                </div>
+                <div style="margin-top: 5px; font-size: 0.85rem; color: rgba(255,255,255,0.6); text-align: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
+                    🚀 Maior visibilidade e nota máxima no Google
+                </div>
+            </div>
+        </div>
+
+        <!-- HUBITAT DETALHADO -->
+        <div class="solucao-card-full fade-up delay-3" style="border-color: rgba(138, 43, 226, 0.25);">
+            <div>
+                <span class="solucao-badge" style="background: rgba(138, 43, 226, 0.12); color: #B19FFB; border: 1px solid rgba(138, 43, 226, 0.3);">EM IDEAÇÃO & DESENVOLVIMENTO</span>
+                <h3>Hubitat by Frame [IA]</h3>
+                <p>Plataforma em desenvolvimento voltada para a gestão de condomínio, residenciais e apartamentos. Automação inteligente para facilitar o dia a dia de síndicos e moradores.</p>
+                <ul>
+                    <li>Foco na organização de solicitações, avisos e rotinas de condomínios</li>
+                    <li>Interface limpa e de fácil uso para moradores e administradores</li>
+                    <li>Acompanhe o desenvolvimento sem promessas precipitadas</li>
+                </ul>
+                <a href="#" onclick="abrirModalEsperaHubitat(); return false;" class="btn-vazado" style="border-color: var(--roxo-hubitat); color: #B19FFB;">Acompanhar Novidades &rarr;</a>
+            </div>
+
+            <!-- PREVIEW CARD ELEGANTE: HUBITAT -->
+            <div class="solucao-preview-card card-hubitat-preview">
+                <div class="preview-header">
+                    <div class="preview-title">
+                        <span style="color: #B19FFB; font-size: 1.3rem;">🏢</span> Hubitat • Gestão Residencial
+                    </div>
+                    <span style="font-size: 0.7rem; color: #B19FFB; background: rgba(138, 43, 226, 0.15); padding: 3px 8px; border-radius: 4px; font-weight: bold;">EM DESENVOLVIMENTO</span>
+                </div>
+                <div class="preview-body-item">
+                    <span>📋 <i>Solicitações & Avisos em 1 clique</i></span>
+                    <span style="color: #B19FFB; font-size: 0.8rem; font-weight: 600;">Simplificado</span>
+                </div>
+                <div class="preview-body-item">
+                    <span>🔔 <i>Comunicação Direta Morador/Síndico</i></span>
+                    <span style="color: #B19FFB; font-size: 0.8rem; font-weight: 600;">Sem Ruídos</span>
+                </div>
+                <div style="margin-top: 5px; font-size: 0.85rem; color: rgba(255,255,255,0.6); text-align: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
+                    🏘️ Para Condomínios, Residenciais e Apartamentos
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROPÓSITO & VALORES -->
+    <section class="secao-proposito">
+        <div style="text-align: center;" class="fade-up">
+            <span style="color: var(--verde-neon); font-weight: 700; letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase;">NOSSOS PILARES</span>
+            <h2 style="font-size: 2.8rem; margin-top: 10px;">Por que a Frame [IA]?</h2>
+        </div>
+        
+        <div class="proposito-grid">
+            <div class="proposito-card fade-up delay-1">
+                <h4>Simplicidade Absoluta</h4>
+                <p>Se você sabe usar o celular, sabe usar nossas ferramentas. Cortamos botões desnecessários e focamos no resultado imediato.</p>
+            </div>
+            <div class="proposito-card fade-up delay-2">
+                <h4>Tecnologia Prática</h4>
+                <p>Acreditamos que a Inteligência Artificial deve ser um recurso acessível a todos os comerciantes e autônomos, sem complicações.</p>
+            </div>
+            <div class="proposito-card fade-up delay-3">
+                <h4>Suporte Humano</h4>
+                <p>Por trás das máquinas há uma equipe atenciosa pronta para te guiar e tirar qualquer dúvida com total atenção.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <h2 style="font-size: 2rem; margin-bottom: 30px;">Pronto para simplificar o seu negócio?</h2>
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 50px; align-items: center;">
+            <a href="https://api.whatsapp.com/send?phone=5585992125971&text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20equipe%20da%20Frame%20%5BIA%5D" target="_blank" class="btn-whatsapp-sutil" style="padding: 14px 30px; font-size: 1.05rem;">
+                <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg> WhatsApp: (85) 99212-5971
+            </a>
+            <a href="#" onclick="abrirModal(); return false;" class="btn-vazado" style="padding: 14px 35px; font-size: 1rem;">Outras formas de contato</a>
+        </div>
+        
+        <div class="social-links">
+            <a href="https://www.linkedin.com/company/frameia" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            <a href="https://www.instagram.com/jadsonsvieira.tech" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <a href="https://www.youtube.com/@FrameIA.Oficial" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        </div>
+        <p style="color: var(--cinza-texto); font-size: 0.9rem;">&copy; 2026 Frame [IA] - Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function abrirModal() { const m = document.getElementById('contatoModal'); if(m) m.classList.add('ativo'); }
+        function fecharModal() { const m = document.getElementById('contatoModal'); if(m) m.classList.remove('ativo'); }
+        function abrirModalEsperaHubitat() { const m = document.getElementById('esperaHubitatModal'); if(m) m.classList.add('ativo'); }
+        function fecharModalEsperaHubitat() { const m = document.getElementById('esperaHubitatModal'); if(m) m.classList.remove('ativo'); }
+        function abrirModalPortal() { const m = document.getElementById('portalModal'); if(m) m.classList.add('ativo'); }
+        function fecharModalPortal() { const m = document.getElementById('portalModal'); if(m) m.classList.remove('ativo'); }
+
+        window.onclick = function(e) {
+            if (e.target === document.getElementById('contatoModal')) fecharModal();
+            if (e.target === document.getElementById('esperaHubitatModal')) fecharModalEsperaHubitat();
+            if (e.target === document.getElementById('portalModal')) fecharModalPortal();
+        }
+
+        window.addEventListener('scroll', () => {
+            const h = document.getElementById('main-header');
+            if (window.scrollY > 50) h.classList.add('scrolled');
+            else h.classList.remove('scrolled');
+        });
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

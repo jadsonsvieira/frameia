@@ -1,0 +1,53 @@
+{
+    "site_id": "frameia",
+    "name": "Frame [IA]",
+    "domain": "frameia.com.br",
+    "version": "0.2.1",
+    "git_tag": "frameia-v0.2.1",
+    "last_updated": "2026-08-05T21:35:20",
+    "description": "Versão 0.2.1: Menu padronizado para 'Serviços', substituição dos quadros de imagens do Sobre por preview cards UI elegantes e discretos, botão do WhatsApp redesenhado em tom sutil e elegante com o número oficial (85 99212-5971).",
+    "history": [
+        {
+            "version": "0.0.0",
+            "tag": "frameia-v0.0.0",
+            "date": "2026-08-01T22:24:00",
+            "notes": "Versão inicial estável v0.0.0."
+        },
+        {
+            "version": "0.1.0",
+            "tag": "frameia-v0.1.0",
+            "date": "2026-08-02T08:08:30",
+            "notes": "ReAction ativado para Beta; Hubitat inserido na Lista VIP de Acesso Antecipado; menu Serviços padronizado."
+        },
+        {
+            "version": "0.1.1",
+            "tag": "frameia-v0.1.1",
+            "date": "2026-08-02T08:12:50",
+            "notes": "Adicionada a informação do Setup VIP 360º no ReAction (R$ 300,00), removidas marcações brutas de asteriscos e aprimorado o refinamento estético global dos cards de serviços."
+        },
+        {
+            "version": "0.1.2",
+            "tag": "frameia-v0.1.2",
+            "date": "2026-08-02T08:21:10",
+            "notes": "Removidas menções a valores no card do Hubitat, focando exclusivamente no Acesso VIP e lista de espera para o lançamento oficial."
+        },
+        {
+            "version": "0.1.3",
+            "tag": "frameia-v0.1.3",
+            "date": "2026-08-02T08:29:00",
+            "notes": "Hubitat configurado com posicionamento claro para gestão de condomínios, residenciais e apartamentos em fase de ideação, sem frases inadequadas ou expectativas precipitadas."
+        },
+        {
+            "version": "0.2.0",
+            "tag": "frameia-v0.2.0",
+            "date": "2026-08-05T21:20:40",
+            "notes": "Versão v0.2.0: Proposta de valor baseada na dor real do cliente (economizar tempo no Cash e conquistar clientes no ReAction Beta), remoção total de valores numéricos e inclusão de chamada direta para atendimento no WhatsApp."
+        },
+        {
+            "version": "0.2.1",
+            "tag": "frameia-v0.2.1",
+            "date": "2026-08-05T21:35:20",
+            "notes": "Versão v0.2.1: Menu 'Serviços' restaurado, substituição das caixas de imagens do Sobre por preview cards UI estilizados, suavização do botão do WhatsApp com o número oficial (85 99212-5971)."
+        }
+    ]
+}

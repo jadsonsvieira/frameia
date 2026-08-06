@@ -1,0 +1,23 @@
+{
+    "site_id": "frameia",
+    "name": "Frame [IA]",
+    "domain": "frameia.com.br",
+    "version": "0.1.0",
+    "git_tag": "frameia-v0.1.0",
+    "last_updated": "2026-08-02T08:08:30",
+    "description": "Automação e SaaS para Micro e Pequenas Empresas (Cash, ReAction Beta e Hubitat em Breve)",
+    "history": [
+        {
+            "version": "0.0.0",
+            "tag": "frameia-v0.0.0",
+            "date": "2026-08-01T22:24:00",
+            "notes": "Versão inicial estável v0.0.0."
+        },
+        {
+            "version": "0.1.0",
+            "tag": "frameia-v0.1.0",
+            "date": "2026-08-02T08:08:30",
+            "notes": "ReAction ativado para Beta; Hubitat inserido na Lista VIP de Acesso Antecipado; menu Serviços padronizado."
+        }
+    ]
+}

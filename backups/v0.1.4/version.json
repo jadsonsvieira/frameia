@@ -1,0 +1,47 @@
+{
+    "site_id": "frameia",
+    "name": "Frame [IA]",
+    "domain": "frameia.com.br",
+    "version": "0.1.4",
+    "git_tag": "frameia-v0.1.4",
+    "last_updated": "2026-08-02T08:38:20",
+    "description": "Automação e SaaS para Micro e Pequenas Empresas (Refletido detalhamento do ReAction Beta e Hubitat Condomínios no Sobre e Blog, logotipos oficiais do Cash e ReAction no Portal do Cliente)",
+    "history": [
+        {
+            "version": "0.0.0",
+            "tag": "frameia-v0.0.0",
+            "date": "2026-08-01T22:24:00",
+            "notes": "Versão inicial estável v0.0.0."
+        },
+        {
+            "version": "0.1.0",
+            "tag": "frameia-v0.1.0",
+            "date": "2026-08-02T08:08:30",
+            "notes": "ReAction ativado para Beta; Hubitat inserido na Lista VIP de Acesso Antecipado; menu Serviços padronizado."
+        },
+        {
+            "version": "0.1.1",
+            "tag": "frameia-v0.1.1",
+            "date": "2026-08-02T08:12:50",
+            "notes": "Adicionada a informação do Setup VIP 360º no ReAction (R$ 300,00), removidas marcações brutas de asteriscos e aprimorado o refinamento estético global dos cards de serviços."
+        },
+        {
+            "version": "0.1.2",
+            "tag": "frameia-v0.1.2",
+            "date": "2026-08-02T08:21:10",
+            "notes": "Removidas menções a valores no card do Hubitat, focando exclusivamente no Acesso VIP e lista de espera para o lançamento oficial."
+        },
+        {
+            "version": "0.1.3",
+            "tag": "frameia-v0.1.3",
+            "date": "2026-08-02T08:29:00",
+            "notes": "Hubitat configurado com posicionamento claro para gestão de condomínios, residenciais e apartamentos em fase de ideação, sem frases inadequadas ou expectativas precipitadas."
+        },
+        {
+            "version": "0.1.4",
+            "tag": "frameia-v0.1.4",
+            "date": "2026-08-02T08:38:20",
+            "notes": "Aba Sobre totalmente reformulada em tema escuro com detalhamento das 3 verticais (Cash, ReAction Beta, Hubitat Condomínios). Aba Blog atualizada. Logotipos anexados inseridos no Modal do Portal do Cliente."
+        }
+    ]
+}
