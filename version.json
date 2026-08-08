@@ -4,8 +4,8 @@
     "domain": "frameia.com.br",
     "version": "0.2.3",
     "git_tag": "frameia-v0.2.3",
-    "last_updated": "2026-08-07T19:30:00",
-    "description": "Versão 0.2.3: Atualização oficial do logotipo da marca ReAction (escudo laranja com ícone de check e tipografia oficial) no Portal do Cliente, cards de soluções e previews de produto.",
+    "last_updated": "2026-08-07T22:02:15",
+    "description": "Versão 0.2.3: Atualização oficial do logotipo das três soluções (Cash, ReAction e Hubitat) no Portal do Cliente, cards de soluções e previews de produto.",
     "history": [
         {
             "version": "0.0.0",
@@ -58,8 +58,8 @@
         {
             "version": "0.2.3",
             "tag": "frameia-v0.2.3",
-            "date": "2026-08-07T19:30:00",
-            "notes": "Versão v0.2.3: Atualização do logotipo oficial do ReAction (assets/reaction-logo-official.png e reaction-logo-icon.png) em todo o website Frame [IA]."
+            "date": "2026-08-07T22:02:15",
+            "notes": "Versão v0.2.3: Atualização do logotipo oficial do ReAction, Cash e Hubitat no Portal do Cliente e em todo o website Frame [IA]."
         }
     ]
 }
