@@ -4,8 +4,8 @@
     "domain": "frameia.com.br",
     "version": "0.3.0",
     "git_tag": "frameia-v0.3.0",
-    "last_updated": "2026-08-18T22:05:30",
-    "description": "Versão 0.3.0: Atualização completa da identidade visual oficial da marca Frame [IA] (novo símbolo geométrico e tipografia oficial nos temas Dark e Light, headers, footers e favicons).",
+    "last_updated": "2026-08-18T23:02:00",
+    "description": "Versão 0.3.0: Nova identidade visual horizontal oficial da Frame [IA] ('Tecnologia que Transforma by MJSV') integrada com harmonia e elegância no cabeçalho e rodapé de todas as páginas.",
     "history": [
         {
             "version": "0.0.0",
@@ -82,8 +82,8 @@
         {
             "version": "0.3.0",
             "tag": "frameia-v0.3.0",
-            "date": "2026-08-18T22:05:30",
-            "notes": "Versão v0.3.0: Nova identidade visual oficial da Frame [IA] integrada em todo o ecossistema (novos logotipos oficiais Light & Dark, headers, footers e favicons)."
+            "date": "2026-08-18T23:02:00",
+            "notes": "Versão v0.3.0: Nova identidade visual oficial horizontal da Frame [IA] (Tecnologia que Transforma by MJSV) aplicada em todo o site com proporções e escalas refinadas."
         }
     ]
 }
