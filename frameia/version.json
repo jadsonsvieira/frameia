@@ -2,10 +2,10 @@
     "site_id": "frameia",
     "name": "Frame [IA]",
     "domain": "frameia.com.br",
-    "version": "0.3.1",
-    "git_tag": "frameia-v0.3.1",
-    "last_updated": "2026-08-18T22:18:40",
-    "description": "Versão 0.3.1: Ajuste fino do logotipo oficial genuíno (proporção natural original sem esticar/deformar, escala elegante height: 46px nos headers e 48px nos footers para equilíbrio visual perfeito).",
+    "version": "0.2.6",
+    "git_tag": "frameia-v0.2.6",
+    "last_updated": "2026-08-07T22:31:10",
+    "description": "Versão 0.2.6: Aplicação das logos oficiais com fundo transparente (PNGs sem fundo com drop-shadow neon) na página Sobre (sobre.html), eliminando blocos de fundo escuro e deixando a interface leve e integrada.",
     "history": [
         {
             "version": "0.0.0",
@@ -78,18 +78,6 @@
             "tag": "frameia-v0.2.6",
             "date": "2026-08-07T22:31:10",
             "notes": "Versão v0.2.6: Aplicação das logos oficiais com fundo transparente nos cartões e previews do Sobre (sobre.html)."
-        },
-        {
-            "version": "0.3.0",
-            "tag": "frameia-v0.3.0",
-            "date": "2026-08-18T22:05:30",
-            "notes": "Versão v0.3.0: Nova identidade visual oficial da Frame [IA] integrada em todo o ecossistema (novos logotipos oficiais Light & Dark, headers, footers e favicons)."
-        },
-        {
-            "version": "0.3.1",
-            "tag": "frameia-v0.3.1",
-            "date": "2026-08-18T22:18:40",
-            "notes": "Versão v0.3.1: Ajuste de escala e proporção original da logo oficial da Frame [IA] (design original não-deformado, 46px no header e 48px no footer) com harmonia e elegância visual."
         }
     ]
 }
