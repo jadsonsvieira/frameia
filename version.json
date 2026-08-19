@@ -2,10 +2,10 @@
     "site_id": "frameia",
     "name": "Frame [IA]",
     "domain": "frameia.com.br",
-    "version": "0.2.6",
-    "git_tag": "frameia-v0.2.6",
-    "last_updated": "2026-08-07T22:31:10",
-    "description": "Versão 0.2.6: Aplicação das logos oficiais com fundo transparente (PNGs sem fundo com drop-shadow neon) na página Sobre (sobre.html), eliminando blocos de fundo escuro e deixando a interface leve e integrada.",
+    "version": "0.3.0",
+    "git_tag": "frameia-v0.3.0",
+    "last_updated": "2026-08-18T23:02:00",
+    "description": "Versão 0.3.0: Nova identidade visual horizontal oficial da Frame [IA] ('Tecnologia que Transforma by MJSV') integrada com harmonia e elegância no cabeçalho e rodapé de todas as páginas.",
     "history": [
         {
             "version": "0.0.0",
@@ -78,6 +78,12 @@
             "tag": "frameia-v0.2.6",
             "date": "2026-08-07T22:31:10",
             "notes": "Versão v0.2.6: Aplicação das logos oficiais com fundo transparente nos cartões e previews do Sobre (sobre.html)."
+        },
+        {
+            "version": "0.3.0",
+            "tag": "frameia-v0.3.0",
+            "date": "2026-08-18T23:02:00",
+            "notes": "Versão v0.3.0: Nova identidade visual oficial horizontal da Frame [IA] (Tecnologia que Transforma by MJSV) aplicada em todo o site com proporções e escalas refinadas."
         }
     ]
 }

@@ -87,10 +87,10 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
         }
         
-        .logo { display: flex; align-items: center; margin-right: auto; }
-        .logo img { height: 65px; width: auto; margin-top: 6px; transition: transform 0.3s ease; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); }
-        header.scrolled .logo img { height: 55px; }
-        .logo img:hover { transform: scale(1.03); }
+        .logo { display: flex; align-items: center; margin-right: auto; text-decoration: none; }
+        .logo img { height: 48px; width: auto; object-fit: contain; transition: all 0.3s ease; filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4)); display: block; }
+        header.scrolled .logo img { height: 40px; }
+        .logo img:hover { transform: scale(1.03); filter: drop-shadow(0 0 14px rgba(0, 230, 118, 0.25)); }
 
         .menu { margin-right: 40px; display: flex; align-items: center; }
         .menu > a {
@@ -965,6 +965,9 @@
     </section>
 
     <footer id="contato" class="fade-up">
+        <div style="margin-bottom: 25px;">
+            <img src="assets/logo-frameia.png" alt="Logo Frame IA" style="height: 52px; width: auto; object-fit: contain; opacity: 0.95; display: inline-block;">
+        </div>
         <h2 style="font-size: 2rem; margin-bottom: 30px;">Pronto para deixar a rotina chata de lado?</h2>
         <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 50px; align-items: center;">
             <a href="https://api.whatsapp.com/send?phone=5585992125971&text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20equipe%20da%20Frame%20%5BIA%5D" target="_blank" class="btn-whatsapp-sutil" style="padding: 14px 30px; font-size: 1.05rem;">

@@ -229,8 +229,9 @@
             border-bottom: 1px solid var(--borda-suave); box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
         
-        .logo img { height: 65px; width: auto; margin-top: 6px; transition: transform 0.3s ease; }
-        header.scrolled .logo img { height: 55px; }
+        .logo { display: flex; align-items: center; text-decoration: none; }
+        .logo img { height: 48px; width: auto; object-fit: contain; transition: all 0.3s ease; display: block; margin-top: 0; }
+        header.scrolled .logo img { height: 40px; }
         .logo img:hover { transform: scale(1.03); }
 
         .menu-voltar {
@@ -316,7 +317,7 @@
         }
 
         footer { text-align: center; padding: 80px 8% 60px; border-top: 1px solid var(--borda-suave); }
-        footer .logo-foter { height: 45px; margin-bottom: 25px; opacity: 0.9; }
+        footer .logo-foter { height: 48px; width: auto; object-fit: contain; margin-bottom: 25px; opacity: 0.95; display: inline-block; }
 
         @media (max-width: 1024px) { 
             .grid-3 { grid-template-columns: repeat(2, 1fr); } 
@@ -324,7 +325,7 @@
         }
         @media (max-width: 768px) {
             header, header.scrolled { padding: 15px 5%; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); }
-            .logo img, header.scrolled .logo img { height: 50px; margin-top: 0; }
+            .logo img, header.scrolled .logo img { height: 40px; margin-top: 0; }
             .hero-blog { padding: 200px 5% 60px; }
             .hero-blog h1 { font-size: 2.5rem; letter-spacing: -1px; line-height: 1.1; }
             .grid-3 { grid-template-columns: 1fr; gap: 30px; }
