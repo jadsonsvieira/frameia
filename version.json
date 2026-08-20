@@ -4,8 +4,8 @@
     "domain": "frameia.com.br",
     "version": "0.3.0",
     "git_tag": "frameia-v0.3.0",
-    "last_updated": "2026-08-18T23:02:00",
-    "description": "Versão 0.3.0: Nova identidade visual horizontal oficial da Frame [IA] ('Tecnologia que Transforma by MJSV') integrada com harmonia e elegância no cabeçalho e rodapé de todas as páginas.",
+    "last_updated": "2026-08-19T21:56:00",
+    "description": "Versão 0.3.0: Nova identidade visual oficial horizontal da Frame [IA] ('Tecnologia que Transforma by MJSV') integrada no canto superior esquerdo (header) e no rodapé de todas as páginas.",
     "history": [
         {
             "version": "0.0.0",
@@ -82,8 +82,8 @@
         {
             "version": "0.3.0",
             "tag": "frameia-v0.3.0",
-            "date": "2026-08-18T23:02:00",
-            "notes": "Versão v0.3.0: Nova identidade visual oficial horizontal da Frame [IA] (Tecnologia que Transforma by MJSV) aplicada em todo o site com proporções e escalas refinadas."
+            "date": "2026-08-19T21:56:00",
+            "notes": "Versão v0.3.0: Nova identidade visual oficial horizontal da Frame [IA] ('Tecnologia que Transforma by MJSV') integrada nos headers e footers de todas as páginas."
         }
     ]
 }
