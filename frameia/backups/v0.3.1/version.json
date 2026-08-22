@@ -4,8 +4,8 @@
     "domain": "frameia.com.br",
     "version": "0.3.1",
     "git_tag": "frameia-v0.3.1",
-    "last_updated": "2026-08-18T22:18:40",
-    "description": "Versão 0.3.1: Ajuste fino do logotipo oficial genuíno (proporção natural original sem esticar/deformar, escala elegante height: 46px nos headers e 48px nos footers para equilíbrio visual perfeito).",
+    "last_updated": "2026-08-21T21:43:00",
+    "description": "Versão 0.3.1: Ajuste refinado na escala da logo oficial horizontal para 38px (32px scrolled/mobile), garantindo proporção e delicadeza visual; e atualização do banner de novidades para destacar o Cash em breve para Android e iOS.",
     "history": [
         {
             "version": "0.0.0",
@@ -82,14 +82,14 @@
         {
             "version": "0.3.0",
             "tag": "frameia-v0.3.0",
-            "date": "2026-08-18T22:05:30",
-            "notes": "Versão v0.3.0: Nova identidade visual oficial da Frame [IA] integrada em todo o ecossistema (novos logotipos oficiais Light & Dark, headers, footers e favicons)."
+            "date": "2026-08-19T21:56:00",
+            "notes": "Versão v0.3.0: Nova identidade visual oficial horizontal da Frame [IA] ('Tecnologia que Transforma by MJSV') integrada nos headers e footers de todas as páginas."
         },
         {
             "version": "0.3.1",
             "tag": "frameia-v0.3.1",
-            "date": "2026-08-18T22:18:40",
-            "notes": "Versão v0.3.1: Ajuste de escala e proporção original da logo oficial da Frame [IA] (design original não-deformado, 46px no header e 48px no footer) com harmonia e elegância visual."
+            "date": "2026-08-21T21:43:00",
+            "notes": "Versão v0.3.1: Redução refinada da altura da logo horizontal para 38px (32px no scroll) e atualização do destaque de novidades para 'Cash em breve no Android e iOS!'."
         }
     ]
 }
