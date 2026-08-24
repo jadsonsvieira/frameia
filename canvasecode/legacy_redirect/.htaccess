@@ -1,0 +1,22 @@
+# ====================================================================
+# REDIRECIONAMENTO PERMANENTE 301 (DOMÍNIO LEGADO)
+# Origem: canvasecode.com.br (ou www.canvasecode.com.br)
+# Destino: https://canvasecodestudio.com.br
+# ====================================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Redirecionar todo o tráfego de canvasecode.com.br para canvasecodestudio.com.br
+    RewriteCond %{HTTP_HOST} ^(www\.)?canvasecode\.com\.br$ [NC]
+    RewriteRule ^(.*)$ https://canvasecodestudio.com.br/$1 [R=301,L]
+
+    # Redirecionar qualquer outra requisição para o novo domínio
+    RewriteRule ^(.*)$ https://canvasecodestudio.com.br/$1 [R=301,L]
+</IfModule>
+
+# Fallback se mod_rewrite não estiver ativo
+<IfModule !mod_rewrite.c>
+    RedirectMatch 301 ^/(.*)$ https://canvasecodestudio.com.br/$1
+</IfModule>
