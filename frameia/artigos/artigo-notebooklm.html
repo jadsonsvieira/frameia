@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Mestre NotebookLM | Frame [IA]</title>
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --fundo-light: #F8F9FA; 
+            --fundo-card: #FFFFFF; 
+            --texto-titulo: #111111; 
+            --texto-corpo: #333333;
+            --azul-tech: #004AAD;
+            --verde-neon: #00E676; 
+            --laranja-frame: #ff6b35;
+            --borda-suave: rgba(0, 0, 0, 0.05); 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--fundo-light);
+            color: var(--texto-corpo);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.8; 
+            font-size: 1.15rem;
+        }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: var(--texto-titulo); letter-spacing: -0.5px; }
+        a { text-decoration: none; }
+
+        header {
+            padding: 10px 8%; 
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px);
+            position: fixed; width: 100%; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--borda-suave);
+        }
+        .logo img { height: 50px; width: auto; transition: transform 0.3s ease; }
+        .logo img:hover { transform: scale(1.03); }
+        .menu-voltar { color: var(--texto-corpo); font-size: 1rem; font-weight: 500; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
+        .menu-voltar:hover { color: var(--laranja-frame); }
+
+        .artigo-header {
+            padding: 180px 5% 60px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .blog-tag { 
+            color: var(--azul-tech); font-size: 0.85rem; font-weight: 800; text-transform: uppercase; 
+            display: inline-block; letter-spacing: 1.5px; margin-bottom: 20px;
+            background: rgba(0, 74, 173, 0.1); padding: 6px 16px; border-radius: 50px;
+        }
+        .artigo-header h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; }
+        .artigo-meta { color: #666; font-size: 1rem; font-weight: 500; }
+        .artigo-meta strong { color: var(--laranja-frame); }
+
+        .artigo-corpo {
+            max-width: 800px;
+            margin: 0 auto 100px;
+            padding: 0 5%;
+        }
+        .artigo-corpo h2 { font-size: 2.2rem; margin: 50px 0 20px; border-bottom: 2px solid var(--verde-neon); padding-bottom: 10px; display: inline-block;}
+        .artigo-corpo h3 { font-size: 1.5rem; margin: 30px 0 15px; color: var(--azul-tech); }
+        .artigo-corpo p { margin-bottom: 25px; }
+        
+        .destaque-box {
+            background: var(--fundo-card);
+            border-left: 5px solid var(--laranja-frame);
+            padding: 30px;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            margin: 40px 0;
+        }
+
+        .code-box {
+            background: #111827;
+            color: #00E676;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 0.95rem;
+            margin: 20px 0 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--azul-tech) 0%, #001533 100%);
+            color: #FFF;
+            text-align: center;
+            padding: 60px 5%;
+            border-radius: 24px;
+            margin-top: 60px;
+        }
+        .cta-box h3 { color: #FFF; font-size: 2rem; margin-bottom: 15px; }
+        .cta-box p { color: rgba(255,255,255,0.8); margin-bottom: 30px; font-size: 1.1rem; }
+        .btn-primario {
+            background: var(--verde-neon); color: #111; padding: 16px 35px; border-radius: 50px;
+            font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.05rem; display: inline-block;
+            transition: transform 0.3s;
+        }
+        .btn-primario:hover { transform: scale(1.05); }
+
+        footer { text-align: center; padding: 60px 5%; border-top: 1px solid var(--borda-suave); }
+        footer .logo-foter { height: 40px; margin-bottom: 20px; opacity: 0.9; }
+
+        @media (max-width: 768px) {
+            .artigo-header { padding: 140px 5% 40px; }
+            .artigo-header h1 { font-size: 2.2rem; }
+            body { font-size: 1.05rem; }
+            .artigo-corpo h2 { font-size: 1.8rem; }
+            .cta-box { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../index" class="logo">
+            <img src="../assets/logo-frameia-colorido.png" alt="Logo Frame IA">
+        </a>
+        <a href="../blog" class="menu-voltar">&larr; Voltar para o Blog</a>
+    </header>
+
+    <div class="artigo-header">
+        <span class="blog-tag">IA na Prática</span>
+        <h1>Guia Mestre NotebookLM</h1>
+        <p class="artigo-meta">Transformando dados brutos em <strong>inteligência corporativa</strong> com a tecnologia mais subestimada do Google.</p>
+    </div>
+
+    <div class="artigo-corpo">
+        <p>Pedir apenas "um resumo" a uma inteligência artificial é usar menos de 5% do potencial do motor mais refinado do Google. O NotebookLM não é apenas mais um chat de conversa; ele funciona como uma verdadeira bancada de <strong>Engenharia de Confiabilidade</strong> para a sua empresa.</p>
+        
+        <div class="destaque-box">
+            <strong>A Quebra de Objeção:</strong><br>
+            Diferente do ChatGPT e de outras IAs generativas convencionais, o NotebookLM cria um ambiente <strong>isolado e blindado</strong> focado estritamente nas suas fontes (arquitetura RAG). Isso zera quase por completo as chances de "alucinação" de dados.
+        </div>
+
+        <h2>O que pode carregar como fonte?</h2>
+        <p>A plataforma aceita e cruza múltiplos formatos de documentos internos da sua empresa:</p>
+        <ul style="padding-left: 20px; margin-bottom: 25px;">
+            <li>Relatórios de falhas e Causa Raiz;</li>
+            <li>Transcrições de reuniões e áudios de alinhamento;</li>
+            <li>Manuais de Procedimentos (POPs) e templates ISO;</li>
+            <li>Documentações e análises de concorrentes.</li>
+        </ul>
+
+        <h2>3 Recursos de Autoridade do NotebookLM</h2>
+        
+        <h3>1. Cruzamento Multióptica</h3>
+        <p>Faça os seus arquivos conversarem entre si. É possível perguntar, por exemplo: <em>"Quais gargalos citados nos relatórios justificam a queda apontada na planilha Y?"</em> A IA entrega a resposta com links de rastreabilidade direta nas fontes originais.</p>
+
+        <h3>2. Audio Overview Sênior</h3>
+        <p>Gere um podcast interativo em áudio (com dois locutores virtuais) a explicar manuais complexos, normas de segurança ou diretrizes de processos para treinamento imediato da sua equipa.</p>
+
+        <h3>3. Notas de Briefing Mestre</h3>
+        <p>Fixe os insights mais valiosos da sua empresa e peça à ferramenta para gerar simulados de treinamento, guias de estudo ou matrizes estratégicas baseadas rigorosamente nos trechos selecionados.</p>
+
+        <h2>Prompts de Ouro (Prontos para Uso)</h2>
+        <p>Copie e cole estes comandos para extrair análises avançadas dos seus documentos anexados:</p>
+
+        <p><strong>Prompt 1: Análise Cruzada de Processos</strong></p>
+        <div class="code-box">
+            "Com base estritamente nos POPs e atas fornecidos, identifique conflitos de responsabilidade operacional entre a equipe de engenharia e o time comercial. Liste em formato de tabela indicando a origem."
+        </div>
+
+        <p><strong>Prompt 2: Auditoria e Conformidade</strong></p>
+        <div class="code-box">
+            "Atue como um Auditor ISO 9001. Analise o relatório operacional anexado e aponte desvios críticos em relação às metas de qualidade estabelecidas. Ignore achismos, use apenas as evidências das fontes."
+        </div>
+
+        <div class="destaque-box" style="border-left-color: var(--azul-tech);">
+            <strong>IA escala a execução, não a estratégia.</strong><br>
+            Dominar arquiteturas e estruturas de dados é o que diferencia quem apenas "brinca com prompts" de quem desenha soluções corporativas de verdade.
+        </div>
+
+        <div class="cta-box">
+            <h3>A inteligência artificial não precisa ser difícil.</h3>
+            <p>A Frame [IA] descomplica a inovação para o seu negócio. Siga o nosso perfil no LinkedIn e acompanhe conteúdos exclusivos sobre automação e IA.</p>
+            
+            <a href="https://www.linkedin.com/company/frameia" target="_blank" class="btn-primario">Seguir no LinkedIn &rarr;</a>
+        </div>
+    </div>
+
+    <footer>
+        <img src="../assets/logo-frameia-colorido.png" alt="Logo Frame IA" class="logo-foter">
+        <p style="font-size: 0.9rem; font-weight: 500;">&copy; 2026 Frame [IA] - Tecnologia para Pequenos Negócios.</p>
+    </footer>
+
+</body>
+</html>
