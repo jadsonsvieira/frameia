@@ -2,10 +2,10 @@
     "site_id": "frameia",
     "name": "Frame [IA]",
     "domain": "frameia.com.br",
-    "version": "1.0.3",
-    "git_tag": "frameia-v1.0.3",
-    "last_updated": "2026-09-08T21:45:00",
-    "description": "Versão 1.0.3: Eliminação de 100% dos emojis amadores em todas as páginas (Home, Sobre e Blog), adoção de ícones vetoriais SVG corporativos de alta resolução (Feather/Lucide style), elevação estética do frontend com micro-bordas refinadas nas badges de integração e preview cards elegantes, e padronização do tempo de leitura nos 33 artigos do blog com ícones de relógio vetorial.",
+    "version": "1.0.2",
+    "git_tag": "frameia-v1.0.2",
+    "last_updated": "2026-09-08T08:20:00",
+    "description": "Versão 1.0.2: Restauração completa de todos os 33 artigos com metadados na aba Blog (permitindo filtragem dinâmica por 'Todos os Artigos', 'IA na Prática', 'Finanças & Cash', 'Reputação & ReAction' e 'Produtividade'), e substituição definitiva da logo do Blog pela logo colorida oficial (com ícone em azul royal, laranja e marinho, 'Frame' em azul e caixa sólida laranja [IA]).",
     "history": [
         {
             "version": "0.0.0",
@@ -132,12 +132,6 @@
             "tag": "frameia-v1.0.2",
             "date": "2026-09-08T08:20:00",
             "notes": "Versão v1.0.2: Restauração completa de todos os 33 artigos com metadados na aba Blog (permitindo filtragem dinâmica por 'Todos os Artigos', 'IA na Prática', 'Finanças & Cash', 'Reputação & ReAction' e 'Produtividade'), e substituição definitiva da logo do Blog pela logo colorida oficial (com ícone em azul royal, laranja e marinho, 'Frame' em azul e caixa sólida laranja [IA])."
-        },
-        {
-            "version": "1.0.3",
-            "tag": "frameia-v1.0.3",
-            "date": "2026-09-08T21:45:00",
-            "notes": "Versão v1.0.3: Eliminação de 100% dos emojis amadores em todas as páginas (Home, Sobre e Blog), substituição por ícones vetoriais SVG corporativos inline de traço refinado (Feather/Lucide style) integrados à paleta da marca, elevação estética dos componentes de frontend (.int-badge, preview cards de produtos e modais com micro-bordas translúcidas), e padronização com ícone vetorial de relógio nos 33 artigos do Blog ('X min de leitura')."
         }
     ]
 }
