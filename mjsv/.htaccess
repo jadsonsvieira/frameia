@@ -2,11 +2,12 @@
     RewriteEngine On
     RewriteBase /
 
-    # 1. Forçar HTTPS (301)
-    RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    # 1. Redirecionar index.html para a raiz / (301)
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/index\.html [NC]
+    RewriteRule ^index\.html$ https://mjsv.com.br/ [R=301,L]
 
-    # 2. Forçar sem www (301)
+    # 2. Forçar HTTPS e sem www em uma única regra (301)
+    RewriteCond %{HTTPS} off [OR]
     RewriteCond %{HTTP_HOST} ^www\.mjsv\.com\.br$ [NC]
     RewriteRule ^(.*)$ https://mjsv.com.br/$1 [R=301,L]
 </IfModule>
