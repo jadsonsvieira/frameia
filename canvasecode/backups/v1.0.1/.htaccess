@@ -3,30 +3,23 @@
 # Domínio Oficial: https://canvasecodestudio.com.br
 # ====================================================================
 
-DirectoryIndex index.html
-
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
 
-    # 1. Redirecionar index.html para a raiz / (301)
-    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/index\.html [NC]
-    RewriteRule ^index\.html$ https://canvasecodestudio.com.br/ [R=301,L]
+    # Forçar HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # 2. Forçar HTTPS e sem www em uma única regra (301)
-    RewriteCond %{HTTPS} off [OR]
+    # Forçar sem www (canônico)
     RewriteCond %{HTTP_HOST} ^www\.canvasecodestudio\.com\.br$ [NC]
     RewriteRule ^(.*)$ https://canvasecodestudio.com.br/$1 [R=301,L]
 
-    # 3. Se acessar com .html na URL (exceto index), redireciona 301 para a versão limpa
-    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/([^.]+)\.html [NC]
-    RewriteRule ^ %1 [R=301,L]
-
-    # 4. Se acessar URL limpa, busca o arquivo .html internamente
+    # URLs Limpas (Sem .html)
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME}\.html -f
-    RewriteRule ^(.*)$ $1.html [L]
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^([^\.]+)$ $1.html [NC,L]
 </IfModule>
 
 # Compressão Gzip para Performance

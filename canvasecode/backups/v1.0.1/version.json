@@ -1,0 +1,24 @@
+{
+    "site_id": "canvasecode",
+    "name": "Canvas & Code Studio",
+    "domain": "canvasecodestudio.com.br",
+    "legacy_domain": "canvasecode.com.br",
+    "version": "1.0.0",
+    "git_tag": "canvasecode-v1.0.0",
+    "last_updated": "2026-08-24T15:06:00",
+    "description": "Versão 1.0.0: Rebranding oficial para Canvas & Code Studio, migração para o domínio canvasecodestudio.com.br, configuração de redirecionamento 301 permanente (HTAccess e fallback HTML/JS), tags canônicas, metatags atualizadas e sincronização no ecossistema MJSV e IOHUB 4.0.",
+    "history": [
+        {
+            "version": "0.0.0",
+            "tag": "canvasecode-v0.0.0",
+            "date": "2026-08-01T22:24:07",
+            "notes": "Versão estável v0.0.0 original restaurada e publicada no Hostinger."
+        },
+        {
+            "version": "1.0.0",
+            "tag": "canvasecode-v1.0.0",
+            "date": "2026-08-24T15:06:00",
+            "notes": "Versão 1.0.0: Transição de marca para Canvas & Code Studio, migração para o domínio oficial canvasecodestudio.com.br com redirecionamento 301 total do domínio legado canvasecode.com.br, .htaccess para URLs limpas e sincronização com portal MJSV e I/O Hub 4.0."
+        }
+    ]
+}
