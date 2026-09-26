@@ -2,10 +2,10 @@
     "site_id": "frameia",
     "name": "Frame [IA]",
     "domain": "frameia.com.br",
-    "version": "1.0.8",
-    "git_tag": "frameia-v1.0.8",
-    "last_updated": "2026-09-26T19:35:00",
-    "description": "Versão 1.0.8: Reposicionamento de foco estratégico no produto Cash (gestão financeira com tração e disponibilidade na App Store). ReAction atualizado para projeto em desenvolvimento com abertura de modal de Lista de Espera dedicado (FormSubmit/e-mail), alinhamento da pílula do Hero ('Cash na App Store da Apple • ReAction em Desenvolvimento') e padronização em index, sobre e blog.",
+    "version": "1.0.7",
+    "git_tag": "frameia-v1.0.7",
+    "last_updated": "2026-09-22T19:57:00",
+    "description": "Versão 1.0.7: Redesign conciso da pílula de novidades do Hero ('Cash na App Store da Apple • ReAction Beta Ativo'), eliminando quebra de linha indesejada e garantindo alinhamento perfeito em uma única linha.",
     "history": [
         {
             "version": "0.0.0",
@@ -162,12 +162,6 @@
             "tag": "frameia-v1.0.7",
             "date": "2026-09-22T19:57:00",
             "notes": "Versão v1.0.7: Redesign conciso da pílula de novidades do Hero ('Cash na App Store da Apple • ReAction Beta Ativo'), com white-space nowrap e calibração de escala em mobile, eliminando quebra de linha isolada de palavras."
-        },
-        {
-            "version": "1.0.8",
-            "tag": "frameia-v1.0.8",
-            "date": "2026-09-26T19:35:00",
-            "notes": "Versão v1.0.8: Foco de tração total no Cash. ReAction reposicionado para projeto em desenvolvimento com lista de espera dedicada e modal interativo nos cards de soluções, serviços e portal do cliente em todas as páginas."
         }
     ]
 }

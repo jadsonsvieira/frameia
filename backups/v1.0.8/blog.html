@@ -476,13 +476,13 @@
                 </span>
             </a>
 
-            <!-- CARD: REACTION (EM DESENVOLVIMENTO) -->
-            <a href="#" onclick="fecharModalPortal(); abrirModalEsperaReAction(); return false;" class="portal-card card-reaction">
+            <!-- CARD: REACTION (BETA) -->
+            <a href="https://reaction.frameia.com.br" target="_blank" class="portal-card card-reaction">
                 <div class="portal-icon-box">
                      <img src="assets/reaction-portal-logo.png" alt="Logo ReAction" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block;">
                 </div>
                 <div class="portal-info">
-                    <h4>ReAction <span style="font-size: 0.65rem; color: var(--laranja-frame); background: rgba(255,107,53,0.15); padding: 2px 6px; border-radius: 4px; font-weight: bold;">EM DESENVOLVIMENTO</span></h4>
+                    <h4>ReAction <span style="font-size: 0.65rem; color: var(--laranja-frame); background: rgba(255,107,53,0.15); padding: 2px 6px; border-radius: 4px; font-weight: bold;">BETA</span></h4>
                     <p>Gestão de Reputação Automática</p>
                 </div>
                 <span class="portal-seta" style="background: rgba(255, 107, 53, 0.1);">
@@ -521,25 +521,6 @@
                     <input type="email" name="Email" required placeholder="O seu e-mail de contato" style="width:100%; padding:15px; border-radius:12px; border:1px solid var(--borda-suave); background:#F8F9FA; color:var(--texto-titulo);">
                 </div>
                 <button type="submit" style="background: var(--roxo-hubitat); color: #FFF; width: 100%; padding: 16px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer;">Acompanhar Novidades &rarr;</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL LISTA REACTION CLARO -->
-    <div class="modal-overlay" id="esperaReActionModal">
-        <div class="modal-box" style="width: 90%; max-width: 440px; padding: 40px 35px; text-align: left; background: #FFF;">
-            <span class="fechar-modal" onclick="fecharModalEsperaReAction()">&times;</span>
-            <span style="background: rgba(255, 107, 53, 0.15); color: var(--laranja-frame); padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; display: inline-block; margin-bottom: 15px;">PROJETO EM DESENVOLVIMENTO</span>
-            <h3 style="font-size: 1.6rem; margin-bottom: 12px; color: var(--texto-titulo);">ReAction: Gestão de Reputação & Avaliações IA</h3>
-            <p style="margin-bottom: 20px; font-size: 0.95rem; color: var(--texto-corpo);">Potencialize sua presença no Google Meu Negócio e redes sociais com respostas automatizadas no tom da sua marca.</p>
-            <form action="https://formsubmit.co/contato@frameia.com.br" method="POST">
-                <input type="hidden" name="_cc" value="jadson@mjsv.com.br,mara@mjsv.com.br">
-                <input type="hidden" name="_subject" value="Interesse Registrado via Blog - ReAction Reputação">
-                <input type="hidden" name="_captcha" value="false">
-                <div style="margin-bottom: 15px;">
-                    <input type="email" name="Email" required placeholder="O seu e-mail de contato" style="width:100%; padding:15px; border-radius:12px; border:1px solid var(--borda-suave); background:#F8F9FA; color:var(--texto-titulo);">
-                </div>
-                <button type="submit" style="background: var(--laranja-frame); color: #FFF; width: 100%; padding: 16px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; box-shadow: 0 0 20px rgba(255, 107, 53, 0.25);">Entrar na Lista de Espera &rarr;</button>
             </form>
         </div>
     </div>
@@ -1299,14 +1280,6 @@
         function fecharModalPortal() { const m = document.getElementById('portalModal'); if(m) m.classList.remove('ativo'); }
         function abrirModalEsperaHubitat() { const m = document.getElementById('esperaHubitatModal'); if(m) m.classList.add('ativo'); }
         function fecharModalEsperaHubitat() { const m = document.getElementById('esperaHubitatModal'); if(m) m.classList.remove('ativo'); }
-        function abrirModalEsperaReAction() { const m = document.getElementById('esperaReActionModal'); if(m) m.classList.add('ativo'); }
-        function fecharModalEsperaReAction() { const m = document.getElementById('esperaReActionModal'); if(m) m.classList.remove('ativo'); }
-
-        window.onclick = function(e) {
-            if (e.target === document.getElementById('esperaHubitatModal')) fecharModalEsperaHubitat();
-            if (e.target === document.getElementById('esperaReActionModal')) fecharModalEsperaReAction();
-            if (e.target === document.getElementById('portalModal')) fecharModalPortal();
-        }
 
         function filtrar(categoria, btnElement) {
             const filters = document.querySelectorAll('.tag-filter');
