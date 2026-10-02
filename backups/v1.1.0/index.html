@@ -472,21 +472,7 @@
             transform: scale(1.05) translateY(-2px); 
             box-shadow: 0 10px 25px rgba(0, 230, 118, 0.45); 
         }
-        .hero-cta-group {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 8px;
-        }
-        .hero-cta-note {
-            font-size: 0.82rem;
-            color: rgba(255,255,255,0.5);
-            margin-top: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .btn-primario:active { transform: scale(0.98); }
 
         .hero-trust-bar {
             display: flex;
@@ -757,130 +743,35 @@
         }
         @media (max-width: 992px) {
             .hero { grid-template-columns: 1fr; text-align: center; padding-top: 150px; min-height: auto; }
-            .hero p { margin-left: auto; margin-right: auto; }
-            .hero-cta-group { justify-content: center; margin-left: auto; margin-right: auto; }
-            .hero-cta-note { justify-content: center; text-align: center; margin-left: auto; margin-right: auto; }
-            .hero-trust-bar { justify-content: center; margin-left: auto; margin-right: auto; }
             .hero-imagem { right: 0; justify-content: center; margin-top: 40px; }
             .sobre-grid-dir, .sobre-grid-esq { gap: 40px; margin-bottom: 100px; grid-template-columns: 1fr; }
             .sobre-grid-dir { flex-direction: column-reverse; display: flex; }
             .sobre-grid-esq { flex-direction: column; display: flex; }
         }
         @media (max-width: 768px) {
-            header, header.scrolled {
-                flex-direction: column;
-                padding: 12px 4%;
-                gap: 8px;
-                background: rgba(11, 11, 11, 0.96);
-                backdrop-filter: blur(18px);
-                -webkit-backdrop-filter: blur(18px);
-                border-bottom: 1px solid rgba(255,255,255,0.08);
-            }
+            header, header.scrolled { flex-direction: column; padding: 15px 5%; gap: 12px; background: rgba(11, 11, 11, 0.95); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
             .logo { margin-right: 0; }
-            .logo img, header.scrolled .logo img { height: 28px; } 
+            .logo img, header.scrolled .logo img { height: 32px; } 
             
-            .menu {
-                margin-right: 0;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 6px 14px;
-            }
-            .menu > a { margin: 0; font-size: 0.88rem; }
+            .menu { margin-right: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 18px; }
+            .menu > a { margin: 0; font-size: 0.95rem; }
             
-            .btn-header-portal {
-                width: auto;
-                max-width: 260px;
-                padding: 6px 16px;
-                font-size: 0.84rem;
-            }
+            .btn-header-portal { width: auto; max-width: 280px; }
             header .btn-vazado { width: 100%; max-width: 300px; text-align: center; margin-top: 5px; }
             
-            .hero { padding: 180px 5% 50px; } 
-            .hero h1 { font-size: 2.35rem; letter-spacing: -1px; }
-            .hero p { margin-left: auto; margin-right: auto; max-width: 520px; }
+            .hero { padding: 220px 5% 60px; } 
+            .hero h1 { font-size: 2.6rem; letter-spacing: -1px; }
             
-            .tagline-pill {
-                margin: 0 auto 20px;
-                display: inline-flex;
-                max-width: 100%;
-                font-size: clamp(0.70rem, 2.7vw, 0.80rem);
-                padding: 6px 14px;
-                box-sizing: border-box;
-            }
-            
-            .hero-cta-group {
-                flex-direction: column;
-                align-items: center;
-                gap: 12px;
-                width: 100%;
-                max-width: 340px;
-                margin: 0 auto 10px;
-            }
-            .hero-cta-group .hero-btn-main {
-                width: 100%;
-                max-width: 320px;
-                margin: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-                padding: 14px 28px;
-                box-sizing: border-box;
-            }
-            .hero-cta-group .hero-btn-wpp {
-                width: 100%;
-                max-width: 320px;
-                margin: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-                padding: 13px 24px;
-                box-sizing: border-box;
-                font-size: 0.95rem;
-            }
-            .hero-cta-note {
-                justify-content: center;
-                text-align: center;
-                margin: 4px auto 16px;
-            }
-            
-            .hero-trust-bar {
-                justify-content: center;
-                gap: 8px 14px;
-                margin: 20px auto 0;
-                max-width: 360px;
-                text-align: center;
-            }
-            
+            .btn-primario { margin: 0 auto 20px; display: block; width: 100%; max-width: 320px; text-align: center; }
             .btn-secundario { display: block; width: 100%; text-align: center; margin-top: 10px; }
             
-            .secao { padding: 70px 5%; }
-            .secao-titulo { font-size: 2.1rem; }
+            .secao { padding: 80px 5%; }
+            .secao-titulo { font-size: 2.2rem; }
             
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 25px; } 
-            .card-glass { padding: 28px 24px; }
-            .card-glass .btn-primario {
-                margin: 0;
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .card-glass .btn-vazado {
-                margin: 0;
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 30px; } 
+            .card-glass { padding: 30px; }
 
-            .sobre-grid-dir, .sobre-grid-esq { text-align: center; margin-bottom: 70px; gap: 35px; }
+            .sobre-grid-dir, .sobre-grid-esq { text-align: center; margin-bottom: 80px; gap: 40px; }
             .assinatura-diretoria { text-align: center; }
             
             .modal-box { padding: 30px 20px; width: 95%; }
@@ -893,35 +784,12 @@
             .card-blog:hover { transform: none; box-shadow: none; border-color: rgba(255,255,255,0.05); }
         }
         @media (max-width: 480px) {
-            header { padding: 10px 3%; gap: 6px; }
-            .logo img { height: 26px; }
-            .menu { gap: 4px 10px; }
-            .menu > a { font-size: 0.82rem; }
-            .btn-header-portal { padding: 5px 14px; font-size: 0.80rem; }
-            .hero { padding: 165px 4% 40px; }
-            .hero h1 { font-size: 2.05rem; }
-            .hero p { font-size: 0.92rem; }
-            .tagline-pill {
-                font-size: 0.72rem;
-                padding: 5px 10px;
-                gap: 6px;
-                letter-spacing: -0.2px;
-            }
-            .hero-trust-bar {
-                font-size: 0.76rem;
-                gap: 6px 10px;
-            }
-            .secao-titulo { font-size: 1.75rem; }
-            .card-glass { padding: 22px 18px; }
-            .card-glass h3 { font-size: 1.55rem; }
-            header .btn-vazado { padding: 10px 16px; font-size: 0.9rem; }
-        }
-        @media (max-width: 375px) {
-            .tagline-pill {
-                font-size: 0.67rem;
-                padding: 4px 8px;
-            }
-            .hero h1 { font-size: 1.85rem; }
+            header { padding: 12px 4%; }
+            .hero h1 { font-size: 2.2rem; }
+            .tagline-pill { font-size: 0.76rem; padding: 5px 12px; }
+            .secao-titulo { font-size: 1.8rem; }
+            .card-glass h3 { font-size: 1.8rem; }
+            .btn-primario, header .btn-vazado { padding: 12px 20px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -1122,15 +990,14 @@
             </div>
             <h1>A <span class="text-gradient">inteligência</span> que faltava no seu dia a dia.</h1>
             <p>Sabemos que o dono de um pequeno negócio faz tudo sozinho. Usamos a Inteligência Artificial para transformar a sua rotina pesada em um trabalho fácil e rápido. Tenha assistentes virtuais trabalhando para o seu negócio 24 horas por dia, sem complicações.</p>
-            <div class="hero-cta-group">
-                <a href="#solucoes" class="btn-primario hero-btn-main">Ver Soluções <span class="arrow">&rarr;</span></a>
-                <a href="https://api.whatsapp.com/send?phone=5585992125971&text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20equipe%20da%20Frame%20%5BIA%5D" target="_blank" class="btn-whatsapp-sutil hero-btn-wpp">
+            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 5px;">
+                <a href="#solucoes" class="btn-primario">Ver Soluções <span class="arrow">&rarr;</span></a>
+                <a href="https://api.whatsapp.com/send?phone=5585992125971&text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20equipe%20da%20Frame%20%5BIA%5D" target="_blank" class="btn-whatsapp-sutil">
                     <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg> Falar no WhatsApp <span class="arrow">&rarr;</span>
                 </a>
             </div>
-            <div class="hero-cta-note">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--verde-neon)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                <span>Resposta rápida pelo WhatsApp comercial</span>
+            <div style="font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 4px; display: flex; align-items: center; gap: 6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--verde-neon)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> Resposta rápida pelo WhatsApp comercial
             </div>
             <div class="hero-trust-bar">
                 <div class="trust-item">

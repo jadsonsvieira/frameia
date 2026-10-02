@@ -2,10 +2,10 @@
     "site_id": "frameia",
     "name": "Frame [IA]",
     "domain": "frameia.com.br",
-    "version": "1.1.0",
-    "git_tag": "frameia-v1.1.0",
-    "last_updated": "2026-10-02T15:45:00",
-    "description": "Versão 1.1.0: Otimização responsiva completa e harmonização visual para mobile. Alinhamento central de botões de CTA no Hero ('Ver Soluções' e 'Falar no WhatsApp' com mesma largura), centralização da nota de resposta e trust-bar, ajuste proporcional da pílula do Hero com fonte fluida (clamp), compactação do cabeçalho fixo no mobile e uniformização de paddings em index, sobre e blog.",
+    "version": "1.0.9",
+    "git_tag": "frameia-v1.0.9",
+    "last_updated": "2026-09-29T12:15:00",
+    "description": "Versão 1.0.9: Disponibilidade oficial do Cash na Google Play Store. Atualização de todas as comunicações, inclusão de link direto para download na Play Store (https://play.google.com/store/apps/details?id=br.com.frameia.cash), alinhamento da pílula do Hero ('Cash na App Store & Google Play • ReAction em Desenvolvimento') e sincronização de badges e serviços.",
     "history": [
         {
             "version": "0.0.0",
@@ -174,12 +174,6 @@
             "tag": "frameia-v1.0.9",
             "date": "2026-09-29T12:15:00",
             "notes": "Versão v1.0.9: Disponibilidade oficial do Cash na Google Play Store com link direto ativo no card de soluções e na página Sobre. Pílula do Hero atualizada para 'Cash na App Store & Google Play • ReAction em Desenvolvimento' e menção de download nos serviços."
-        },
-        {
-            "version": "1.1.0",
-            "tag": "frameia-v1.1.0",
-            "date": "2026-10-02T15:45:00",
-            "notes": "Versão v1.1.0: Refatoração e alinhamento visual completo para dispositivos móveis. Centralização simétrica dos botões de ação e trust-bar no Hero, estilização proporcional da pílula com clamp para telas compactas, otimização da altura do cabeçalho fixo no mobile e uniformização de espaçamentos."
         }
     ]
 }
