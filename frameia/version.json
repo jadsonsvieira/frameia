@@ -2,10 +2,10 @@
     "site_id": "frameia",
     "name": "Frame [IA]",
     "domain": "frameia.com.br",
-    "version": "1.0.4",
-    "git_tag": "frameia-v1.0.4",
-    "last_updated": "2026-09-17T07:40:00",
-    "description": "Versão 1.0.4: Resolução completa de avisos do Google Search Console. Implementação de tags canônicas (<link rel='canonical'>) em todas as páginas e nos 33 artigos do blog, criação de robots.txt e sitemap.xml oficiais com URLs limpas em HTTPS, e regras avançadas de .htaccess para forçar HTTPS e redirecionamento de www para domínio canônico.",
+    "version": "1.1.1",
+    "git_tag": "frameia-v1.1.1",
+    "last_updated": "2026-10-02T16:05:00",
+    "description": "Versão 1.1.1: Inclusão oficial dos dados cadastrais e fiscais da empresa em conformidade com o Decreto nº 7.962/2013 e LGPD. Adicionada a Razão Social (MJSV TECNOLOGIA E SOLUCOES DIGITAIS INOVA SIMPLES (I.S.)), CNPJ (68.614.850/0001-13) e localização (Eusébio - CE, Brasil) no rodapé institucional de todas as páginas e no modal de contato.",
     "history": [
         {
             "version": "0.0.0",
@@ -144,6 +144,48 @@
             "tag": "frameia-v1.0.4",
             "date": "2026-09-17T07:40:00",
             "notes": "Versão v1.0.4: Resolução técnica completa das notificações do Google Search Console. Inclusão de tags canônicas (<link rel='canonical'>) no cabeçalho de todas as páginas e dos 33 artigos, criação dos arquivos robots.txt e sitemap.xml oficiais em HTTPS, e parametrização do .htaccess para forçar HTTPS, redirecionar subdomínio www para o domínio canônico e acelerar o rastreamento do Googlebot."
+        },
+        {
+            "version": "1.0.5",
+            "tag": "frameia-v1.0.5",
+            "date": "2026-09-22T18:15:00",
+            "notes": "Versão v1.0.5: Correção arquitetural e responsiva para monitores desktop widescreen e ultrawide (1080p, 2K, 4K). Centralização inteligente em 1280px via CSS dinâmico max(6%, calc((100% - 1280px) / 2)), fechamento do vácuo central no Hero, centralização harmoniosa do mockup 3D ao lado do texto e alinhamento milimétrico do header com a grade de conteúdo."
+        },
+        {
+            "version": "1.0.6",
+            "tag": "frameia-v1.0.6",
+            "date": "2026-09-22T19:10:00",
+            "notes": "Versão v1.0.6: Atualização institucional e de canais de distribuição. Ajuste na titulação do CEO para 'Arquitetura e Estratégia' (alinhado a Arquiteto de Soluções) e destaque da disponibilidade oficial dos aplicativos na App Store da Apple."
+        },
+        {
+            "version": "1.0.7",
+            "tag": "frameia-v1.0.7",
+            "date": "2026-09-22T19:57:00",
+            "notes": "Versão v1.0.7: Redesign conciso da pílula de novidades do Hero ('Cash na App Store da Apple • ReAction Beta Ativo'), com white-space nowrap e calibração de escala em mobile, eliminando quebra de linha isolada de palavras."
+        },
+        {
+            "version": "1.0.8",
+            "tag": "frameia-v1.0.8",
+            "date": "2026-09-26T19:35:00",
+            "notes": "Versão v1.0.8: Foco de tração total no Cash. ReAction reposicionado para projeto em desenvolvimento com lista de espera dedicada e modal interativo nos cards de soluções, serviços e portal do cliente em todas as páginas."
+        },
+        {
+            "version": "1.0.9",
+            "tag": "frameia-v1.0.9",
+            "date": "2026-09-29T12:15:00",
+            "notes": "Versão v1.0.9: Disponibilidade oficial do Cash na Google Play Store com link direto ativo no card de soluções e na página Sobre. Pílula do Hero atualizada para 'Cash na App Store & Google Play • ReAction em Desenvolvimento' e menção de download nos serviços."
+        },
+        {
+            "version": "1.1.0",
+            "tag": "frameia-v1.1.0",
+            "date": "2026-10-02T15:45:00",
+            "notes": "Versão v1.1.0: Refatoração e alinhamento visual completo para dispositivos móveis. Centralização simétrica dos botões de ação e trust-bar no Hero, estilização proporcional da pílula com clamp para telas compactas, otimização da altura do cabeçalho fixo no mobile e uniformização de espaçamentos."
+        },
+        {
+            "version": "1.1.1",
+            "tag": "frameia-v1.1.1",
+            "date": "2026-10-02T16:05:00",
+            "notes": "Versão v1.1.1: Transparência e conformidade regulatória. Inclusão oficial dos dados cadastrais (MJSV TECNOLOGIA E SOLUCOES DIGITAIS INOVA SIMPLES (I.S.) - CNPJ: 68.614.850/0001-13) no rodapé de index, sobre e blog, e no modal de contato."
         }
     ]
 }

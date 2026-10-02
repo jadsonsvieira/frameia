@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluções Ignition | I/O Hub 4.0</title>
+    <link rel="canonical" href="https://iohub40.com.br/solucoes-ignition">
+    
+    <link rel="icon" type="image/png" href="assets/img/favicon.png?v=2">
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png?v=2">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- PALETA EXCLUSIVA IGNITION --- */
+        :root {
+            --grafite-fundo: #0A0A0A;
+            --grafite-painel: #161616;
+            --grid-line: rgba(255, 255, 255, 0.03);
+            --laranja-ignition: #FF9800; 
+            --laranja-fundo: rgba(255, 152, 0, 0.1);
+            --texto-corpo: #A0A0A0;
+            --branco: #FFFFFF;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+        }
+
+        body {
+            background-color: var(--grafite-fundo);
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: var(--texto-corpo);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { 
+            font-family: 'Poppins', sans-serif; 
+            text-transform: uppercase; 
+        }
+
+        /* --- HEADER RESPONSIVO E AGRUPADO --- */
+        header {
+            width: 100%; 
+            padding: 20px 5%; 
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid #222; 
+            display: flex; 
+            justify-content: space-between;
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            backdrop-filter: blur(10px);
+        }
+
+        .logo img { 
+            height: 85px; 
+            width: auto; 
+            transition: 0.3s; 
+            display: block; 
+        }
+
+        .logo img:hover { 
+            transform: scale(1.03); 
+            filter: drop-shadow(0 0 15px rgba(255, 152, 0, 0.3)); 
+        }
+        
+        .header-actions { 
+            display: flex; 
+            align-items: center; 
+            gap: 30px; 
+        }
+
+        .menu-links { 
+            display: flex; 
+            gap: 30px; 
+            align-items: center; 
+        }
+        
+        .link-padrao { 
+            color: #888; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            transition: 0.3s; 
+        }
+
+        .link-padrao:hover, .link-ativo { 
+            color: var(--branco); 
+        }
+        
+        /* BOTÃO PADRONIZADO E TRAVADO */
+        .nav-link { 
+            color: var(--laranja-ignition); 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            border: 1px solid var(--laranja-ignition); 
+            padding: 0 24px; 
+            height: 45px;
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: 0.3s; 
+            border-radius: 4px; 
+            text-transform: uppercase; 
+        }
+
+        .nav-link:hover { 
+            background: var(--laranja-ignition); 
+            color: var(--grafite-fundo); 
+            box-shadow: 0 0 15px var(--laranja-fundo); 
+        }
+
+        /* --- HERO PME --- */
+        .hero-ignition { 
+            padding: 100px 5% 60px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            text-align: center; 
+            border-bottom: 1px solid #222; 
+        }
+
+        .hero-ignition h1 { 
+            font-size: clamp(2rem, 6vw, 4.5rem); 
+            color: var(--branco); 
+            line-height: 1; 
+            margin-bottom: 20px; 
+        }
+
+        .destaque-laranja { 
+            color: var(--laranja-ignition); 
+        }
+
+        .hero-ignition p { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            font-size: 1.15rem; 
+            color: #888; 
+        }
+
+        /* --- MÓDULOS ALTERNADOS (ZIG-ZAG) --- */
+        .modulos-container {
+            padding: 80px 5%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .module-row {
+            display: flex;
+            align-items: stretch;
+            background: var(--grafite-painel);
+            border: 1px solid #222;
+            border-radius: 6px;
+            margin-bottom: 60px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .module-row:hover {
+            transform: translateY(-5px);
+            border-color: var(--laranja-ignition);
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.1);
+        }
+
+        .module-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .module-content {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .module-tag { 
+            font-size: 0.75rem; 
+            color: var(--laranja-ignition); 
+            font-weight: bold; 
+            margin-bottom: 15px; 
+            display: block; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        .module-title { 
+            color: var(--branco); 
+            margin-bottom: 20px; 
+            font-size: 2rem; 
+            line-height: 1.1;
+        }
+
+        .module-desc { 
+            font-size: 1rem; 
+            color: #888; 
+            margin-bottom: 30px; 
+            line-height: 1.7; 
+        }
+
+        .module-roi {
+            background: var(--laranja-fundo);
+            border-left: 3px solid var(--laranja-ignition);
+            padding: 20px;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.9rem;
+            color: #CCC;
+        }
+
+        .module-roi strong {
+            color: var(--laranja-ignition);
+            font-family: 'JetBrains Mono', monospace;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .module-visual {
+            flex: 1;
+            background: #050505;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid #222;
+            min-height: 350px;
+        }
+
+        .module-row.reverse .module-visual {
+            border-left: none;
+            border-right: 1px solid #222;
+        }
+
+        .visual-text {
+            color: #1A1A1A;
+            font-size: 3.5rem;
+            font-weight: 800;
+            transform: rotate(-5deg);
+            letter-spacing: -2px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* --- CTA FINAL --- */
+        .cta-final {
+            text-align: center;
+            padding: 0 5% 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-box {
+            background: linear-gradient(180deg, var(--grafite-painel) 0%, var(--grafite-fundo) 100%);
+            border: 1px solid #333;
+            padding: 50px;
+            border-radius: 6px;
+        }
+
+        .cta-box h3 {
+            font-size: 2rem;
+            color: var(--branco);
+            margin-bottom: 20px;
+        }
+
+        .cta-box p {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        .link-oficial {
+            color: var(--laranja-ignition);
+            text-decoration: underline;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .link-oficial:hover {
+            color: var(--branco);
+        }
+
+        /* --- FOOTER --- */
+        footer { 
+            padding: 60px 5% 40px; 
+            background: #050505; 
+            border-top: 1px solid #111; 
+            text-align: center; 
+        }
+
+        .footer-logo-link { 
+            text-decoration: none; 
+            display: inline-flex; 
+            align-items: center; 
+            transition: 0.3s; 
+            margin-bottom: 15px; 
+        }
+
+        .footer-logo-link:hover { 
+            transform: translateY(-3px); 
+            opacity: 0.8;
+        }
+
+        .footer-logo-texto { 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            color: var(--branco); 
+            letter-spacing: -1px; 
+        }
+
+        .footer-logo-badge { 
+            color: var(--laranja-ignition); 
+            font-family: 'JetBrains Mono', monospace; 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            background: var(--laranja-fundo); 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            margin-left: 8px; 
+            border: 1px solid rgba(255, 152, 0, 0.2); 
+        }
+
+        .copyright { 
+            font-size: 0.75rem; 
+            color: #444; 
+            margin-top: 20px; 
+        }
+
+        /* --- RESPONSIVIDADE (MOBILE) --- */
+        @media (max-width: 900px) {
+            header { 
+                padding: 15px 5%; 
+            }
+            .logo img { 
+                height: 60px; 
+            }
+            .menu-links { 
+                display: none; 
+            }
+            .hero-ignition {
+                padding-top: 50px;
+            }
+            .hero-ignition h1 { 
+                font-size: 2.2rem; 
+            }
+            .nav-link { 
+                height: 40px; 
+                padding: 0 18px; 
+                font-size: 0.75rem; 
+            }
+            .module-row, .module-row.reverse {
+                flex-direction: column;
+            }
+            .module-visual {
+                min-height: 200px;
+                border-left: none;
+                border-bottom: 1px solid #222;
+            }
+            .module-row.reverse .module-visual {
+                border-right: none;
+                border-bottom: 1px solid #222;
+            }
+            .module-content {
+                padding: 30px 20px;
+            }
+            .cta-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="assets/img/logo-iohub.png" alt="I/O HUB 4.0">
+            </a>
+        </div>
+        <div class="header-actions">
+            <nav class="menu-links">
+                <a href="/" class="link-padrao">Início</a>
+                <a href="/#servicos" class="link-padrao">Serviços</a>
+                <a href="/laboratorio" class="link-padrao">Laboratório</a>
+                <a href="/solucoes-ignition" class="link-padrao link-ativo">Soluções Ignition</a>
+                <a href="/academia" class="link-padrao">Academia MJSV</a>
+            </nav>
+            <a href="/#contato" class="nav-link">SOLICITAR DIAGNÓSTICO</a>
+        </div>
+    </header>
+
+    <section class="hero-ignition">
+        <p style="color: var(--laranja-ignition); font-weight: bold; margin-bottom: 15px; font-family: 'JetBrains Mono', monospace;">/// SOLUÇÕES PARA PEQUENAS E MÉDIAS INDÚSTRIAS</p>
+        <h1>Tecnologia de Multinacional.<br><span class="destaque-laranja">Escala Inteligente.</span></h1>
+        <p>Acreditamos que a sua indústria não precisa pagar centenas de milhares em pacotes MES engessados. Arquitetamos soluções modulares de alto impacto com a plataforma Ignition, utilizando um investimento inicial altamente acessível.</p>
+    </section>
+
+    <section class="modulos-container">
+        
+        <div class="module-row">
+            <div class="module-content">
+                <span class="module-tag">A Porta de Entrada</span>
+                <h2 class="module-title">Ignition Edge IIoT / Panel</h2>
+                <p class="module-desc">A digitalização começa na borda. O Edge atua diretamente na máquina, capturando e visualizando dados de equipamentos críticos isolados ou linhas descentralizadas, sem a necessidade imediata de uma rede de TI complexa.</p>
+                <div class="module-roi">
+                    <strong>ROI Imediato:</strong>
+                    Permite que o cliente valide o valor da Indústria 4.0 com um investimento mínimo, sincronizando os dados com o servidor central no futuro.
+                </div>
+            </div>
+            <div class="module-visual">
+                <span class="visual-text">EDGE_NODE</span>
+            </div>
+        </div>
+
+        <div class="module-row reverse">
+            <div class="module-content">
+                <span class="module-tag">O "Motor" do MES de Baixo Custo</span>
+                <h2 class="module-title">SQL Bridge Module</h2>
+                <p class="module-desc">O fim das "ilhas de informação". O SQL Bridge cria uma via bidirecional que conecta os sensores e CLPs do chão de fábrica diretamente aos bases de dados corporativos (TI), sem a necessidade de historiadores caros.</p>
+                <div class="module-roi">
+                    <strong>ROI Imediato:</strong>
+                    Construa apontamentos de produção complexos utilizando bancos SQL totalmente gratuitos (PostgreSQL/MySQL), poupando fortunas na compra de conectores engessados.
+                </div>
+            </div>
+            <div class="module-visual">
+                <span class="visual-text">SQL_BRIDGE</span>
+            </div>
+        </div>
+
+        <div class="module-row">
+            <div class="module-content">
+                <span class="module-tag">O Painel Gerencial Mobile</span>
+                <h2 class="module-title">Perspective Module (Limited)</h2>
+                <p class="module-desc">A arquitetura responsável pelo "Efeito Uau". Criação de painéis, ecrãs e dashboards dinâmicos que rodam de forma nativa em navegadores web, telemóveis e tablets. O diretor visualiza a fábrica do sofá de casa.</p>
+                <div class="module-roi">
+                    <strong>ROI Imediato:</strong>
+                    Ao utilizar as versões limitadas (1 a 2 sessões), obtém a tecnologia mobile de ponta por uma fração do preço da versão full, ideal para estruturas enxutas.
+                </div>
+            </div>
+            <div class="module-visual">
+                <span class="visual-text">MOBILE_OEE</span>
+            </div>
+        </div>
+
+        <div class="module-row reverse">
+            <div class="module-content">
+                <span class="module-tag">O Fim de "Apagar Incêndios"</span>
+                <h2 class="module-title">Alarm Notification Module</h2>
+                <p class="module-desc">Foque na dor da máquina parada. Desenvolvemos sistemas de alerta baseados em anomalias lógicas. O operador não precisa de estar a olhar para o ecrã; a plataforma notifica os responsáveis no momento exato da falha.</p>
+                <div class="module-roi">
+                    <strong>ROI Imediato:</strong>
+                    Ser avisado em tempo real sobre o desarme de um equipamento crítico evita desperdícios reais na mesma semana de implantação, pagando a ferramenta rapidamente.
+                </div>
+            </div>
+            <div class="module-visual">
+                <span class="visual-text">ALARM_SYS</span>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="cta-final">
+        <div class="cta-box">
+            <h3>Uma Base Sólida sem Custos Abusivos</h3>
+            <p>Implementamos a soma poderosa destes módulos para criar o sistema nervoso central da sua manufatura. O nosso diagnóstico aponta exatamente quais blocos a sua operação precisa para eliminar atritos hoje.</p>
+            <a href="/#contato" class="nav-link" style="height: 55px; padding: 0 40px; font-size: 1rem; margin-bottom: 20px;">AGENDAR DIAGNÓSTICO DE VIABILIDADE</a><br>
+            <a href="https://inductiveautomation.com/ignition/" target="_blank" class="link-oficial">Conheça o ecossistema oficial da Inductive Automation →</a>
+        </div>
+    </section>
+
+    <footer>
+        <a href="/" class="footer-logo-link" title="Voltar ao Início">
+            <span class="footer-logo-texto">I/O HUB</span>
+            <span class="footer-logo-badge">4.0</span>
+        </a>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">Expertise em Automação e Sistemas de Manufatura</p>
+        <div class="copyright">&copy; 2026 - Desenvolvido por Canvas & Code Studio.</div>
+    </footer>
+
+</body>
+</html>

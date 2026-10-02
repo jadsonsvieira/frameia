@@ -1,0 +1,17 @@
+{
+    "site_id": "mjsv",
+    "name": "MJSV Holding",
+    "domain": "mjsv.com.br",
+    "version": "0.0.0",
+    "git_tag": "mjsv-v0.0.0",
+    "last_updated": "2026-08-01T22:24:07.264940",
+    "description": "Portal Institucional do Ecossistema MJSV Holding",
+    "history": [
+        {
+            "version": "0.0.0",
+            "tag": "mjsv-v0.0.0",
+            "date": "2026-08-01T22:24:07.264960",
+            "notes": "Versão estável v0.0.0 original restaurada e publicada no Hostinger."
+        }
+    ]
+}

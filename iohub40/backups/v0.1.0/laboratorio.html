@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório de Engenharia | I/O Hub 4.0</title>
+    <link rel="canonical" href="https://iohub40.com.br/laboratorio">
+    
+    <link rel="icon" type="image/png" href="assets/img/favicon.png?v=2">
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png?v=2">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- PALETA EXCLUSIVA LABORATÓRIO (AZUL) --- */
+        :root {
+            --grafite-fundo: #0A0A0A;
+            --grafite-painel: #161616;
+            --grid-line: rgba(255, 255, 255, 0.03);
+            --azul-mjsv: #004AAD; 
+            --azul-fundo: rgba(0, 74, 173, 0.1);
+            --texto-corpo: #A0A0A0;
+            --branco: #FFFFFF;
+            --verde-destaque: #00E676;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+        }
+
+        body {
+            background-color: var(--grafite-fundo);
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: var(--texto-corpo);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { 
+            font-family: 'Poppins', sans-serif; 
+            text-transform: uppercase; 
+        }
+
+        /* --- HEADER RESPONSIVO E AGRUPADO --- */
+        header {
+            width: 100%; 
+            padding: 20px 5%; 
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid #222; 
+            display: flex; 
+            justify-content: space-between;
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            backdrop-filter: blur(10px);
+        }
+
+        .logo img { 
+            height: 85px; 
+            width: auto; 
+            transition: 0.3s; 
+            display: block; 
+        }
+
+        .logo img:hover { 
+            transform: scale(1.03); 
+            filter: drop-shadow(0 0 15px rgba(0, 74, 173, 0.4)); 
+        }
+        
+        .header-actions { 
+            display: flex; 
+            align-items: center; 
+            gap: 30px; 
+        }
+
+        .menu-links { 
+            display: flex; 
+            gap: 30px; 
+            align-items: center; 
+        }
+        
+        .link-padrao { 
+            color: #888; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            transition: 0.3s; 
+        }
+
+        .link-padrao:hover, .link-ativo { 
+            color: var(--branco); 
+        }
+        
+        /* BOTÃO PADRONIZADO E TRAVADO (AZUL) */
+        .nav-link { 
+            color: var(--azul-mjsv); 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            border: 1px solid var(--azul-mjsv); 
+            padding: 0 24px; 
+            height: 45px;
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: 0.3s; 
+            border-radius: 4px; 
+            text-transform: uppercase; 
+        }
+
+        .nav-link:hover { 
+            background: var(--azul-mjsv); 
+            color: var(--branco); 
+            box-shadow: 0 0 15px var(--azul-fundo); 
+        }
+
+        /* --- HERO LABS --- */
+        .hero-lab { 
+            padding: 100px 5% 60px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            text-align: center; 
+            border-bottom: 1px solid #222; 
+        }
+
+        .hero-lab h1 { 
+            font-size: clamp(2rem, 6vw, 4.5rem); 
+            color: var(--branco); 
+            line-height: 1; 
+            margin-bottom: 20px; 
+        }
+
+        .destaque-azul { 
+            color: var(--azul-mjsv); 
+        }
+
+        .hero-lab p { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            font-size: 1.15rem; 
+            color: #888; 
+        }
+
+        /* --- GRID DE PROJETOS (LABORATÓRIO) --- */
+        .showcase-container { 
+            padding: 80px 5%; 
+            max-width: 1300px; 
+            margin: 0 auto; 
+        }
+
+        .showcase-header { 
+            margin-bottom: 50px; 
+            border-left: 4px solid var(--azul-mjsv); 
+            padding-left: 25px; 
+        }
+
+        .showcase-header h2 { 
+            font-size: 2.5rem; 
+            color: var(--branco); 
+        }
+
+        .showcase-header p { 
+            color: var(--azul-mjsv); 
+            font-weight: bold; 
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 30px; 
+        }
+
+        .project-card { 
+            background: var(--grafite-painel); 
+            border: 1px solid #222; 
+            border-radius: 4px; 
+            overflow: hidden; 
+            transition: 0.3s; 
+            position: relative; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover { 
+            border-color: var(--azul-mjsv); 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 30px rgba(0, 74, 173, 0.15); 
+        }
+
+        /* Estilo do Card em Destaque (SmartLevel) */
+        .project-card.featured {
+            grid-column: span 2;
+            flex-direction: row;
+            border-color: rgba(0, 74, 173, 0.5);
+            background: linear-gradient(135deg, var(--grafite-painel) 0%, #0d1218 100%);
+        }
+
+        .project-card.featured:hover {
+            box-shadow: 0 10px 40px rgba(0, 74, 173, 0.25); 
+        }
+
+        .project-card.featured .project-img-placeholder {
+            width: 50%;
+            height: auto;
+            min-height: 350px;
+            border-bottom: none;
+            border-right: 1px solid #222;
+        }
+
+        .project-card.featured .project-info {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .project-img-placeholder { 
+            width: 100%; 
+            height: 250px; 
+            background: #050505; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-bottom: 1px solid #222; 
+            overflow: hidden; 
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .project-img-placeholder span { 
+            color: #1A1A1A; 
+            font-size: 3.5rem; 
+            font-weight: 800; 
+            transform: rotate(-5deg); 
+            letter-spacing: -2px; 
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .project-info { 
+            padding: 30px; 
+            flex-grow: 1;
+        }
+
+        .project-tag { 
+            font-size: 0.7rem; 
+            color: var(--azul-mjsv); 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            display: block; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        .project-info h3 { 
+            color: var(--branco); 
+            margin-bottom: 15px; 
+            font-size: 1.6rem; 
+        }
+
+        .project-info p { 
+            font-size: 0.95rem; 
+            color: #888; 
+            margin-bottom: 25px; 
+            line-height: 1.6; 
+        }
+
+        .tech-stack { 
+            display: flex; 
+            gap: 10px; 
+            flex-wrap: wrap; 
+        }
+
+        .tech-tag { 
+            font-size: 0.65rem; 
+            background: rgba(255,255,255,0.03); 
+            color: #999; 
+            padding: 6px 12px; 
+            border-radius: 3px; 
+            border: 1px solid #333; 
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .btn-ler-case {
+            display: inline-block;
+            margin-top: 25px;
+            color: var(--branco);
+            background: var(--azul-mjsv);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            align-self: flex-start;
+        }
+
+        .btn-ler-case:hover {
+            background: #003a8c;
+            transform: translateY(-2px);
+        }
+
+        /* --- CTA FINAL --- */
+        .cta-final {
+            text-align: center;
+            padding: 0 5% 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-box {
+            background: linear-gradient(180deg, var(--grafite-painel) 0%, var(--grafite-fundo) 100%);
+            border: 1px solid #333;
+            padding: 50px;
+            border-radius: 6px;
+            margin-top: 50px;
+        }
+
+        .cta-box h3 {
+            font-size: 2rem;
+            color: var(--branco);
+            margin-bottom: 20px;
+        }
+
+        .cta-box p {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        /* --- FOOTER --- */
+        footer { 
+            padding: 60px 5% 40px; 
+            background: #050505; 
+            border-top: 1px solid #111; 
+            text-align: center; 
+        }
+
+        .footer-logo-link { 
+            text-decoration: none; 
+            display: inline-flex; 
+            align-items: center; 
+            transition: 0.3s; 
+            margin-bottom: 15px; 
+        }
+
+        .footer-logo-link:hover { 
+            transform: translateY(-3px); 
+            opacity: 0.8;
+        }
+
+        .footer-logo-texto { 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            color: var(--branco); 
+            letter-spacing: -1px; 
+        }
+
+        .footer-logo-badge { 
+            color: var(--azul-mjsv); 
+            font-family: 'JetBrains Mono', monospace; 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            background: var(--azul-fundo); 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            margin-left: 8px; 
+            border: 1px solid rgba(0, 74, 173, 0.2); 
+        }
+
+        .copyright { 
+            font-size: 0.75rem; 
+            color: #444; 
+            margin-top: 20px; 
+        }
+
+        /* --- RESPONSIVIDADE (MOBILE) --- */
+        @media (max-width: 900px) {
+            header { padding: 15px 5%; }
+            .logo img { height: 60px; }
+            .menu-links { display: none; }
+            .hero-lab { padding-top: 50px; }
+            .hero-lab h1 { font-size: 2.2rem; }
+            .nav-link { height: 40px; padding: 0 18px; font-size: 0.75rem; }
+            
+            .project-grid { grid-template-columns: 1fr; }
+            
+            .project-card.featured {
+                grid-column: span 1;
+                flex-direction: column;
+            }
+            .project-card.featured .project-img-placeholder {
+                width: 100%;
+                min-height: 250px;
+                border-right: none;
+                border-bottom: 1px solid #222;
+            }
+            .project-card.featured .project-info {
+                width: 100%;
+                padding: 30px;
+            }
+
+            .cta-box { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="assets/img/logo-iohub.png" alt="I/O HUB 4.0">
+            </a>
+        </div>
+        <div class="header-actions">
+            <nav class="menu-links">
+                <a href="/" class="link-padrao">Início</a>
+                <a href="/#servicos" class="link-padrao">Serviços</a>
+                <a href="/laboratorio" class="link-padrao link-ativo">Laboratório</a>
+                <a href="/solucoes-ignition" class="link-padrao">Soluções Ignition</a>
+                <a href="/academia" class="link-padrao">Academia MJSV</a>
+            </nav>
+            <a href="/#contato" class="nav-link">SOLICITAR DIAGNÓSTICO</a>
+        </div>
+    </header>
+
+    <section class="hero-lab">
+        <p style="color: var(--azul-mjsv); font-weight: bold; margin-bottom: 15px; font-family: 'JetBrains Mono', monospace;">/// I/O_HUB_LABS</p>
+        <h1>A Engenharia no <span class="destaque-azul">Campo de Batalha</span>.</h1>
+        <p>Mais do que integrar softwares, nós arquitetamos inteligência. Explore o nosso laboratório B2B e veja como aplicamos o ecossistema Ignition, Python, SQL e Node-RED para resolver gargalos críticos na indústria.</p>
+    </section>
+
+    <section class="showcase-container">
+        
+        <div class="showcase-header">
+            <p>> CASOS_DE_ESTUDO_&_PROJETOS</p>
+            <h2>A Nossa Stack em Ação.</h2>
+        </div>
+
+        <div class="project-grid">
+            
+            <div class="project-card featured">
+                <div class="project-img-placeholder" style="background: #090B0E; padding: 30px;">
+                    <img src="assets/img/smartlevel-dashboard.png" alt="SmartLevel Dashboard" style="width: 100%; height: 100%; object-fit: contain; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+                </div>
+                <div class="project-info">
+                    <span class="project-tag" style="color: var(--verde-destaque);">[ 🔥 ESTUDO DE CASO COMPLETO ] / UNS</span>
+                    <h3>Arquitetura SmartLevel</h3>
+                    <p>A nossa validação física e lógica de alto desempenho. O projeto demonstra a convergência TI/TA em milissegundos, extraindo telemetria física na borda e roteando-a através de uma infraestrutura desacoplada para um Cockpit Gerencial em tempo real.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Unified Namespace</span>
+                        <span class="tech-tag">Ignition Enterprise</span>
+                        <span class="tech-tag">Node-RED / MQTT</span>
+                        <span class="tech-tag">Edge Computing</span>
+                    </div>
+                    <a href="/smartlevel" class="btn-ler-case">Acessar Engenharia &rarr;</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img-placeholder">
+                    <span>OEE_DASHBOARD</span>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">SCADA / Ignition Perspective</span>
+                    <h3>Painel de OEE e Rastreabilidade</h3>
+                    <p>Desenvolvimento de uma interface de controlo responsiva. O painel captura os tempos de ciclo e paragens de máquina, calculando o OEE em tempo real. Acessível nativamente em ecrãs industriais e telemóveis da diretoria.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Ignition Perspective</span>
+                        <span class="tech-tag">Tags OPC-UA</span>
+                        <span class="tech-tag">UI/UX Industrial</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img-placeholder">
+                    <span>IIoT_GATEWAY</span>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Orquestração de Dados / IIoT</span>
+                    <h3>Gateway de Orquestração Node-RED</h3>
+                    <p>Criação de um fluxo de dados invisível e seguro. O Node-RED atua como o tradutor da fábrica, recolhendo dados de CLPs isolados via Modbus e enviando-os para a nuvem através do protocolo leve MQTT.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Node-RED</span>
+                        <span class="tech-tag">MQTT Broker</span>
+                        <span class="tech-tag">Modbus TCP</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img-placeholder">
+                    <span>ALGO_CONTROL</span>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Lógica Avançada / Jython</span>
+                    <h3>Algoritmo de Controlo de Lote</h3>
+                    <p>Quando os componentes visuais não bastam, entramos no código. Scripts complexos escritos em Python (Jython) a correr no servidor Ignition para validar receitas de produção e emitir alertas preditivos de manutenção.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python (Jython)</span>
+                        <span class="tech-tag">Gateway Scripts</span>
+                        <span class="tech-tag">Automação Backend</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img-placeholder">
+                    <span>ERP_BRIDGE</span>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag">Bases de Dados / Integração</span>
+                    <h3>Ponte Corporativa com SQL</h3>
+                    <p>A eliminação de folhas de cálculo manuais. Arquitetamos bases de dados relacionais para armazenar o histórico de produção e criar uma ponte bidirecional entre o chão de fábrica (TA) e o software ERP da empresa (TI).</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">PostgreSQL / MySQL</span>
+                        <span class="tech-tag">SQL Queries</span>
+                        <span class="tech-tag">Integração ERP</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="cta-final">
+        <div class="cta-box">
+            <h3>Preparado para modernizar a sua operação?</h3>
+            <p>Não entregamos pacotes fechados. A nossa equipe avalia a sua infraestrutura atual e desenha a solução mais ágil e rentável para o seu cenário.</p>
+            <a href="/#contato" class="nav-link" style="height: 55px; padding: 0 40px; font-size: 1rem; color: var(--branco); background: var(--azul-mjsv); border-color: var(--azul-mjsv);">AGENDAR DIAGNÓSTICO TÉCNICO</a>
+        </div>
+    </section>
+
+    <footer>
+        <a href="/" class="footer-logo-link" title="Voltar ao Início">
+            <span class="footer-logo-texto">I/O HUB</span>
+            <span class="footer-logo-badge">4.0</span>
+        </a>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">Boutique de Engenharia | Laboratório de Sistemas</p>
+        <div class="copyright">&copy; 2026 - Desenvolvido por Canvas & Code Studio.</div>
+    </footer>
+
+</body>
+</html>

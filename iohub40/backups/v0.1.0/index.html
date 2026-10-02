@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I/O Hub 4.0 | Boutique de Engenharia B2B</title>
+    <link rel="canonical" href="https://iohub40.com.br/">
+    
+    <link rel="icon" type="image/png" href="assets/img/favicon.png?v=2">
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png?v=2">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIÁVEIS DO ECOSSISTEMA MJSV --- */
+        :root {
+            --grafite-fundo: #0F0F0F;
+            --grafite-painel: #1A1A1A;
+            --grid-line: rgba(255, 255, 255, 0.03);
+            --verde-node: #00E676; 
+            --azul-mjsv: #004AAD;
+            --laranja-ignition: #FF9800; 
+            --texto-corpo: #D1D1D1;
+            --branco: #FFFFFF;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+        }
+
+        body {
+            background-color: var(--grafite-fundo);
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 35px 35px;
+            color: var(--texto-corpo);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { 
+            font-family: 'Poppins', sans-serif; 
+            text-transform: uppercase; 
+            letter-spacing: -1px; 
+        }
+
+        /* --- HEADER --- */
+        header {
+            width: 100%;
+            padding: 20px 5%;
+            background: rgba(15, 15, 15, 0.95);
+            border-bottom: 2px solid var(--grafite-painel);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo img { 
+            height: 85px; 
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover { 
+            transform: scale(1.03); 
+            filter: drop-shadow(0 0 15px rgba(0, 74, 173, 0.4));
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .menu-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .link-padrao {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .link-padrao:hover, .link-ativo { 
+            color: var(--branco); 
+        }
+
+        /* BOTÃO PADRONIZADO (AGORA EM AZUL TECNOLÓGICO) */
+        .nav-link { 
+            color: var(--azul-mjsv); 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            border: 1px solid var(--azul-mjsv); 
+            padding: 0 24px; 
+            height: 45px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s; 
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .nav-link:hover { 
+            background: var(--azul-mjsv); 
+            color: var(--branco); /* Branco para melhor contraste no fundo azul */
+            box-shadow: 0 0 15px rgba(0, 74, 173, 0.3);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 100px 5% 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-left: 2px solid var(--azul-mjsv); /* Alterado para Azul */
+            margin-top: 50px;
+        }
+
+        .terminal-text { 
+            color: var(--azul-mjsv); /* Alterado para Azul */
+            font-size: 0.9rem; 
+            margin-bottom: 15px; 
+            display: block; 
+        }
+
+        .hero h1 { 
+            font-size: clamp(2.2rem, 7vw, 4.5rem); 
+            color: var(--branco); 
+            line-height: 0.95; 
+            margin-bottom: 30px; 
+        }
+
+        .hero p { 
+            max-width: 750px; 
+            font-size: 1.1rem; 
+            margin-bottom: 40px; 
+            border-left: 4px solid var(--grafite-painel); 
+            padding-left: 20px; 
+            color: #999; 
+        }
+
+        /* --- BENTO GRID --- */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            padding: 0 5% 60px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .bento-item {
+            background: var(--grafite-painel);
+            border: 1px solid #2A2A2A;
+            padding: 40px;
+            position: relative;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            border-radius: 4px;
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+        }
+
+        .bento-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--azul-mjsv); /* Hover padrão agora é Azul */
+        }
+
+        .bento-item::before { 
+            content: ""; 
+            position: absolute; 
+            top: 12px; 
+            left: 12px; 
+            width: 4px; 
+            height: 4px; 
+            background: #444; 
+            border-radius: 50%; 
+        }
+
+        .item-7 { grid-column: span 7; }
+        .item-5 { grid-column: span 5; }
+        .item-full { grid-column: span 12; }
+
+        .bento-tag { 
+            font-size: 0.75rem; 
+            color: var(--azul-mjsv); /* Padrão agora é Azul */
+            text-transform: uppercase; 
+            margin-bottom: 20px; 
+            display: block; 
+            font-weight: bold; 
+        }
+
+        .bento-item h3 { 
+            color: var(--branco); 
+            margin-bottom: 15px; 
+            font-size: 1.8rem; 
+            line-height: 1.1; 
+        }
+
+        .bento-item p { 
+            font-size: 0.95rem; 
+            color: #777; 
+            line-height: 1.7; 
+            margin-bottom: 20px; 
+        }
+
+        .btn-mini-link {
+            color: var(--azul-mjsv); /* Padrão agora é Azul */
+            text-decoration: underline;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        /* Caixas de Destaque Internas */
+        .case-highlight {
+            background: rgba(0, 74, 173, 0.08);
+            border: 1px dashed var(--azul-mjsv);
+            padding: 20px;
+            border-radius: 6px;
+            margin: 15px 0 25px 0;
+            transition: 0.3s;
+        }
+
+        .case-highlight:hover {
+            background: rgba(0, 74, 173, 0.15);
+        }
+
+        /* 1. Laboratório (Azul) */
+        .laboratorio-card { 
+            border-top: 4px solid var(--azul-mjsv); 
+        }
+        .laboratorio-card:hover {
+            border-color: var(--azul-mjsv);
+            box-shadow: 0 10px 30px rgba(0, 74, 173, 0.15);
+        }
+        .laboratorio-card .bento-tag, .laboratorio-card .btn-mini-link {
+            color: var(--azul-mjsv);
+        }
+
+        /* 2. Soluções Ignition (Laranja) */
+        .mes-card { 
+            border-top: 4px solid var(--laranja-ignition); 
+        }
+        .mes-card:hover {
+            border-color: var(--laranja-ignition);
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.15);
+        }
+        .mes-card .bento-tag, .mes-card .btn-mini-link {
+            color: var(--laranja-ignition);
+        }
+
+        /* 3. Academia (Verde) */
+        .academia-card { 
+            background: linear-gradient(135deg, #161616 0%, #0A0A0A 100%); 
+            border: 1px dashed #333; 
+        }
+        .academia-card:hover {
+            border-color: var(--verde-node);
+            box-shadow: 0 10px 30px rgba(0, 230, 118, 0.1);
+        }
+        .academia-card .bento-tag, .academia-card .btn-mini-link {
+            color: var(--verde-node);
+        }
+
+        /* SECÇÃO SUTIL DE SERVIÇOS */
+        .servicos-container {
+            padding: 40px 5% 60px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .servico-card-sutil {
+            background: var(--grafite-painel);
+            border: 1px solid #2A2A2A;
+            border-radius: 4px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .servico-card-sutil:hover {
+            border-color: var(--azul-mjsv);
+            transform: translateY(-4px);
+        }
+
+        .servico-card-sutil h4 {
+            color: var(--branco);
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .servico-card-sutil p {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* --- SECÇÃO DE DIAGNÓSTICO --- */
+        .secao-diagnostico {
+            padding: 40px 5% 100px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .terminal-box {
+            background: var(--grafite-fundo);
+            border: 1px solid #333;
+            border-radius: 6px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #111;
+            padding: 12px 15px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot { 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+        }
+
+        .dot.red { background: #FF5F56; }
+        .dot.yellow { background: #FFBD2E; }
+        .dot.green { background: #27C93F; }
+
+        .terminal-title { 
+            color: #666; 
+            font-size: 0.8rem; 
+            margin-left: 10px; 
+        }
+
+        .terminal-body {
+            padding: 45px;
+            background: linear-gradient(180deg, var(--grafite-painel) 0%, var(--grafite-fundo) 100%);
+        }
+
+        .terminal-body h2 { 
+            font-size: 2rem; 
+            margin-bottom: 10px; 
+            color: var(--branco); 
+        }
+
+        .terminal-body p { 
+            color: #999; 
+            margin-bottom: 35px; 
+            font-size: 0.95rem; 
+        }
+
+        .form-industrial { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 25px; 
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--azul-mjsv);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-industrial input, .form-industrial select {
+            width: 100%;
+            background: #0A0A0A;
+            border: 1px solid #333;
+            padding: 16px;
+            color: var(--branco);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            border-radius: 4px;
+        }
+
+        .form-industrial input:focus, .form-industrial select:focus {
+            outline: none;
+            border-color: var(--azul-mjsv);
+            box-shadow: 0 0 15px rgba(0, 74, 173, 0.2);
+        }
+
+        .btn-terminal {
+            background: transparent;
+            color: var(--azul-mjsv);
+            border: 1px solid var(--azul-mjsv);
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+
+        .btn-terminal:hover { 
+            background: var(--azul-mjsv);
+            color: var(--branco); 
+            box-shadow: 0 0 20px rgba(0, 74, 173, 0.3); 
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 60px 5% 40px;
+            background: #080808;
+            border-top: 2px solid var(--grafite-painel);
+            text-align: center;
+        }
+
+        .footer-logo-link {
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .footer-logo-link:hover { 
+            transform: translateY(-3px); 
+            opacity: 0.8; 
+        }
+
+        .footer-logo-texto {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--branco);
+            letter-spacing: -1px;
+        }
+
+        .footer-logo-badge {
+            color: var(--azul-mjsv);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 1.1rem;
+            background: rgba(0, 74, 173, 0.15);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            border: 1px solid rgba(0, 74, 173, 0.3);
+        }
+
+        .copyright { 
+            font-size: 0.75rem; 
+            color: #444; 
+            margin-top: 20px; 
+        }
+
+        /* --- RESPONSIVIDADE (MOBILE) --- */
+        @media (max-width: 900px) {
+            header { padding: 15px 5%; }
+            .logo img { height: 60px; }
+            .menu-links { display: none; }
+            .hero { border-left: none; padding-top: 50px; }
+            .hero h1 { font-size: 2.5rem; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .item-7, .item-5, .item-full { grid-column: span 12; }
+            .servicos-grid { grid-template-columns: 1fr; }
+            .terminal-body { padding: 30px 20px; }
+            .terminal-body h2 { font-size: 1.6rem; }
+            .nav-link { height: 38px; padding: 0 18px; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="assets/img/logo-iohub.png" alt="I/O HUB 4.0">
+            </a>
+        </div>
+        
+        <div class="header-actions">
+            <nav class="menu-links">
+                <a href="/" class="link-padrao link-ativo">Início</a>
+                <a href="#servicos" class="link-padrao">Serviços</a>
+                <a href="/laboratorio" class="link-padrao">Laboratório</a>
+                <a href="/solucoes-ignition" class="link-padrao">Soluções Ignition</a>
+                <a href="/academia" class="link-padrao">Academia MJSV</a>
+            </nav>
+            <a href="#contato" class="nav-link">SOLICITAR DIAGNÓSTICO</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <span class="terminal-text">> inicializando_boutique_engenharia... [OK]</span>
+        <h1>ENGENHARIA ÁGIL.<br>OPERAÇÃO REAL-TIME.</h1>
+        <p>A ponte definitiva entre o seu hardware físico e a inteligência corporativa. Especialistas em arquiteturas de dados escaláveis para indústrias que exigem zero atrito e máxima visibilidade.</p>
+    </section>
+
+    <main class="bento-grid">
+        
+        <div class="bento-item item-7 laboratorio-card" style="border-color: #333;">
+            <div style="border-top: 4px solid var(--azul-mjsv); position: absolute; top: 0; left: 0; width: 100%; height: 4px;"></div>
+            <div>
+                <span class="bento-tag">[ I/O_HUB_LABS ]</span>
+                <h3>O Nosso Laboratório B2B</h3>
+                <p>A nossa vitrine de engenharia. Desenvolvemos ecossistemas autônomos aplicando a plataforma Ignition, arquiteturas modulares em Node-RED, lógica avançada em Python (Jython) e orquestração de bases de dados SQL. Veja a tecnologia no campo de batalha.</p>
+                
+                <div class="case-highlight">
+                    <strong style="color: var(--branco); font-size: 0.9rem; display: block; margin-bottom: 8px;">🔥 NOVO ESTUDO DE CASO:</strong>
+                    <p style="font-size: 0.85rem; margin-bottom: 12px; line-height: 1.4;">Validação arquitetural conectando o chão de fábrica à nuvem em milissegundos utilizando o padrão Unified Namespace (UNS).</p>
+                    <a href="/smartlevel" class="btn-mini-link">[ Acessar Arquitetura SmartLevel ]</a>
+                </div>
+
+                <a href="/laboratorio" class="btn-mini-link" style="color: #666; font-size: 0.75rem; text-decoration: none;">Ver todos os projetos de laboratório &rarr;</a>
+            </div>
+            <div style="font-size: 0.7rem; color: var(--azul-mjsv); font-weight: bold; margin-top: 20px;">[ STACK: IGNITION | PYTHON | SQL | NODE-RED ]</div>
+        </div>
+
+        <div class="bento-item item-5 mes-card">
+            <div>
+                <span class="bento-tag">SOLUÇÕES IGNITION</span>
+                <h3>Controlo em Tempo Real</h3>
+                <p>O sistema nervoso da sua manufatura. Dashboards nativos para web e mobile, colocando os dados da fábrica e o cálculo de OEE no bolso da diretoria sem o custo abusivo de licenças por utilizador.</p>
+                <a href="/solucoes-ignition" class="btn-mini-link">[ Ver Soluções para PMEs ]</a>
+            </div>
+        </div>
+
+        <div class="bento-item item-full academia-card">
+            <div>
+                <span class="bento-tag">Capacitação & Autoridade</span>
+                <h3>ACADEMIA MJSV</h3>
+                <p>A nossa missão vai além da integração: nós formamos especialistas. A Academia MJSV é o hub de excelência para engenheiros e técnicos que buscam o mais alto nível em desenvolvimento industrial. Treinamentos intensivos focados no <strong>ecossistema Ignition, Jython, automação em SQL, Node-RED e Design de Interfaces Industriais</strong>. Não entregamos apenas software; ensinamos o mercado a dominar a tecnologia.</p>
+            </div>
+            <div style="margin-top: 30px; font-size: 0.75rem; color: var(--verde-node); border: 1px dashed #333; padding: 10px; display: inline-block;">
+                ● STATUS: MATRÍCULAS_EM_BREVE
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SECÇÃO SUTIL DE SERVIÇOS DA I/O HUB 4.0 -->
+    <section id="servicos" class="servicos-container">
+        <div style="margin-bottom: 30px; border-left: 3px solid var(--azul-mjsv); padding-left: 15px;">
+            <span style="color: var(--azul-mjsv); font-size: 0.8rem; font-weight: bold;">[ ENGENHARIA B2B ]</span>
+            <h3 style="color: var(--branco); font-size: 1.8rem; margin-top: 5px;">Nossos Serviços & Consultoria</h3>
+        </div>
+
+        <div class="servicos-grid">
+            <div class="servico-card-sutil">
+                <span style="color: var(--azul-mjsv); font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">/// ENGENHARIA & AUTOMAÇÃO</span>
+                <h4>Engenharia & Arquitetura Indústria 4.0</h4>
+                <p>
+                    • <strong>Diagnóstico de Viabilidade:</strong> Mapeamento de redes TA, PLCs e conectividade.<br>
+                    • <strong>Convergência TI/TA:</strong> Implementação de Unified Namespace (UNS), MQTT Broker e Node-RED.<br>
+                    • <strong>Sistemas MES/SCADA:</strong> Arquitetura e telas de OEE em tempo real via Ignition.<br>
+                    • <strong>Suporte & Sustentação:</strong> Acompanhamento contínuo de servidores e bancos de dados SQL.
+                </p>
+                <a href="#contato" class="btn-mini-link">Solicitar Proposta Técnica &rarr;</a>
+            </div>
+
+            <div class="servico-card-sutil">
+                <span style="color: var(--laranja-ignition); font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">/// LICENCIAMENTO & CAPACITAÇÃO</span>
+                <h4>Licenciamento & Capacitação Corporativa</h4>
+                <p>
+                    • <strong>Licenciamento Inteligente Ignition:</strong> Estruturação de licenças enxutas e de alto ROI.<br>
+                    • <strong>Capacitação de Equipes (Academia MJSV):</strong> Formação prática em Jython, SQL e UI/UX Industrial.<br>
+                    • <strong>Consultoria Executiva C-Level:</strong> Dashboards estratégicos de eficiência operacional para a diretoria.
+                </p>
+                <a href="#contato" class="btn-mini-link" style="color: var(--laranja-ignition);">Falar com Consultor B2B &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="secao-diagnostico">
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="terminal-title">bash - root@iohub40:~/diagnostico</span>
+            </div>
+            <div class="terminal-body">
+                <h2>Solicitar Diagnóstico Técnico.</h2>
+                <p>Inicie o mapeamento da topologia da sua planta. Preencha os dados da sua operação e um Arquiteto de Sistemas entrará em contacto.</p>
+                
+                <form action="#" method="POST" class="form-industrial">
+                    <div class="input-group">
+                        <label for="nome">> RESPONSÁVEL_TÉCNICO</label>
+                        <input type="text" id="nome" placeholder="Ex: Eng. João Silva" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="email">> E-MAIL_CORPORATIVO</label>
+                        <input type="email" id="email" placeholder="joao@industria.com.br" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="desafio">> OBJETIVO_PRINCIPAL</label>
+                        <select id="desafio" required>
+                            <option value="">[ Selecione o cenário crítico ]</option>
+                            <option value="tita">Integração TI/TA (Do chão de fábrica ao ERP/SAP)</option>
+                            <option value="scada">Atualização de SCADA/MES (Licenciamento Ilimitado)</option>
+                            <option value="oee">Dashboards Web/Mobile e OEE em tempo real</option>
+                            <option value="academia">Capacitação da Equipa</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-terminal">[ INICIAR_DIAGNÓSTICO ]</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="/" class="footer-logo-link" title="Ir para a Nave Mãe">
+            <span class="footer-logo-texto">I/O HUB</span>
+            <span class="footer-logo-badge">4.0</span>
+        </a>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: #666;">Boutique de Engenharia | Parte da MJSV Holding</p>
+        <div class="copyright">
+            &copy; 2026 - Desenvolvido por Canvas & Code Studio.
+        </div>
+    </footer>
+
+</body>
+</html>

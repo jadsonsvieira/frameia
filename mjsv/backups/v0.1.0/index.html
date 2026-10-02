@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MJSV Holding | Ecossistema Autônomo</title>
+    <link rel="canonical" href="https://mjsv.com.br/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png?v=4">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png?v=4">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --fundo-mestre: #050505;
+            --grafite-escuro: #121212;
+            --borda-vidro: rgba(255, 255, 255, 0.08);
+            --azul-mjsv: #004AAD;
+            --verde-mjsv: #00E676;
+            --laranja-mjsv: #ff6b35;
+            --branco: #FFFFFF;
+            --texto-suave: #A0A0A0;
+            --degrade-poder: linear-gradient(135deg, var(--verde-mjsv) 0%, var(--azul-mjsv) 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--fundo-mestre);
+            color: var(--branco);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 15% 50%, rgba(0, 230, 118, 0.05), transparent 40%),
+                              radial-gradient(circle at 85% 30%, rgba(0, 74, 173, 0.08), transparent 40%);
+        }
+
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+
+        .text-gradient {
+            background: var(--degrade-poder);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ====== HEADER (ORIGINAL ESCURO) ====== */
+        header {
+            background: rgba(5, 5, 5, 0.8); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--borda-vidro);
+        }
+
+        /* ====== LOGO AUMENTADA E COM ANIMAÇÃO ====== */
+        .logo { 
+            flex-shrink: 0; 
+            display: flex; 
+            align-items: center; 
+        }
+        .logo img { 
+            height: 60px; /* Logo maior no desktop */
+            width: auto; 
+            max-width: 100%; 
+            object-fit: contain; 
+            display: block; 
+            transition: transform 0.3s ease; 
+        }
+        .logo img:hover {
+            transform: scale(1.05); /* Efeito zoom premium */
+        }
+
+        .nav-links-mjsv {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .btn-contato {
+            background: var(--branco); 
+            color: var(--fundo-mestre);
+            padding: 10px 24px; border-radius: 50px;
+            font-weight: 700; text-decoration: none;
+            transition: all 0.3s; font-size: 0.9rem; flex-shrink: 0;
+        }
+        .btn-contato:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 0 20px rgba(255,255,255,0.2); 
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            padding: 180px 5% 100px;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 50px; align-items: center;
+            max-width: 1400px; margin: 0 auto; min-height: 90vh;
+        }
+
+        .hero-text h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero-text p { font-size: 1.1rem; color: var(--texto-suave); margin-bottom: 30px; max-width: 500px; }
+        .tag-holding {
+            display: inline-block; border: 1px solid var(--borda-vidro);
+            padding: 6px 15px; border-radius: 50px; font-size: 0.75rem;
+            letter-spacing: 2px; text-transform: uppercase;
+            margin-bottom: 20px; color: var(--verde-mjsv); font-weight: 600;
+        }
+
+        /* SISTEMA DE SLIDES */
+        .slider-container {
+            position: relative; width: 100%; display: flex; flex-direction: column; align-items: center;
+        }
+        .slider-wrapper { position: relative; width: 100%; min-height: 380px; }
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; opacity: 0; visibility: hidden;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); transform: scale(0.95) translateY(20px);
+        }
+        .slide.active { opacity: 1; visibility: visible; transform: scale(1) translateY(0); position: relative; }
+
+        .slider-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--branco); width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; cursor: pointer; z-index: 10; backdrop-filter: blur(5px); transition: all 0.3s;
+        }
+        .slider-arrow:hover { background: var(--verde-mjsv); color: var(--fundo-mestre); box-shadow: 0 0 20px rgba(0, 230, 118, 0.4); transform: translateY(-50%) scale(1.1); }
+        .slider-arrow.prev { left: -25px; }
+        .slider-arrow.next { right: -25px; }
+
+        .spotlight-card {
+            background: var(--grafite-escuro); border: 1px solid rgba(0, 230, 118, 0.2);
+            border-radius: 24px; padding: 45px; position: relative; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4); overflow: hidden; height: 100%;
+        }
+        .spotlight-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--degrade-poder); }
+        .spotlight-badge { background: var(--verde-mjsv); color: #000; padding: 6px 14px; border-radius: 6px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; letter-spacing: 1px; }
+        .badge-azul { background: var(--azul-mjsv); color: #fff; }
+        .spotlight-card h2 { font-size: 2.5rem; margin-bottom: 15px; letter-spacing: -1px;}
+        .spotlight-card p { font-size: 1.05rem; color: var(--texto-suave); margin-bottom: 35px; }
+        .btn-gradiente { background: var(--degrade-poder); color: var(--branco); padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s; box-shadow: 0 8px 20px rgba(0, 230, 118, 0.15); }
+        .btn-gradiente:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 230, 118, 0.35); }
+
+        .slider-dots { display: flex; justify-content: center; gap: 12px; margin-top: 30px; }
+        .dot { width: 40px; height: 6px; border-radius: 4px; background: rgba(255,255,255,0.15); cursor: pointer; transition: all 0.4s ease; }
+        .dot.active { background: var(--verde-mjsv); width: 70px; box-shadow: 0 0 15px rgba(0, 230, 118, 0.5); }
+
+        /* ====== HUB DAS FRENTES ====== */
+        .secao-hub { padding: 80px 5%; background: #080808; border-top: 1px solid var(--borda-vidro); }
+        .titulo-centro { text-align: center; margin-bottom: 60px; }
+        .titulo-centro h2 { font-size: 2.8rem; margin-bottom: 10px; }
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; max-width: 1300px; margin: 0 auto; }
+        
+        .module-card { 
+            background: rgba(255, 255, 255, 0.02); 
+            border: 1px solid var(--borda-vidro); 
+            border-radius: 20px; 
+            padding: 35px; 
+            transition: all 0.4s ease; 
+            text-align: left;
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        .module-card:hover { 
+            background: rgba(255, 255, 255, 0.04); 
+            border-color: rgba(0, 230, 118, 0.3); 
+            transform: translateY(-8px); 
+        }
+
+        /* ====== O BOTÃO DAS LOGOS (ESTILO DARK NEUMORPHISM) ====== */
+        .logo-3d-wrapper {
+            width: 110px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.03); 
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.02), 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+
+        .module-card:hover .logo-3d-wrapper {
+            transform: translateY(-5px);
+            border-color: rgba(0, 230, 118, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 230, 118, 0.15);
+        }
+
+        .unit-logo { 
+            flex-shrink: 0; 
+            height: 50px; 
+            width: auto; 
+            max-width: 90%; 
+            object-fit: contain; 
+            display: block; 
+            transition: 0.3s; 
+        }
+
+        .module-card h3 { font-size: 1.6rem; margin-bottom: 12px; }
+        .module-card p { color: var(--texto-suave); font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; }
+        .link-arrow { color: var(--branco); font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; margin-top: auto; }
+        .module-card:hover .link-arrow { color: var(--verde-mjsv); }
+
+        /* ====== SEÇÃO CONSOLIDADA DE SERVIÇOS DAS VERTICAIS ====== */
+        .secao-servicos-mjsv {
+            padding: 80px 5%;
+            background: #050505;
+            border-top: 1px solid var(--borda-vidro);
+        }
+        .servicos-grid-mjsv {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .servico-card-mjsv {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--borda-vidro);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .servico-card-mjsv:hover {
+            border-color: var(--verde-mjsv);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .servico-card-mjsv .servico-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+        .servico-card-mjsv h3 { font-size: 1.6rem; margin-bottom: 15px; color: var(--branco); }
+        .servico-card-mjsv p { color: var(--texto-suave); font-size: 0.95rem; line-height: 1.7; flex-grow: 1; }
+        .servico-card-mjsv .servico-link {
+            color: var(--verde-mjsv);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+        .servico-card-mjsv .servico-link:hover { opacity: 0.8; }
+
+        /* ====== GOVERNANÇA (A TRINDADE) ====== */
+        .secao-governanca { padding: 100px 5%; border-top: 1px solid var(--borda-vidro); background-image: radial-gradient(circle at center, rgba(0, 74, 173, 0.05), transparent 70%); }
+        
+        .gov-header { text-align: center; margin-bottom: 60px; }
+        .gov-header .tagline { color: var(--verde-mjsv); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; display: block; margin-bottom: 10px; }
+        .gov-header h2 { font-size: 3rem; letter-spacing: -1px; }
+
+        .lideres-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .perfil-card-full {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--borda-vidro);
+            border-radius: 24px;
+            padding: 40px;
+            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .perfil-card-full:hover {
+            border-color: rgba(0, 230, 118, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .perfil-topo { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+
+        .foto-lider {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--azul-mjsv);
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #111;
+        }
+
+        .info-lider h4 { font-size: 1.3rem; margin-bottom: 2px; line-height: 1.2; }
+        .info-lider span { color: var(--verde-mjsv); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        .bio-lider { color: var(--texto-suave); font-size: 0.95rem; line-height: 1.6; }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 50px 5%; color: #444; font-size: 0.85rem; border-top: 1px solid var(--borda-vidro); }
+
+        /* RESPONSIVO */
+        @media (max-width: 1024px) {
+            .hero-section { grid-template-columns: 1fr; text-align: center; padding-top: 140px; }
+            .hero-text h1 { font-size: 2.8rem; }
+            .hero-text p { margin: 0 auto 30px; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .servicos-grid-mjsv { grid-template-columns: 1fr; }
+            .slider-arrow { display: none; }
+            .lideres-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        }
+        @media (max-width: 768px) {
+            .lideres-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            header { padding: 15px; }
+            .logo img { height: 45px; }
+            .btn-contato { padding: 8px 16px; font-size: 0.8rem; }
+            .spotlight-card { padding: 35px 25px; }
+            .perfil-card-full { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="assets/mjsv-logo.png" alt="MJSV Holding">
+        </div>
+        <div class="nav-links-mjsv">
+            <a href="#servicos" style="color: var(--texto-suave); font-weight: 600; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#A0A0A0'">Serviços</a>
+            <a href="#governanca" class="btn-contato">Entrar em Contato</a>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-text">
+            <span class="tag-holding">Ecossistema MJSV</span>
+            <h1>Arquitetura para <span class="text-gradient">Eficiência Autônoma.</span></h1>
+            <p>Operamos com 80% de autonomia tecnológica. Engenharia Industrial, IA e Design Premium fundidos para escalar o seu lucro.</p>
+        </div>
+
+        <div class="slider-container">
+            <button class="slider-arrow prev" onclick="moveSlide(-1)">&#8592;</button>
+            <button class="slider-arrow next" onclick="moveSlide(1)">&#8594;</button>
+            <div class="slider-wrapper">
+                <div class="slide active">
+                    <div class="spotlight-card">
+                        <span class="spotlight-badge">Lançamento</span>
+                        <h2>Cash</h2>
+                        <p>Gestão financeira via WhatsApp. Elimine o atrito e deixe a IA organizar o seu caixa em tempo real.</p>
+                        <a href="https://frameia.com.br" class="btn-gradiente">Automatizar Agora &rarr;</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="spotlight-card">
+                        <span class="spotlight-badge badge-azul">Em Breve</span>
+                        <h2>ReAction</h2>
+                        <p>Inteligência estratégica operando nos bastidores do seu negócio para apontar caminhos de escala.</p>
+                        <a href="https://frameia.com.br" class="btn-gradiente">Lista de Espera VIP &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-dots">
+                <div class="dot active" data-index="0"></div>
+                <div class="dot" data-index="1"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="frentes" class="secao-hub">
+        <div class="titulo-centro">
+            <h2>Nossos Motores de <span class="text-gradient">Escala</span></h2>
+        </div>
+        <div class="bento-grid">
+            <div class="module-card">
+                <div class="logo-3d-wrapper">
+                    <img src="assets/logo-frame.png" alt="Frame IA" class="unit-logo">
+                </div>
+                <h3>Frame [IA]</h3>
+                <p>O seu "funcionário invisível". Automação e ferramentas SaaS para o pequeno empreendedor.</p>
+                <a href="https://frameia.com.br" class="link-arrow">Acessar Plataforma &rarr;</a>
+            </div>
+            <div class="module-card">
+                <div class="logo-3d-wrapper">
+                    <img src="assets/logo-iohub.png" alt="I/O Hub" class="unit-logo">
+                </div>
+                <h3>I/O Hub 4.0</h3>
+                <p>Engenharia Ágil. Conectando dados físicos à nuvem com precisão industrial.</p>
+                <a href="https://iohub40.com.br" class="link-arrow">Ver Engenharia &rarr;</a>
+            </div>
+            <div class="module-card">
+                <div class="logo-3d-wrapper">
+                    <img src="assets/logo-canvas.png" alt="Canvas & Code Studio" class="unit-logo">
+                </div>
+                <h3>Canvas & Code Studio</h3>
+                <p>Design Estratégico. Interfaces premium e identidades de Autoridade Absoluta B2B.</p>
+                <a href="https://canvasecodestudio.com.br" class="link-arrow">Explorar Estúdio &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO CONSOLIDADA DE SERVIÇOS DAS VERTICAIS -->
+    <section id="servicos" class="secao-servicos-mjsv">
+        <div class="titulo-centro">
+            <span style="color: var(--verde-mjsv); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; display: block; margin-bottom: 10px;">ESTRUTURA DE SERVIÇOS</span>
+            <h2>Serviços do <span class="text-gradient">Ecossistema</span></h2>
+        </div>
+        
+        <div class="servicos-grid-mjsv">
+            <!-- VERTICAL 1: FRAME IA -->
+            <div class="servico-card-mjsv">
+                <span class="servico-badge" style="background: rgba(255, 107, 53, 0.1); color: var(--laranja-mjsv); border: 1px solid rgba(255, 107, 53, 0.2);">FRAME [IA]</span>
+                <h3>Automação & SaaS para PMEs</h3>
+                <p>
+                    • <strong>Cash:</strong> Gestão financeira simples via WhatsApp por fotos de recibos e mensagens de voz.<br>
+                    • <strong>ReAction:</strong> Gestão de reputação e respostas automáticas a avaliações no Google e redes sociais.<br>
+                    • <strong>Ativação Imediata:</strong> Condições comerciais especiais de lançamento e atendimento direto.
+                </p>
+                <a href="https://frameia.com.br" target="_blank" class="servico-link" style="color: var(--laranja-mjsv);">Ver Soluções Frame [IA] &rarr;</a>
+            </div>
+
+            <!-- VERTICAL 2: I/O HUB 4.0 -->
+            <div class="servico-card-mjsv">
+                <span class="servico-badge" style="background: rgba(0, 74, 173, 0.1); color: var(--azul-mjsv); border: 1px solid rgba(0, 74, 173, 0.2);">I/O HUB 4.0</span>
+                <h3>Engenharia Indústria 4.0</h3>
+                <p>
+                    • <strong>Arquitetura TI/TA:</strong> Convergência de dados físicos, conectividade de CLPs, Unified Namespace (UNS) e MQTT.<br>
+                    • <strong>SCADA / MES Ignition:</strong> Dashboards de OEE em tempo real, rastreabilidade e controle operacional.<br>
+                    • <strong>Capacitação & Diagnóstico:</strong> Formação prática na Academia MJSV e consultoria de licenciamento.
+                </p>
+                <a href="https://iohub40.com.br" target="_blank" class="servico-link" style="color: var(--azul-mjsv);">Ver Engenharia I/O Hub &rarr;</a>
+            </div>
+
+            <!-- VERTICAL 3: CANVAS & CODE STUDIO -->
+            <div class="servico-card-mjsv">
+                <span class="servico-badge" style="background: rgba(0, 230, 118, 0.1); color: var(--verde-mjsv); border: 1px solid rgba(0, 230, 118, 0.2);">CANVAS & CODE STUDIO</span>
+                <h3>Design Estratégico B2B</h3>
+                <p>
+                    • <strong>UI/UX para SaaS:</strong> Interfaces de alta fidelidade e arquiteturas de informação focadas em conversão.<br>
+                    • <strong>Identidade Corporativa:</strong> Marcas, logotipos e brandbooks com alto padrão de autoridade.<br>
+                    • <strong>Pitch Decks Executivos:</strong> Apresentações de impacto para fechamento de contratos High-Ticket.
+                </p>
+                <a href="https://canvasecodestudio.com.br" target="_blank" class="servico-link" style="color: var(--verde-mjsv);">Ver Estúdio Canvas & Code Studio &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="governanca" class="secao-governanca">
+        <div class="gov-header">
+            <span class="tagline">O Fator Humano & IA</span>
+            <h2>Governança e <span class="text-gradient">Estratégia</span></h2>
+        </div>
+
+        <div class="lideres-grid">
+            <div class="perfil-card-full">
+                <div class="perfil-topo">
+                    <img src="assets/foto-jadson.jpg" alt="Jadson S. Vieira" class="foto-lider">
+                    <div class="info-lider">
+                        <h4>Jadson S. Vieira</h4>
+                        <span>CEO & Arquiteto Chefe</span>
+                    </div>
+                </div>
+                <p class="bio-lider">
+                    Responsável pela arquitetura mestra do ecossistema. Especialista em orquestrar Inteligência Artificial e Engenharia para transformar processos complexos em soluções autônomas que garantem precisão técnica e escala real para os clientes.
+                </p>
+            </div>
+
+            <div class="perfil-card-full">
+                <div class="perfil-topo">
+                    <img src="assets/foto-mara.jpg" alt="Mara" class="foto-lider">
+                    <div class="info-lider">
+                        <h4>Mara</h4>
+                        <span>CGO & Guardiã da Marca</span>
+                    </div>
+                </div>
+                <p class="bio-lider">
+                    Focada no crescimento estratégico e na experiência do parceiro. Audita o padrão estético e a usabilidade de todas as entregas da holding, garantindo que a tecnologia avançada nunca perca o fator humano essencial e a facilidade de uso.
+                </p>
+            </div>
+
+            <div class="perfil-card-full">
+                <div class="perfil-topo">
+                    <img src="assets/foto-ia.png" alt="Oráculo [IA]" class="foto-lider" style="border-color: var(--verde-mjsv);">
+                    <div class="info-lider">
+                        <h4>Oráculo [IA]</h4>
+                        <span>Motor de Automação</span>
+                    </div>
+                </div>
+                <p class="bio-lider">
+                    A inteligência autônoma do nosso ecossistema. Executa processos repetitivos, analisa dados em tempo real e garante que a sua operação nunca durma. Trabalha nos bastidores com zero atrito para escalar a sua eficiência.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 MJSV Holding. Operando com 80% de Autonomia IA.</p>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        let slideInterval;
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            function updateSlider(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+            }
+            window.moveSlide = function(step) {
+                currentSlide = (currentSlide + step + slides.length) % slides.length;
+                updateSlider(currentSlide);
+                resetInterval();
+            };
+            function resetInterval() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(() => moveSlide(1), 6000);
+            }
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    currentSlide = parseInt(this.getAttribute('data-index'));
+                    updateSlider(currentSlide);
+                    resetInterval();
+                });
+            });
+            resetInterval();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+{
+    "site_id": "frameia",
+    "name": "Frame [IA]",
+    "domain": "frameia.com.br",
+    "version": "1.0.6",
+    "git_tag": "frameia-v1.0.6",
+    "last_updated": "2026-09-22T19:10:00",
+    "description": "Versão 1.0.6: Atualização institucional e de canais de distribuição. Ajuste na titulação do CEO para 'Arquitetura e Estratégia' (alinhado ao perfil de Arquiteto de Soluções) e destaque da disponibilidade oficial dos aplicativos na App Store da Apple.",
+    "history": [
+        {
+            "version": "0.0.0",
+            "tag": "frameia-v0.0.0",
+            "date": "2026-08-01T22:24:00",
+            "notes": "Versão inicial estável v0.0.0."
+        },
+        {
+            "version": "0.1.0",
+            "tag": "frameia-v0.1.0",
+            "date": "2026-08-02T08:08:30",
+            "notes": "ReAction ativado para Beta; Hubitat inserido na Lista VIP de Acesso Antecipado; menu Serviços padronizado."
+        },
+        {
+            "version": "0.1.1",
+            "tag": "frameia-v0.1.1",
+            "date": "2026-08-02T08:12:50",
+            "notes": "Adicionada a informação do Setup VIP 360º no ReAction (R$ 300,00), removidas marcações brutas de asteriscos e aprimorado o refinamento estético global dos cards de serviços."
+        },
+        {
+            "version": "0.1.2",
+            "tag": "frameia-v0.1.2",
+            "date": "2026-08-02T08:21:10",
+            "notes": "Removidas menções a valores no card do Hubitat, focando exclusivamente no Acesso VIP e lista de espera para o lançamento oficial."
+        },
+        {
+            "version": "0.1.3",
+            "tag": "frameia-v0.1.3",
+            "date": "2026-08-02T08:29:00",
+            "notes": "Hubitat configurado com posicionamento claro para gestão de condomínios, residenciais e apartamentos em fase de ideação, sem frases inadequadas ou expectativas precipitadas."
+        },
+        {
+            "version": "0.2.0",
+            "tag": "frameia-v0.2.0",
+            "date": "2026-08-05T21:20:40",
+            "notes": "Versão v0.2.0: Proposta de valor baseada na dor real do cliente (economizar tempo no Cash e conquistar clientes no ReAction Beta), remoção total de valores numéricos e inclusão de chamada direta para atendimento no WhatsApp."
+        },
+        {
+            "version": "0.2.1",
+            "tag": "frameia-v0.2.1",
+            "date": "2026-08-05T21:35:20",
+            "notes": "Versão v0.2.1: Menu 'Serviços' restaurado, substituição das caixas de imagens do Sobre por preview cards UI estilizados, suavização do botão do WhatsApp."
+        },
+        {
+            "version": "0.2.2",
+            "tag": "frameia-v0.2.2",
+            "date": "2026-08-05T21:40:00",
+            "notes": "Versão v0.2.2: Rótulos limpos para botões do WhatsApp (sem número impresso no texto, usando o número 5585992125971 apenas no link da API de integração)."
+        },
+        {
+            "version": "0.2.3",
+            "tag": "frameia-v0.2.3",
+            "date": "2026-08-07T22:02:15",
+            "notes": "Versão v0.2.3: Atualização do logotipo oficial do ReAction, Cash e Hubitat no Portal do Cliente e em todo o website Frame [IA]."
+        },
+        {
+            "version": "0.2.4",
+            "tag": "frameia-v0.2.4",
+            "date": "2026-08-07T22:05:50",
+            "notes": "Versão v0.2.4: Encaixe elegante das marcas oficiais das 3 soluções na aba Sobre (sobre.html), enriquecendo os cards de apresentação e previews de produto."
+        },
+        {
+            "version": "0.2.5",
+            "tag": "frameia-v0.2.5",
+            "date": "2026-08-07T22:11:45",
+            "notes": "Versão v0.2.5: Ajuste de enquadramento (height: 220px, object-fit: contain) dos cartões das marcas no Sobre para garantir visualização 100% inteira sem qualquer corte."
+        },
+        {
+            "version": "0.2.6",
+            "tag": "frameia-v0.2.6",
+            "date": "2026-08-07T22:31:10",
+            "notes": "Versão v0.2.6: Aplicação das logos oficiais com fundo transparente nos cartões e previews do Sobre (sobre.html)."
+        },
+        {
+            "version": "0.3.0",
+            "tag": "frameia-v0.3.0",
+            "date": "2026-08-19T21:56:00",
+            "notes": "Versão v0.3.0: Nova identidade visual oficial horizontal da Frame [IA] ('Tecnologia que Transforma by MJSV') integrada nos headers e footers de todas as páginas."
+        },
+        {
+            "version": "0.3.1",
+            "tag": "frameia-v0.3.1",
+            "date": "2026-08-21T21:43:00",
+            "notes": "Versão v0.3.1: Redução refinada da altura da logo horizontal para 38px (32px no scroll) e atualização do destaque de novidades para 'Cash em breve no Android e iOS!'."
+        },
+        {
+            "version": "0.3.2",
+            "tag": "frameia-v0.3.2",
+            "date": "2026-08-22T19:28:40",
+            "notes": "Versão v0.3.2: Pacote de refinamentos visuais sutis (tagline pill com pulse-dot, gradientes de destaque, micro-benefícios no Hero, shimmer nos CTAs, glow temático nos cards de produto, badge mobile no Cash e tempo de leitura no Blog)."
+        },
+        {
+            "version": "0.3.3",
+            "tag": "frameia-v0.3.3",
+            "date": "2026-08-22T19:40:30",
+            "notes": "Versão v0.3.3: Calibragem do respiro e altura do Hero para perfeito enquadramento da dobra e redesign elegante do botão 'Área do Cliente' no cabeçalho em glassmorphism."
+        },
+        {
+            "version": "0.4.0",
+            "tag": "frameia-v0.4.0",
+            "date": "2026-08-23T11:30:30",
+            "notes": "Versão v0.4.0: Enfatização do ecossistema e maturidade das soluções (Cash 100% pronto, ReAction em Beta, Hubitat em construção), inserção de logos transparentes nos cards da Home, badges vetoriais de integração com WhatsApp e anúncio de lançamento na Apple App Store e Google Play Store."
+        },
+        {
+            "version": "0.4.1",
+            "tag": "frameia-v0.4.1",
+            "date": "2026-08-23T12:03:50",
+            "notes": "Versão v0.4.1: Padronização completa do menu superior mobile no Sobre e no Blog com a mesma grade e estilo da Home, e descompressão dos bullets de recursos com alinhamento no topo da linha (align-items: flex-start) para eliminar o prensamento em telas de celulares."
+        },
+        {
+            "version": "0.4.2",
+            "tag": "frameia-v0.4.2",
+            "date": "2026-08-23T12:17:00",
+            "notes": "Versão v0.4.2: Fundo moderno e discreto na aba Blog com padrão vetorial de micro-pontos tecnológicos (tech dot matrix) e iluminação ambiente translúcida em gradiente mesh (laranja e azul), com efeito de profundidade nos cartões de artigos."
+        },
+        {
+            "version": "1.0.1",
+            "tag": "frameia-v1.0.1",
+            "date": "2026-09-07T22:08:00",
+            "notes": "Versão v1.0.1: Foco direto em vendas comerciais e conversão no Cash e ReAction (remoção de Setup VIP e Setup Orientado por Ativação Imediata e Atendimento Comercial), restauração da logo original clássica oficial com caixa laranja [IA] e texto branco/cinza, unificação e alinhamento milimétrico dos menus em todas as páginas (Home, Sobre e Blog) eliminando deslocamentos na navegação, e micro-copy de conversão rápida no WhatsApp."
+        },
+        {
+            "version": "1.0.2",
+            "tag": "frameia-v1.0.2",
+            "date": "2026-09-08T08:20:00",
+            "notes": "Versão v1.0.2: Restauração completa de todos os 33 artigos com metadados na aba Blog (permitindo filtragem dinâmica por 'Todos os Artigos', 'IA na Prática', 'Finanças & Cash', 'Reputação & ReAction' e 'Produtividade'), e substituição definitiva da logo do Blog pela logo colorida oficial (com ícone em azul royal, laranja e marinho, 'Frame' em azul e caixa sólida laranja [IA])."
+        },
+        {
+            "version": "1.0.3",
+            "tag": "frameia-v1.0.3",
+            "date": "2026-09-08T21:45:00",
+            "notes": "Versão v1.0.3: Eliminação de 100% dos emojis amadores em todas as páginas (Home, Sobre e Blog), substituição por ícones vetoriais SVG corporativos inline de traço refinado (Feather/Lucide style) integrados à paleta da marca, elevação estética dos componentes de frontend (.int-badge, preview cards de produtos e modais com micro-bordas translúcidas), e padronização com ícone vetorial de relógio nos 33 artigos do Blog ('X min de leitura')."
+        },
+        {
+            "version": "1.0.4",
+            "tag": "frameia-v1.0.4",
+            "date": "2026-09-17T07:40:00",
+            "notes": "Versão v1.0.4: Resolução técnica completa das notificações do Google Search Console. Inclusão de tags canônicas (<link rel='canonical'>) no cabeçalho de todas as páginas e dos 33 artigos, criação dos arquivos robots.txt e sitemap.xml oficiais em HTTPS, e parametrização do .htaccess para forçar HTTPS, redirecionar subdomínio www para o domínio canônico e acelerar o rastreamento do Googlebot."
+        },
+        {
+            "version": "1.0.5",
+            "tag": "frameia-v1.0.5",
+            "date": "2026-09-22T18:15:00",
+            "notes": "Versão v1.0.5: Correção arquitetural e responsiva para monitores desktop widescreen e ultrawide (1080p, 2K, 4K). Centralização inteligente em 1280px via CSS dinâmico max(6%, calc((100% - 1280px) / 2)), fechamento do vácuo central no Hero, centralização harmoniosa do mockup 3D ao lado do texto e alinhamento milimétrico do header com a grade de conteúdo."
+        },
+        {
+            "version": "1.0.6",
+            "tag": "frameia-v1.0.6",
+            "date": "2026-09-22T19:10:00",
+            "notes": "Versão v1.0.6: Atualização institucional e de canais de distribuição. Ajuste na titulação do CEO para 'Arquitetura e Estratégia' (alinhado a Arquiteto de Soluções) e destaque da disponibilidade oficial dos aplicativos na App Store da Apple."
+        }
+    ]
+}

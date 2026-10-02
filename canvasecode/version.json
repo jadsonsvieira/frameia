@@ -3,10 +3,10 @@
     "name": "Canvas & Code Studio",
     "domain": "canvasecodestudio.com.br",
     "legacy_domain": "canvasecode.com.br",
-    "version": "1.0.1",
-    "git_tag": "canvasecode-v1.0.1",
-    "last_updated": "2026-09-23T21:20:00",
-    "description": "Versão 1.0.1: Otimização de SEO e arquitetura de rotas. Unificação de todos os links internos para URLs limpas (/metodo, /vitrine, /contato), regras de redirecionamento 301 para index.html e páginas .html no .htaccess, definição de DirectoryIndex e remoção de arquivo residual na hospedagem, garantindo indexação rápida e eliminação de alertas no Google Search Console.",
+    "version": "1.1.0",
+    "git_tag": "canvasecode-v1.1.0",
+    "last_updated": "2026-10-02T16:42:00",
+    "description": "Versão 1.1.0: Inclusão de dados cadastrais e fiscais corporativos (Razão Social MJSV TECNOLOGIA E SOLUCOES DIGITAIS INOVA SIMPLES (I.S.), CNPJ 68.614.850/0001-13 e Sede em Eusébio - CE) em todas as páginas e rodapés do Canvas & Code Studio.",
     "history": [
         {
             "version": "0.0.0",
@@ -25,6 +25,12 @@
             "tag": "canvasecode-v1.0.1",
             "date": "2026-09-23T21:20:00",
             "notes": "Versão 1.0.1: Otimização de SEO e arquitetura de rotas. Unificação de links internos para URLs limpas sem extensão, redirecionamento 301 de index.html para raiz / e de .html para rotas canônicas no .htaccess, e remoção de arquivo default.php da Hostinger."
+        },
+        {
+            "version": "1.1.0",
+            "tag": "canvasecode-v1.1.0",
+            "date": "2026-10-02T16:42:00",
+            "notes": "Versão 1.1.0: Inclusão de dados cadastrais e fiscais corporativos (Razão Social MJSV TECNOLOGIA E SOLUCOES DIGITAIS INOVA SIMPLES (I.S.), CNPJ 68.614.850/0001-13 e Sede em Eusébio - CE) em todas as páginas e rodapés do Canvas & Code Studio."
         }
     ]
 }

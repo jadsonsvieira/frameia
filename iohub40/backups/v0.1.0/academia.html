@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia MJSV | I/O Hub 4.0</title>
+    <link rel="canonical" href="https://iohub40.com.br/academia">
+    
+    <link rel="icon" type="image/png" href="assets/img/favicon.png?v=2">
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png?v=2">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- PALETA EXCLUSIVA ACADEMIA (VERDE) --- */
+        :root {
+            --grafite-fundo: #0A0A0A;
+            --grafite-painel: #161616;
+            --grid-line: rgba(255, 255, 255, 0.03);
+            --verde-node: #00E676; 
+            --verde-fundo: rgba(0, 230, 118, 0.1);
+            --texto-corpo: #A0A0A0;
+            --branco: #FFFFFF;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+        }
+
+        body {
+            background-color: var(--grafite-fundo);
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: var(--texto-corpo);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { 
+            font-family: 'Poppins', sans-serif; 
+            text-transform: uppercase; 
+        }
+
+        /* --- HEADER RESPONSIVO E AGRUPADO --- */
+        header {
+            width: 100%; 
+            padding: 20px 5%; 
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid #222; 
+            display: flex; 
+            justify-content: space-between;
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            backdrop-filter: blur(10px);
+        }
+
+        .logo img { 
+            height: 85px; 
+            width: auto; 
+            transition: 0.3s; 
+            display: block; 
+        }
+
+        .logo img:hover { 
+            transform: scale(1.03); 
+            filter: drop-shadow(0 0 15px rgba(0, 230, 118, 0.4)); 
+        }
+        
+        .header-actions { 
+            display: flex; 
+            align-items: center; 
+            gap: 30px; 
+        }
+
+        .menu-links { 
+            display: flex; 
+            gap: 30px; 
+            align-items: center; 
+        }
+        
+        .link-padrao { 
+            color: #888; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            transition: 0.3s; 
+        }
+
+        .link-padrao:hover, .link-ativo { 
+            color: var(--branco); 
+        }
+        
+        /* BOTÃO PADRONIZADO E TRAVADO (VERDE) */
+        .nav-link { 
+            color: var(--verde-node); 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            border: 1px solid var(--verde-node); 
+            padding: 0 24px; 
+            height: 45px;
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: 0.3s; 
+            border-radius: 4px; 
+            text-transform: uppercase; 
+        }
+
+        .nav-link:hover { 
+            background: var(--verde-node); 
+            color: var(--grafite-fundo); 
+            box-shadow: 0 0 15px var(--verde-fundo); 
+        }
+
+        /* --- HERO ACADEMIA --- */
+        .hero-academia { 
+            padding: 100px 5% 60px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            text-align: center; 
+            border-bottom: 1px solid #222; 
+        }
+
+        .hero-academia h1 { 
+            font-size: clamp(2rem, 6vw, 4.5rem); 
+            color: var(--branco); 
+            line-height: 1; 
+            margin-bottom: 20px; 
+        }
+
+        .destaque-verde { 
+            color: var(--verde-node); 
+        }
+
+        .hero-academia p { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            font-size: 1.15rem; 
+            color: #888; 
+        }
+
+        /* --- GRID DE CURRÍCULO (PILARES) --- */
+        .curriculo-container { 
+            padding: 80px 5%; 
+            max-width: 1300px; 
+            margin: 0 auto; 
+        }
+
+        .curriculo-header { 
+            margin-bottom: 50px; 
+            border-left: 4px solid var(--verde-node); 
+            padding-left: 25px; 
+        }
+
+        .curriculo-header h2 { 
+            font-size: 2.5rem; 
+            color: var(--branco); 
+        }
+
+        .curriculo-header p { 
+            color: var(--verde-node); 
+            font-weight: bold; 
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .course-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 30px; 
+        }
+
+        .course-card { 
+            background: var(--grafite-painel); 
+            border: 1px solid #222; 
+            border-radius: 4px; 
+            overflow: hidden; 
+            transition: 0.3s; 
+            position: relative;
+            padding: 40px;
+        }
+
+        .course-card:hover { 
+            border-color: var(--verde-node); 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 30px rgba(0, 230, 118, 0.1); 
+        }
+
+        .course-icon {
+            font-size: 2.5rem;
+            color: var(--verde-node);
+            margin-bottom: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: bold;
+        }
+
+        .course-tag { 
+            font-size: 0.7rem; 
+            color: var(--verde-node); 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            display: block; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            border: 1px solid var(--verde-node);
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .course-card h3 { 
+            color: var(--branco); 
+            margin-bottom: 15px; 
+            font-size: 1.6rem; 
+            margin-top: 15px;
+        }
+
+        .course-card p { 
+            font-size: 0.95rem; 
+            color: #888; 
+            line-height: 1.6; 
+        }
+
+        /* --- TERMINAL: LISTA DE ESPERA --- */
+        .secao-lista {
+            padding: 40px 5% 100px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .terminal-box {
+            background: var(--grafite-fundo);
+            border: 1px dashed var(--verde-node);
+            border-radius: 6px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .terminal-box::before {
+            content: "STATUS: AGUARDANDO_LANÇAMENTO";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: var(--verde-node);
+            font-size: 0.65rem;
+            font-family: 'JetBrains Mono', monospace;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .terminal-header {
+            background: #111;
+            padding: 12px 15px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #FF5F56; }
+        .dot.yellow { background: #FFBD2E; }
+        .dot.green { background: #27C93F; }
+
+        .terminal-title { 
+            color: #666; 
+            font-size: 0.8rem; 
+            margin-left: 10px; 
+        }
+
+        .terminal-body {
+            padding: 45px;
+            background: linear-gradient(180deg, var(--grafite-painel) 0%, var(--grafite-fundo) 100%);
+        }
+
+        .terminal-body h2 { 
+            font-size: 2rem; 
+            margin-bottom: 10px; 
+            color: var(--branco); 
+        }
+
+        .terminal-body p { 
+            color: #999; 
+            margin-bottom: 35px; 
+            font-size: 0.95rem; 
+        }
+
+        .form-industrial { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 25px; 
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--verde-node);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-industrial input, .form-industrial select {
+            width: 100%;
+            background: #0A0A0A;
+            border: 1px solid #333;
+            padding: 16px;
+            color: var(--branco);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            border-radius: 4px;
+        }
+
+        .form-industrial input:focus, .form-industrial select:focus {
+            outline: none;
+            border-color: var(--verde-node);
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.15);
+        }
+
+        .btn-terminal {
+            background: var(--verde-fundo);
+            color: var(--verde-node);
+            border: 1px solid var(--verde-node);
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+
+        .btn-terminal:hover { 
+            background: var(--verde-node); 
+            color: var(--grafite-fundo); 
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.4); 
+        }
+
+        /* --- FOOTER --- */
+        footer { 
+            padding: 60px 5% 40px; 
+            background: #050505; 
+            border-top: 1px solid #111; 
+            text-align: center; 
+        }
+
+        .footer-logo-link { 
+            text-decoration: none; 
+            display: inline-flex; 
+            align-items: center; 
+            transition: 0.3s; 
+            margin-bottom: 15px; 
+        }
+
+        .footer-logo-link:hover { 
+            transform: translateY(-3px); 
+            opacity: 0.8;
+        }
+
+        .footer-logo-texto { 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            color: var(--branco); 
+            letter-spacing: -1px; 
+        }
+
+        .footer-logo-badge { 
+            color: var(--verde-node); 
+            font-family: 'JetBrains Mono', monospace; 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            background: var(--verde-fundo); 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            margin-left: 8px; 
+            border: 1px solid rgba(0, 230, 118, 0.2); 
+        }
+
+        .copyright { 
+            font-size: 0.75rem; 
+            color: #444; 
+            margin-top: 20px; 
+        }
+
+        /* --- RESPONSIVIDADE (MOBILE) --- */
+        @media (max-width: 900px) {
+            header { 
+                padding: 15px 5%; 
+            }
+            .logo img { 
+                height: 60px; 
+            }
+            .menu-links { 
+                display: none; 
+            }
+            .hero-academia {
+                padding-top: 50px;
+            }
+            .hero-academia h1 { 
+                font-size: 2.2rem; 
+            }
+            .nav-link { 
+                height: 40px; 
+                padding: 0 18px; 
+                font-size: 0.75rem; 
+            }
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+            .terminal-body {
+                padding: 30px 20px;
+            }
+            .terminal-body h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="assets/img/logo-iohub.png" alt="I/O HUB 4.0">
+            </a>
+        </div>
+        <div class="header-actions">
+            <nav class="menu-links">
+                <a href="/" class="link-padrao">Início</a>
+                <a href="/#servicos" class="link-padrao">Serviços</a>
+                <a href="/laboratorio" class="link-padrao">Laboratório</a>
+                <a href="/solucoes-ignition" class="link-padrao">Soluções Ignition</a>
+                <a href="/academia" class="link-padrao link-ativo">Academia MJSV</a>
+            </nav>
+            <a href="/#contato" class="nav-link">SOLICITAR DIAGNÓSTICO</a>
+        </div>
+    </header>
+
+    <section class="hero-academia">
+        <p style="color: var(--verde-node); font-weight: bold; margin-bottom: 15px; font-family: 'JetBrains Mono', monospace;">/// CAPACITAÇÃO DE ELITE</p>
+        <h1>Formamos a Elite da <span class="destaque-verde">Engenharia 4.0.</span></h1>
+        <p>A nossa missão vai além da integração. A Academia MJSV é o centro de capacitação onde transferimos o nosso *know-how* de campo para si. Não ensinamos apenas a operar softwares; ensinamos a arquitetar inteligência industrial.</p>
+    </section>
+
+    <section class="curriculo-container">
+        
+        <div class="curriculo-header">
+            <p>> ESTRUTURA_CURRICULAR_V1</p>
+            <h2>Os Pilares da Formação.</h2>
+        </div>
+
+        <div class="course-grid">
+            
+            <div class="course-card">
+                <div class="course-icon">{ I }</div>
+                <span class="course-tag">MÓDULO CORE</span>
+                <h3>Domínio Ignition (SCADA & MES)</h3>
+                <p>Aprenda a arquitetar sistemas do absoluto zero utilizando a plataforma Inductive Automation. Desde a instalação do servidor, mapeamento de tags, até à criação de ecrãs de alto desempenho no módulo Perspective e visão geral.</p>
+            </div>
+
+            <div class="course-card">
+                <div class="course-icon">{ Py }</div>
+                <span class="course-tag">LÓGICA & DADOS</span>
+                <h3>Python (Jython) e Automação SQL</h3>
+                <p>Deixe de depender exclusivamente do *arrastar e largar*. Domine as linguagens de programação (Python) e bases de dados relacionais (SQL) que correm no motor (backend) da sua indústria para automatizar cálculos e lógicas preditivas.</p>
+            </div>
+
+            <div class="course-card">
+                <div class="course-icon">{ NR }</div>
+                <span class="course-tag">ORQUESTRAÇÃO IIoT</span>
+                <h3>Node-RED Data Pipeline</h3>
+                <p>Conecte o desconectado. Formação intensiva sobre como orquestrar fluxos invisíveis de dados (Data Pipelines), unindo sensores de campo e CLPs via Modbus e enviando tráfego via MQTT para aplicações na nuvem com latência zero.</p>
+            </div>
+
+            <div class="course-card">
+                <div class="course-icon">{ UI }</div>
+                <span class="course-tag">DESIGN CORPORATIVO</span>
+                <h3>UI/UX para Interfaces Industriais</h3>
+                <p>Ninguém confia num sistema que parece saído de 1995. Um mergulho no método "Canvas & Code Studio" aplicado à engenharia. Aprenda a aplicar psicologia das cores, hierarquia visual e design focado no utilizador para impressionar C-Levels.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="espera" class="secao-lista">
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="terminal-title">bash - root@academia:~/lista-espera</span>
+            </div>
+            <div class="terminal-body">
+                <h2>Garantir Vaga na Lista VIP.</h2>
+                <p>As turmas da Academia MJSV serão extremamente limitadas para garantir o rigor técnico e o acompanhamento de projetos práticos. Adicione o seu nome ao diretório.</p>
+                
+                <form action="#" method="POST" class="form-industrial">
+                    <div class="input-group">
+                        <label for="nome">> NOME_DO_CANDIDATO</label>
+                        <input type="text" id="nome" placeholder="Seu nome completo" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="email">> E-MAIL_PRINCIPAL</label>
+                        <input type="email" id="email" placeholder="O seu melhor e-mail" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="interesse">> ÁREA_DE_MAIOR_INTERESSE</label>
+                        <select id="interesse" required>
+                            <option value="">[ Selecionar módulo prioritário ]</option>
+                            <option value="ignition">Ignition SCADA / Perspective</option>
+                            <option value="logica">Python (Jython) e SQL</option>
+                            <option value="nodered">Node-RED / IIoT Orquestração</option>
+                            <option value="design">UI/UX e Design de Interfaces Industriais</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-terminal">[ INGRESSAR_NO_DIRETÓRIO ]</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="/" class="footer-logo-link" title="Voltar ao Início">
+            <span class="footer-logo-texto">I/O HUB</span>
+            <span class="footer-logo-badge">4.0</span>
+        </a>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">Academia MJSV | Capacitação Tecnológica</p>
+        <div class="copyright">&copy; 2026 - Desenvolvido por Canvas & Code Studio.</div>
+    </footer>
+
+</body>
+</html>

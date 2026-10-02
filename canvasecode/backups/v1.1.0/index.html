@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas & Code Studio | Estúdio de Design Estratégico</title>
+    <meta name="description" content="Canvas & Code Studio é o estúdio de design estratégico e engenharia digital da MJSV Holding. Interfaces e identidades visuais de peso corporativo global.">
+    <link rel="canonical" href="https://canvasecodestudio.com.br/">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#004AAD',
+                            graphite: '#3A3A3A',
+                            green: '#00E676',
+                            bg: '#F8F8F8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* O "Detalhe" Visível: Malha de Prancheta (Grid) usando o Azul Tech com 4% de opacidade */
+        body { 
+            background-color: #F8F8F8; 
+            color: #3A3A3A; 
+            background-image: 
+                linear-gradient(rgba(0, 74, 173, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 74, 173, 0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        
+        /* Utilitários de Degradê */
+        .gradient-text {
+            background: linear-gradient(135deg, #00E676 0%, #004AAD 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg { background: linear-gradient(135deg, #00E676 0%, #004AAD 100%); }
+        
+        /* Glassmorphism do Header e Cards */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .glass-header {
+            background: rgba(248, 248, 248, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* Efeitos e Animações */
+        .hover-lift { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s; }
+        .hover-lift:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 74, 173, 0.08); }
+        
+        /* Elemento de Luz Abstrata (Maior para refletir no vidro) */
+        .abstract-shape {
+            position: absolute;
+            background: linear-gradient(135deg, #00E676 0%, #004AAD 100%);
+            filter: blur(140px);
+            opacity: 0.25;
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 8s infinite alternate;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(-40px, 40px); }
+        }
+    </style>
+</head>
+<body class="antialiased font-sans relative overflow-x-hidden">
+
+    <header class="glass-header fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            
+            <a href="/" class="flex items-center">
+                <img src="assets/logo.png" alt="Canvas & Code Studio" class="h-10 md:h-12 hover:scale-105 transition-transform duration-300">
+            </a>
+
+            <nav class="hidden md:flex space-x-10 text-base font-medium text-gray-600">
+                <a href="#manifesto" class="hover:text-brand-blue transition-colors">A Guardiã</a>
+                <a href="#servicos" class="hover:text-brand-blue transition-colors">Serviços</a>
+                <a href="/metodo" class="hover:text-brand-blue transition-colors">O Método</a>
+                <a href="/vitrine" class="hover:text-brand-blue transition-colors">Vitrine</a>
+                <a href="#expertise" class="hover:text-brand-blue transition-colors">Expertise</a>
+            </nav>
+            
+            <a href="/contato" class="gradient-bg text-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-brand-green/20 hover:shadow-brand-blue/30 transition-all hover:-translate-y-0.5">
+                Aplicar o Método
+            </a>
+        </div>
+    </header>
+
+    <section class="relative pt-40 pb-24 md:pt-56 md:pb-32 px-6 min-h-[90vh] flex items-center">
+        <div class="abstract-shape w-[600px] h-[600px] top-0 right-0"></div>
+        <div class="max-w-7xl mx-auto w-full relative z-10">
+            <div class="max-w-3xl glass-panel p-10 rounded-[2.5rem] shadow-xl">
+                <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-brand-blue font-bold text-xs tracking-widest uppercase">
+                    Design Premium B2B
+                </div>
+                <h1 class="font-display text-5xl md:text-7xl font-extrabold text-brand-graphite leading-[1.1] tracking-tight mb-6">
+                    Codificar para <br><span class="gradient-text">Simplificar.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-500 mb-10 max-w-2xl leading-relaxed">
+                    A primeira impressão dita o seu preço. Construímos interfaces e identidades visuais de peso corporativo global para empresas que não podem parecer amadoras.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="/vitrine" class="bg-brand-graphite text-white px-8 py-4 rounded-full font-semibold text-center hover:bg-black transition-colors shadow-lg">
+                        Vitrine de Projetos
+                    </a>
+                    <a href="/contato" class="border-2 border-brand-graphite text-brand-graphite px-8 py-4 rounded-full font-semibold text-center hover:bg-brand-graphite hover:text-white transition-colors">
+                        Solicitar Análise UX/UI
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="manifesto" class="py-24 glass-panel border-y border-gray-200/50">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-graphite mb-6">A Guardiã Visual do Ecossistema</h2>
+            <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                O Canvas & Code Studio é o estúdio de design estratégico da <strong class="text-brand-graphite">MJSV Holding</strong>. Nosso propósito central é garantir que a alta tecnologia entregue por nossas frentes seja envelopada com excelência estética, unindo agilidade implacável com um padrão visual impressionante. O resultado é a percepção de Autoridade Absoluta.
+            </p>
+        </div>
+    </section>
+
+    <!-- SEÇÃO SUTIL DE SERVIÇOS DO CANVAS & CODE STUDIO -->
+    <section id="servicos" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 text-center">
+                <span class="text-xs font-mono font-bold text-brand-blue uppercase tracking-widest bg-brand-blue/10 px-4 py-1.5 rounded-full border border-brand-blue/20">Modelos & Serviços</span>
+                <h2 class="font-display text-4xl font-bold text-brand-graphite mt-4 mb-4">Soluções em <span class="gradient-text">Design & UX</span></h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Estruturas completas de design para elevar o ticket percebido do seu produto ou empresa.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- DESIGN & SAAS -->
+                <div class="glass-panel p-10 rounded-[2.5rem] border border-brand-blue/20 hover-lift">
+                    <span class="text-brand-blue font-mono font-bold text-xs uppercase tracking-widest">// DESIGN & SAAS</span>
+                    <h3 class="font-display text-2xl font-bold text-brand-graphite mt-3 mb-4">Design & Prototipagem High-Ticket</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                        • <strong>UI/UX para SaaS & Web Apps:</strong> Interfaces limpas, componentes e jornadas focadas em retenção.<br>
+                        • <strong>Identidade Visual Corporativa:</strong> Logos, tipografia e diretrizes de autoridade B2B.<br>
+                        • <strong>Decks Executivos (Pitch Decks):</strong> Apresentações projetadas para fechar grandes contratos.
+                    </p>
+                    <a href="/contato" class="text-brand-blue font-bold text-sm hover:underline">Solicitar Projeto de Design &rarr;</a>
+                </div>
+
+                <!-- CONSULTORIA & MARCA -->
+                <div class="glass-panel p-10 rounded-[2.5rem] border border-brand-green/20 hover-lift">
+                    <span class="text-brand-green font-mono font-bold text-xs uppercase tracking-widest">// CONSULTORIA & MARCA</span>
+                    <h3 class="font-display text-2xl font-bold text-brand-graphite mt-3 mb-4">Consultoria & Retainer de Marca</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                        • <strong>Análise de GAP UX/UI:</strong> Auditoria visual da sua plataforma para identificar perda de conversão.<br>
+                        • <strong>Retainer de Marca (Acompanhamento VIP):</strong> Guarda visual contínua para novos lançamentos e materiais.<br>
+                        • <strong>Consultoria de Estética Corporativa:</strong> Alinhamento executivo para C-Levels e conselhos.
+                    </p>
+                    <a href="/contato" class="text-brand-green font-bold text-sm hover:underline">Falar com Consultor C&C &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="metodo" class="py-24 px-6 relative">
+        <div class="abstract-shape w-[500px] h-[500px] bottom-0 left-[-150px] opacity-20"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="mb-16 md:text-center">
+                <h2 class="font-display text-4xl font-bold text-brand-graphite mb-4">A Armadura <span class="gradient-text">Estética</span></h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">A fusão exata entre a lógica do código limpo e o design minimalista.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-10 rounded-3xl hover-lift shadow-sm">
+                    <div class="font-mono text-xl font-bold gradient-text mb-6">01.</div>
+                    <h3 class="font-display text-xl font-bold text-brand-graphite mb-3">O Tear da Lógica</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Interfaces tecidas com dados e jornadas de usuário pensadas para reduzir atrito, unir lógica de código limpo com estética e alavancar conversões.</p>
+                </div>
+                <div class="glass-panel p-10 rounded-3xl hover-lift shadow-sm">
+                    <div class="font-mono text-xl font-bold gradient-text mb-6">02.</div>
+                    <h3 class="font-display text-xl font-bold text-brand-graphite mb-3">O Prisma de Clareza</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Recebemos a complexidade da sua tecnologia e projetamos uma visão executiva limpa, intuitiva e espetacular do outro lado.</p>
+                </div>
+                <div class="glass-panel p-10 rounded-3xl hover-lift shadow-sm">
+                    <div class="font-mono text-xl font-bold gradient-text mb-6">03.</div>
+                    <h3 class="font-display text-xl font-bold text-brand-graphite mb-3">A Armadura Estética</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">O design atua como a camada de proteção que eleva instantaneamente o ticket percebido. A primeira impressão que dita o preço.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vitrine-home" class="py-24 px-6 border-t border-brand-blue/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <h2 class="font-display text-4xl font-bold text-brand-graphite mb-4">Portfólio <span class="gradient-text">Vivo</span></h2>
+                    <p class="text-gray-600 text-lg">A prova visual da nossa excelência UI/UX e alto padrão.</p>
+                </div>
+                <a href="/vitrine" class="text-brand-blue font-bold hover:underline">Ver todos os Estudos de Caso →</a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+                <div class="md:col-span-2 bg-brand-graphite rounded-3xl p-8 relative overflow-hidden group shadow-lg">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                    <div class="absolute inset-0 bg-gray-800 flex items-center justify-center text-gray-700 font-mono text-sm opacity-50 group-hover:scale-105 transition-transform duration-700">
+                        [IA IMAGE PLACEHOLDER: MJSV Holding UI]
+                    </div>
+                    <div class="absolute bottom-8 left-8 z-20">
+                        <span class="px-3 py-1 bg-brand-blue/20 text-blue-300 text-xs font-bold uppercase tracking-wider rounded-full backdrop-blur-sm mb-3 inline-block">Corporativo</span>
+                        <h3 class="font-display text-2xl font-bold text-white">MJSV Holding</h3>
+                        <p class="text-gray-300 text-sm mt-1">Identidade Institucional & Portal B2B</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 relative overflow-hidden border border-gray-200 group shadow-md">
+                    <div class="absolute inset-0 bg-gray-50 flex items-center justify-center text-gray-300 font-mono text-xs text-center p-4 group-hover:scale-105 transition-transform duration-700">
+                        [IA IMAGE PLACEHOLDER: I/O Hub 4.0 Dashboard]
+                    </div>
+                    <div class="absolute bottom-8 left-8 z-20">
+                        <span class="px-3 py-1 bg-brand-green/10 text-brand-green text-xs font-bold uppercase tracking-wider rounded-full mb-3 inline-block">Industrial Tech</span>
+                        <h3 class="font-display text-xl font-bold text-brand-graphite">I/O Hub 4.0</h3>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 relative overflow-hidden border border-gray-200 group shadow-md">
+                    <div class="absolute inset-0 bg-gray-50 flex items-center justify-center text-gray-300 font-mono text-xs text-center p-4 group-hover:scale-105 transition-transform duration-700">
+                        [IA IMAGE PLACEHOLDER: Frame IA Interface]
+                    </div>
+                    <div class="absolute bottom-8 left-8 z-20">
+                        <span class="px-3 py-1 bg-brand-blue/10 text-brand-blue text-xs font-bold uppercase tracking-wider rounded-full mb-3 inline-block">Automação IA</span>
+                        <h3 class="font-display text-xl font-bold text-brand-graphite">Frame [IA]</h3>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 bg-gradient-to-br from-brand-blue to-[#002866] rounded-3xl p-8 relative overflow-hidden group shadow-lg">
+                    <div class="absolute inset-0 flex items-center justify-center text-white/20 font-mono text-xs group-hover:scale-105 transition-transform duration-700">
+                        [IA IMAGE PLACEHOLDER: Brandbook & Logos]
+                    </div>
+                    <div class="absolute bottom-8 left-8 z-20">
+                        <span class="px-3 py-1 bg-white/10 text-white text-xs font-bold uppercase tracking-wider rounded-full backdrop-blur-sm mb-3 inline-block">Branding Premium</span>
+                        <h3 class="font-display text-2xl font-bold text-white">Marcas High-Ticket</h3>
+                        <p class="text-blue-200 text-sm mt-1">Galeria Minimalista de Logotipos B2B</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="py-24 px-6 relative glass-panel border-y border-gray-200/50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-display text-4xl font-bold text-brand-graphite mb-16 text-center">Nossa <span class="gradient-text">Expertise</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl border-t-4 border-brand-blue shadow-lg hover-lift">
+                    <h3 class="font-display text-xl font-bold text-brand-graphite mb-3">UI/UX para SaaS</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Prototipagem de alta fidelidade e arquitetura de informação focada em escala e retenção. Desenhamos a jornada perfeita.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border-t-4 border-brand-graphite shadow-lg hover-lift">
+                    <h3 class="font-display text-xl font-bold text-brand-graphite mb-3">Identidade Corporativa</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Criação de marcas, logotipos e brandbooks com o peso e a sobriedade que o mercado corporativo exige.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border-t-4 border-brand-green shadow-lg hover-lift">
+                    <h3 class="font-display text-xl font-bold text-brand-graphite mb-3">Decks High-Ticket</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Apresentações espetaculares projetadas para fechar grandes contratos, blindando o seu posicionamento em reuniões decisivas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contato-footer" class="bg-brand-graphite text-white py-20 px-6 mt-12 relative overflow-hidden border-t-4 border-brand-green">
+        <div class="abstract-shape w-[600px] h-[600px] top-[-300px] left-1/2 -translate-x-1/2 opacity-20"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="font-display text-4xl md:text-5xl font-bold mb-8">Pronto para elevar o seu padrão?</h2>
+            <p class="text-gray-400 mb-10 text-lg">Soluções visuais prontas para o negócio rodar. Design inteligente e rápido.</p>
+            
+            <a href="/contato" class="inline-block gradient-bg px-10 py-5 rounded-full font-bold text-lg shadow-2xl shadow-brand-green/20 hover:scale-105 transition-transform">
+                Iniciar Projeto Estratégico
+            </a>
+            
+            <div class="mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>Desenvolvido com o <span class="text-brand-blue font-bold">Método C&C</span></p>
+                <p>Uma empresa <strong class="text-white">MJSV Holding</strong></p>
+                <p>&copy; 2026 Canvas & Code Studio. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

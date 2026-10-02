@@ -2,16 +2,22 @@
     "site_id": "iohub40",
     "name": "I/O Hub 4.0",
     "domain": "iohub40.com.br",
-    "version": "0.0.0",
-    "git_tag": "iohub40-v0.0.0",
-    "last_updated": "2026-08-01T22:24:07.192976",
-    "description": "Boutique de Engenharia Indústria 4.0, Ignition e UNS",
+    "version": "0.1.0",
+    "git_tag": "iohub40-v0.1.0",
+    "last_updated": "2026-10-02T16:40:00",
+    "description": "Versão 0.1.0: Inclusão dos dados cadastrais e fiscais corporativos (Razão Social MJSV TECNOLOGIA E SOLUCOES DIGITAIS INOVA SIMPLES (I.S.), CNPJ 68.614.850/0001-13 e Sede em Eusébio - CE) em todas as páginas do portal I/O Hub 4.0.",
     "history": [
         {
             "version": "0.0.0",
             "tag": "iohub40-v0.0.0",
             "date": "2026-08-01T22:24:07.193000",
             "notes": "Versão estável v0.0.0 original restaurada e publicada no Hostinger."
+        },
+        {
+            "version": "0.1.0",
+            "tag": "iohub40-v0.1.0",
+            "date": "2026-10-02T16:40:00",
+            "notes": "Versão 0.1.0: Inclusão dos dados cadastrais e fiscais corporativos (Razão Social MJSV TECNOLOGIA E SOLUCOES DIGITAIS INOVA SIMPLES (I.S.), CNPJ 68.614.850/0001-13 e Sede em Eusébio - CE) em todas as páginas do portal I/O Hub 4.0."
         }
     ]
 }

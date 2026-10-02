@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Frame [IA]</title>
+    <link rel="canonical" href="https://frameia.com.br/blog">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Paleta Premium - TEMA CLARO ULTRA-MODERNO v0.2.2 */
+        :root {
+            --fundo-light: #F8F9FA; 
+            --fundo-card: #FFFFFF; 
+            --texto-titulo: #111111; 
+            --texto-corpo: #555555; 
+            --azul-tech: #004AAD;
+            --verde-neon: #00E676; 
+            --verde-wpp: #25D366;
+            --verde-app: #00C853; 
+            --laranja-frame: #ff6b35;
+            --roxo-hubitat: #8A2BE2;
+            --laranja-azul-grad: linear-gradient(135deg, #ff6b35 0%, #004AAD 100%);
+            --borda-suave: rgba(0, 0, 0, 0.05); 
+            --sombra-card: 0 20px 40px rgba(0, 0, 0, 0.03);
+            --sombra-hover: 0 30px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--fundo-light); }
+        ::-webkit-scrollbar-thumb { background: #CCCCCC; border-radius: 10px; border: 2px solid var(--fundo-light); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--laranja-frame); }
+
+        ::selection { background: var(--laranja-frame); color: #FFF; }
+        ::-moz-selection { background: var(--laranja-frame); color: #FFF; }
+
+        body {
+            background-color: #F8F9FB;
+            background-image: 
+                radial-gradient(ellipse 90% 60% at 50% -10%, rgba(255, 107, 53, 0.07) 0%, rgba(0, 74, 173, 0.04) 40%, transparent 80%),
+                radial-gradient(circle, rgba(0, 0, 0, 0.048) 1.2px, transparent 1.2px);
+            background-size: 100% auto, 28px 28px;
+            background-position: center top, 0 0;
+            background-attachment: scroll, fixed;
+            color: var(--texto-corpo);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4 { 
+            font-family: 'Poppins', sans-serif; 
+            color: var(--texto-titulo); 
+            letter-spacing: -0.5px; 
+            text-wrap: balance;
+        }
+        a { text-decoration: none; }
+
+        .text-gradient {
+            background: var(--laranja-azul-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .arrow { 
+            display: inline-block; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .card-blog:hover .blog-link .arrow,
+        .btn-vazado:hover .arrow,
+        .btn-whatsapp-sutil:hover .arrow { 
+            transform: translateX(6px); 
+        }
+
+        .btn-whatsapp-sutil {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #111111;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 9px 18px;
+            border-radius: 50px;
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-whatsapp-sutil:hover {
+            background: rgba(37, 211, 102, 0.2);
+            border-color: rgba(37, 211, 102, 0.6);
+            transform: translateY(-2px);
+        }
+        .btn-whatsapp-sutil svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--verde-wpp);
+        }
+
+        /* MODAL E PORTAL DO CLIENTE */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000; display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-box {
+            position: relative; transform: translateY(20px); transition: transform 0.4s ease;
+            background: #FFFFFF; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.15); border: 1px solid var(--borda-suave);
+        }
+        .modal-overlay.ativo { display: flex; opacity: 1; }
+        .modal-overlay.ativo .modal-box { transform: translateY(0); }
+        
+        .fechar-modal {
+            position: absolute; top: 20px; right: 25px; font-size: 2rem;
+            cursor: pointer; color: var(--texto-corpo); line-height: 1; transition: color 0.3s ease;
+        }
+        .fechar-modal:hover { color: var(--laranja-frame); }
+
+        .modal-box .portal-card {
+            padding: 16px 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 15px !important;
+            text-decoration: none !important;
+            border-radius: 16px !important;
+            width: 100% !important;
+            min-height: auto !important;
+            transition: all 0.3s ease !important;
+            box-sizing: border-box !important;
+            margin-bottom: 14px !important;
+        }
+        .modal-box .portal-card:last-child { margin-bottom: 0 !important; }
+
+        .modal-box .portal-card.card-cash {
+            border: 1px solid rgba(0, 200, 83, 0.3) !important;
+            background: rgba(0, 200, 83, 0.03) !important;
+        }
+        .modal-box .portal-card.card-cash:hover {
+            transform: translateY(-3px) !important;
+            border-color: rgba(0, 200, 83, 0.6) !important;
+            box-shadow: 0 10px 25px rgba(0, 200, 83, 0.15) !important;
+        }
+
+        .modal-box .portal-card.card-reaction {
+            border: 1px solid rgba(255, 107, 53, 0.3) !important;
+            background: rgba(255, 107, 53, 0.03) !important;
+        }
+        .modal-box .portal-card.card-reaction:hover {
+            transform: translateY(-3px) !important;
+            border-color: rgba(255, 107, 53, 0.6) !important;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.15) !important;
+        }
+
+        .modal-box .portal-card.card-hubitat {
+            border: 1px solid rgba(138, 43, 226, 0.3) !important;
+            background: rgba(138, 43, 226, 0.03) !important;
+        }
+        .modal-box .portal-card.card-hubitat:hover {
+            transform: translateY(-3px) !important;
+            border-color: rgba(138, 43, 226, 0.6) !important;
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.15) !important;
+        }
+
+        .modal-box .portal-icon-box {
+            width: 48px !important;
+            min-width: 48px !important;
+            height: 48px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: #111111 !important;
+            border-radius: 12px !important;
+            border: 1px solid rgba(0,0,0,0.1) !important;
+            flex-shrink: 0 !important;
+            overflow: hidden !important;
+        }
+        .modal-box .portal-icon-box img {
+            width: 85% !important;
+            height: 85% !important;
+            object-fit: contain !important;
+        }
+
+        .modal-box .portal-info {
+            text-align: left !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            flex-grow: 1 !important;
+        }
+
+        .modal-box .portal-info h4 {
+            color: var(--texto-titulo) !important;
+            font-size: 1.2rem !important;
+            font-family: 'Poppins', sans-serif !important;
+            margin: 0 !important;
+            line-height: 1.2 !important;
+        }
+
+        .modal-box .portal-info p {
+            color: var(--texto-corpo) !important;
+            font-size: 0.8rem !important;
+            margin: 2px 0 0 0 !important;
+            line-height: 1.2 !important;
+        }
+
+        .modal-box .portal-seta {
+            width: 36px !important;
+            min-width: 36px !important;
+            height: 36px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        /* Header Minimalista Claro */
+        header {
+            padding: 20px max(6%, calc((100% - 1280px) / 2)); 
+            display: flex; 
+            align-items: center; 
+            background: transparent; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 100;
+            box-sizing: border-box;
+            border-bottom: 1px solid transparent; 
+            transition: all 0.4s ease;
+        }
+        
+        header.scrolled {
+            padding: 12px max(6%, calc((100% - 1280px) / 2)); 
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--borda-suave); 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .logo { display: flex; align-items: center; margin-right: auto; text-decoration: none; }
+        .logo img { height: 38px; width: auto; max-height: 38px; object-fit: contain; transition: all 0.3s ease; display: block; margin-top: 0; }
+        header.scrolled .logo img { height: 32px; max-height: 32px; }
+        .logo img:hover { transform: scale(1.03); }
+
+        .menu {
+            margin-right: 36px;
+            display: flex;
+            align-items: center;
+            gap: 26px;
+        }
+        .menu > a {
+            color: var(--texto-corpo);
+            font-size: 0.96rem;
+            font-weight: 500;
+            margin: 0;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+        .menu > a:hover, .menu > a.ativo {
+            color: var(--laranja-frame);
+            font-weight: 600;
+            transform: translateY(-1px);
+        }
+        .menu > a.ativo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--laranja-frame);
+            border-radius: 2px;
+        }
+        
+        /* BOTÃO ÁREA DO CLIENTE - LIGHT THEME REFINADO */
+        .btn-header-portal {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 20px;
+            border-radius: 50px;
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            color: var(--texto-titulo);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-header-portal:hover {
+            background: var(--laranja-frame);
+            border-color: var(--laranja-frame);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.25);
+        }
+        .btn-header-portal svg {
+            width: 15px;
+            height: 15px;
+            stroke: currentColor;
+            opacity: 0.85;
+            transition: transform 0.3s ease;
+        }
+        .btn-header-portal:hover svg {
+            opacity: 1;
+        }
+        .btn-header-portal .portal-arrow {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            display: inline-block;
+        }
+        .btn-header-portal:hover .portal-arrow {
+            opacity: 1;
+            transform: translateX(4px);
+        }
+
+        .btn-vazado {
+            border: 1px solid var(--laranja-frame); color: var(--laranja-frame);
+            padding: 10px 28px; border-radius: 50px; font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-size: 0.95rem; cursor: pointer;
+            background: transparent;
+        }
+        .btn-vazado:hover { 
+            background: var(--laranja-frame); color: #FFFFFF; 
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.2); transform: scale(1.02);
+        }
+
+        /* Animações Fade-Up */
+        .fade-up {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; will-change: opacity, transform;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* Hero do Blog */
+        .hero-blog {
+            padding: 180px max(6%, calc((100% - 1280px) / 2)) 60px; text-align: center;
+            background: transparent; border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .tagline { color: var(--laranja-frame); font-weight: 800; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 25px; display: inline-block; text-transform: uppercase; background: rgba(255, 107, 53, 0.1); padding: 6px 16px; border-radius: 50px; border: 1px solid rgba(255, 107, 53, 0.2); }
+        .hero-blog h1 { font-size: 3.8rem; line-height: 1.15; margin-bottom: 20px; padding-bottom: 10px; letter-spacing: -2px; } 
+        .hero-blog p { font-size: 1.2rem; color: var(--texto-corpo); margin: 0 auto 40px; max-width: 750px; font-weight: 400; text-wrap: pretty;}
+
+        /* Filtro de Tags */
+        .tags-container {
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 60px;
+        }
+        .tag-filter {
+            padding: 10px 25px; border-radius: 50px; font-size: 0.95rem; font-weight: 500;
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(0, 0, 0, 0.08); color: var(--texto-corpo); user-select: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); backdrop-filter: blur(8px);
+        }
+        .tag-filter:hover, .tag-filter.ativo {
+            background: var(--laranja-frame); color: #FFFFFF; border-color: var(--laranja-frame);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.25); transform: translateY(-2px);
+        }
+
+        /* Seção do Blog */
+        .secao-blog { padding: 40px max(6%, calc((100% - 1280px) / 2)) 100px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        
+        .card-blog {
+            background: rgba(255, 255, 255, 0.92); border-radius: 20px; overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.06); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; flex-direction: column; cursor: pointer;
+        }
+        .card-blog:hover {
+            transform: translateY(-8px); box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08); border-color: rgba(255, 107, 53, 0.35);
+        }
+        
+        .blog-img-box {
+            width: 100%; height: 220px; overflow: hidden; position: relative;
+        }
+        .blog-img-box img {
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;
+        }
+        .card-blog:hover .blog-img-box img { transform: scale(1.08); }
+        
+        .blog-conteudo { padding: 30px; display: flex; flex-direction: column; flex-grow: 1; }
+        .blog-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+        .blog-tag-badge {
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            padding: 4px 12px; border-radius: 50px; background: rgba(0, 74, 173, 0.08); color: var(--azul-tech);
+        }
+        .blog-data { font-size: 0.85rem; color: #888; display: flex; align-items: center; gap: 8px; }
+        .blog-tempo { font-size: 0.78rem; color: #999; display: inline-flex; align-items: center; gap: 4px; }
+        .blog-tempo svg { width: 12px; height: 12px; flex-shrink: 0; stroke: currentColor; vertical-align: -1px; }
+        .card-blog h3 { font-size: 1.35rem; margin-bottom: 15px; line-height: 1.4; color: var(--texto-titulo); min-height: 60px; }
+        .blog-resumo { font-size: 0.95rem; color: var(--texto-corpo); margin-bottom: 25px; line-height: 1.6; flex-grow: 1; }
+        .blog-link {
+            color: var(--laranja-frame); font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; margin-top: auto;
+        }
+
+        footer { text-align: center; padding: 80px max(6%, calc((100% - 1280px) / 2)) 60px; border-top: 1px solid var(--borda-suave); }
+        footer .logo-foter { height: 42px; width: auto; object-fit: contain; margin-bottom: 25px; opacity: 0.95; display: inline-block; }
+
+        @media (max-width: 1024px) { 
+            .grid-3 { grid-template-columns: repeat(2, 1fr); } 
+            .hero-blog h1 { font-size: 3.5rem; }
+        }
+        @media (max-width: 768px) {
+            header, header.scrolled {
+                padding: 15px 5%;
+                flex-direction: column;
+                gap: 12px;
+                background: rgba(255, 255, 255, 0.96);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border-bottom: 1px solid var(--borda-suave);
+            }
+            .logo { margin-right: 0; }
+            .logo img, header.scrolled .logo img { height: 32px; margin-top: 0; }
+            .menu {
+                margin-right: 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px 18px;
+            }
+            .menu > a { margin: 0; font-size: 0.95rem; }
+            .btn-header-portal { width: auto; max-width: 280px; }
+
+            .hero-blog { padding: 220px 5% 50px; }
+            .hero-blog h1 { font-size: 2.4rem; letter-spacing: -1px; line-height: 1.15; }
+            .grid-3 { grid-template-columns: 1fr; gap: 30px; }
+            .secao-blog { padding: 20px 5% 80px; }
+        }
+        @media (max-width: 480px) {
+            header { padding: 12px 4%; }
+            .hero-blog h1 { font-size: 2.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PORTAL DO CLIENTE -->
+    <div class="modal-overlay" id="portalModal">
+        <div class="modal-box" style="text-align: center; width: 90%; max-width: 440px; padding: 45px 35px; background: #FFFFFF;">
+            <span class="fechar-modal" onclick="fecharModalPortal()">&times;</span>
+            <div style="margin-bottom: 20px; margin-top: 5px;">
+                <span class="tagline" style="color: var(--verde-app); background: rgba(0, 200, 83, 0.1); padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px; border: 1px solid rgba(0, 200, 83, 0.2); display: inline-block;">ÁREA DO CLIENTE</span>
+            </div>
+            <h3 style="font-size: 2.1rem; margin-bottom: 8px; color: var(--texto-titulo); letter-spacing: -1px; line-height: 1.15;">O seu Painel de<br>Comando</h3>
+            <p style="margin-bottom: 30px; font-size: 0.95rem; color: var(--texto-corpo);">Acesse as ferramentas do seu negócio.</p>
+
+            <!-- CARD: CASH -->
+            <a href="https://cash.frameia.com.br" target="_blank" class="portal-card card-cash">
+                <div class="portal-icon-box">
+                     <img src="assets/cash-portal-logo.png" alt="Logo Cash" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block;">
+                </div>
+                <div class="portal-info">
+                    <h4>Cash</h4>
+                    <p>Gestão Financeira por Voz & Foto</p>
+                </div>
+                <span class="portal-seta" style="background: rgba(0, 200, 83, 0.1);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--verde-app)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
+            </a>
+
+            <!-- CARD: REACTION (EM DESENVOLVIMENTO) -->
+            <a href="#" onclick="fecharModalPortal(); abrirModalEsperaReAction(); return false;" class="portal-card card-reaction">
+                <div class="portal-icon-box">
+                     <img src="assets/reaction-portal-logo.png" alt="Logo ReAction" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block;">
+                </div>
+                <div class="portal-info">
+                    <h4>ReAction <span style="font-size: 0.65rem; color: var(--laranja-frame); background: rgba(255,107,53,0.15); padding: 2px 6px; border-radius: 4px; font-weight: bold;">EM DESENVOLVIMENTO</span></h4>
+                    <p>Gestão de Reputação Automática</p>
+                </div>
+                <span class="portal-seta" style="background: rgba(255, 107, 53, 0.1);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--laranja-frame)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
+            </a>
+
+            <!-- CARD: HUBITAT (EM BREVE) -->
+            <a href="#" onclick="fecharModalPortal(); abrirModalEsperaHubitat(); return false;" class="portal-card card-hubitat">
+                <div class="portal-icon-box">
+                     <img src="assets/hubitat-portal-logo.png" alt="Logo Hubitat" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block;">
+                </div>
+                <div class="portal-info">
+                    <h4>Hubitat <span style="font-size: 0.65rem; color: #8A2BE2; background: rgba(138,43,226,0.15); padding: 2px 6px; border-radius: 4px; font-weight: bold;">EM BREVE</span></h4>
+                    <p>Gestão Residencial & Condomínios</p>
+                </div>
+                <span class="portal-seta" style="background: rgba(138, 43, 226, 0.1);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A2BE2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MODAL LISTA HUBITAT CLARO -->
+    <div class="modal-overlay" id="esperaHubitatModal">
+        <div class="modal-box" style="width: 90%; max-width: 440px; padding: 40px 35px; text-align: left; background: #FFF;">
+            <span class="fechar-modal" onclick="fecharModalEsperaHubitat()">&times;</span>
+            <span style="background: rgba(138, 43, 226, 0.15); color: #8A2BE2; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; display: inline-block; margin-bottom: 15px;">EM IDEAÇÃO & DESENVOLVIMENTO</span>
+            <h3 style="font-size: 1.6rem; margin-bottom: 12px; color: var(--texto-titulo);">Hubitat: Gestão de Condomínios e Residenciais</h3>
+            <p style="margin-bottom: 20px; font-size: 0.95rem; color: var(--texto-corpo);">Um ecossistema inteligente sendo desenhado para simplificar a rotina de condomínios, residenciais e apartamentos.</p>
+            <form action="https://formsubmit.co/contato@frameia.com.br" method="POST">
+                <input type="hidden" name="_cc" value="jadson@mjsv.com.br,mara@mjsv.com.br">
+                <input type="hidden" name="_subject" value="Interesse Registrado via Blog - Hubitat Condomínios">
+                <input type="hidden" name="_captcha" value="false">
+                <div style="margin-bottom: 15px;">
+                    <input type="email" name="Email" required placeholder="O seu e-mail de contato" style="width:100%; padding:15px; border-radius:12px; border:1px solid var(--borda-suave); background:#F8F9FA; color:var(--texto-titulo);">
+                </div>
+                <button type="submit" style="background: var(--roxo-hubitat); color: #FFF; width: 100%; padding: 16px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer;">Acompanhar Novidades &rarr;</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL LISTA REACTION CLARO -->
+    <div class="modal-overlay" id="esperaReActionModal">
+        <div class="modal-box" style="width: 90%; max-width: 440px; padding: 40px 35px; text-align: left; background: #FFF;">
+            <span class="fechar-modal" onclick="fecharModalEsperaReAction()">&times;</span>
+            <span style="background: rgba(255, 107, 53, 0.15); color: var(--laranja-frame); padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; display: inline-block; margin-bottom: 15px;">PROJETO EM DESENVOLVIMENTO</span>
+            <h3 style="font-size: 1.6rem; margin-bottom: 12px; color: var(--texto-titulo);">ReAction: Gestão de Reputação & Avaliações IA</h3>
+            <p style="margin-bottom: 20px; font-size: 0.95rem; color: var(--texto-corpo);">Potencialize sua presença no Google Meu Negócio e redes sociais com respostas automatizadas no tom da sua marca.</p>
+            <form action="https://formsubmit.co/contato@frameia.com.br" method="POST">
+                <input type="hidden" name="_cc" value="jadson@mjsv.com.br,mara@mjsv.com.br">
+                <input type="hidden" name="_subject" value="Interesse Registrado via Blog - ReAction Reputação">
+                <input type="hidden" name="_captcha" value="false">
+                <div style="margin-bottom: 15px;">
+                    <input type="email" name="Email" required placeholder="O seu e-mail de contato" style="width:100%; padding:15px; border-radius:12px; border:1px solid var(--borda-suave); background:#F8F9FA; color:var(--texto-titulo);">
+                </div>
+                <button type="submit" style="background: var(--laranja-frame); color: #FFF; width: 100%; padding: 16px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; box-shadow: 0 0 20px rgba(255, 107, 53, 0.25);">Entrar na Lista de Espera &rarr;</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CABEÇALHO UNIFORME - MENU COM LINKS PADRÃO -->
+    <header id="blog-header">
+        <a href="index.html" class="logo">
+            <img src="assets/logo-frameia-colorido.png?v=1.0.2" alt="Logo Frame IA">
+        </a>
+        <nav class="menu">
+            <a href="index.html#solucoes">Soluções</a>
+            <a href="index.html#servicos">Serviços</a>
+            <a href="sobre">Sobre</a>
+            <a href="blog" class="ativo">Blog</a>
+            <a href="index.html#time">O Time</a>
+        </nav>
+        <a href="#" onclick="abrirModalPortal(); return false;" class="btn-header-portal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Área do Cliente</span>
+            <span class="portal-arrow">&rarr;</span>
+        </a>
+    </header>
+
+    <!-- HERO DO BLOG -->
+    <section class="hero-blog fade-up">
+        <span class="tagline">CONTEÚDO PRÁTICO & TECNOLOGIA</span>
+        <h1>Blog da <span class="text-gradient">Frame [IA]</span></h1>
+        <p>Artigos curtos, dicas práticas de inteligência artificial e estratégias simples para colocar o seu pequeno negócio no piloto automático.</p>
+        
+        <div class="tags-container">
+            <span class="tag-filter ativo" onclick="filtrar('todos', this)">Todos os Artigos</span>
+            <span class="tag-filter" onclick="filtrar('ia', this)">IA na Prática</span>
+            <span class="tag-filter" onclick="filtrar('financas', this)">Finanças & Cash</span>
+            <span class="tag-filter" onclick="filtrar('reputacao', this)">Reputação & ReAction</span>
+            <span class="tag-filter" onclick="filtrar('produtividade', this)">Produtividade</span>
+        </div>
+    </section>
+
+    <!-- GRID DE ARTIGOS -->
+    <section class="secao-blog">
+        <div class="grid-3">
+
+            <div class="card-blog fade-up" data-cat="ia" onclick="window.location.href='artigos/artigo-notebooklm'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">GUIA MESTRE<br>NOTEBOOKLM</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(0, 74, 173, 0.1); color: var(--azul-tech);">IA na Prática</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 5 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Guia Mestre NotebookLM: Inteligência Corporativa no Google</h3>
+                    <p class="blog-resumo">Transforme relatórios, POPs e reuniões em respostas precisas e sem alucinações usando o motor de IA mais refinado do Google.</p>
+                    <a href="artigos/artigo-notebooklm" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-30'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #00E676 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">REVISÃO DE<br>CONTRATOS</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #30: Cláusulas perigosas ocultas nas entrelinhas contratuais?</h3>
+                    <p class="blog-resumo">Identifique brechas de risco financeiro, multas abusivas e obrigações operacionais em minutas e contratos complexos de forma automatizada usando IA.</p>
+                    <a href="artigos/artigo-pilula-30" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="reputacao" onclick="window.location.href='artigos/artigo-pilula-29'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #8A2BE2 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">MONITORAMENTO<br>CONCORRENTES</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(255, 107, 53, 0.12); color: var(--laranja-frame);">Reputação & ReAction</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #29: Sendo apanhado de surpresa pela concorrência?</h3>
+                    <p class="blog-resumo">Receba alertas resumidos, filtrados e contextualizados sobre lançamentos de tecnologias ou mudanças nas estratégias de concorrentes usando radares de IA.</p>
+                    <a href="artigos/artigo-pilula-29" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-28'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #003366 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">PERSONAS<br>PARA DESIGN</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #28: Desenvolvendo produtos sem conhecer o cliente ideal?</h3>
+                    <p class="blog-resumo">Gere perfis detalhados de Personas de usuários finais e mapeie a jornada de consumo para orientar o desenvolvimento de novos produtos de forma cirúrgica com IA.</p>
+                    <a href="artigos/artigo-pilula-28" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-27'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #0A192F 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">CÓDIGO<br>LEGADO</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #27: Medo de mexer em códigos antigos da empresa?</h3>
+                    <p class="blog-resumo">Gere comentários lógicos e documentações explicativas profundas para sistemas legados que ninguém mais sabe operar usando Inteligência Artificial avançada.</p>
+                    <a href="artigos/artigo-pilula-27" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="reputacao" onclick="window.location.href='artigos/artigo-pilula-26'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">CHAMADOS<br>DE TI</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(255, 107, 53, 0.12); color: var(--laranja-frame);">Reputação & ReAction</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #26: Atendimento de suporte interno lento e travado?</h3>
+                    <p class="blog-resumo">Use Inteligência Artificial e NLP para ler descrições brutas de pedidos de assistência, classificar o problema e encaminhar automaticamente ao especialista correto.</p>
+                    <a href="artigos/artigo-pilula-26" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="financas" onclick="window.location.href='artigos/artigo-pilula-25'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #00E676 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">PREVISÃO DE<br>DEMANDA</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(0, 230, 118, 0.12); color: #008744;">Finanças & Cash</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #25: Sobras ou faltas de stock na operação?</h3>
+                    <p class="blog-resumo">Aplique modelos preditivos básicos e estatísticos em históricos de vendas para estimar a produção futura e as compras de forma automatizada.</p>
+                    <a href="artigos/artigo-pilula-25" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-24'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #8A2BE2 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">RESUMO DE<br>VÍDEOS</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #24: Sem tempo para assistir a tutoriais de 2 horas?</h3>
+                    <p class="blog-resumo">Obtenha os pontos-chave, parâmetros exatos e guias passo a passo de webinars técnicos longos do YouTube sem assistir ao vídeo na íntegra usando IA.</p>
+                    <a href="artigos/artigo-pilula-24" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-23'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #003366 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">TREINAMENTOS<br>SEGURANÇA</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #23: Treinamentos de segurança sem impacto visual?</h3>
+                    <p class="blog-resumo">Gere imagens ilustrativas e hiper-realistas de situações de risco específicas para usar em slides de DDS e cartilhas industriais através de IA.</p>
+                    <a href="artigos/artigo-pilula-23" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="financas" onclick="window.location.href='artigos/artigo-pilula-22'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #0A192F 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">NOVOS<br>FORNECEDORES</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(0, 230, 118, 0.12); color: #008744;">Finanças & Cash</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #22: Horas perdidas a pesquisar novos fornecedores?</h3>
+                    <p class="blog-resumo">Realize varreduras profundas na web e crie tabelas comparativas de especificações técnicas de equipamentos e tecnologias em segundos usando IA.</p>
+                    <a href="artigos/artigo-pilula-22" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-21'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">FÓRMULAS<br>NO EXCEL</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #21: Preso em erros de fórmulas no Excel?</h3>
+                    <p class="blog-resumo">Peça para a IA explicar, corrigir ou programar fórmulas aninhadas e complexas a partir de linguagem natural em poucos segundos.</p>
+                    <a href="artigos/artigo-pilula-21" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-20'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #00E676 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">GESTÃO DE<br>TAREFAS</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #20: Notas de reunião sumindo no caos operacional?</h3>
+                    <p class="blog-resumo">Transforme anotações soltas e e-mails em blocos de tarefas organizados em quadros Kanban com prazos e responsáveis de forma automática.</p>
+                    <a href="artigos/artigo-pilula-20" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-19'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #8A2BE2 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">ONBOARDING<br>ÁGIL</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #19: Gastando horas para treinar novos funcionários?</h3>
+                    <p class="blog-resumo">Crie roteiros de estudo visuais e quizzes técnicos personalizados baseados nos manuais da sua empresa de forma automática usando IA.</p>
+                    <a href="artigos/artigo-pilula-19" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-18'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #003366 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">LOGS DE<br>ERRO</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #18: Linha parada por códigos de erro indecifráveis?</h3>
+                    <p class="blog-resumo">Cole o log de erro bruto do seu PLC ou sistema industrial e obtenha uma explicação em linguagem clara sobre a causa provável da falha em segundos.</p>
+                    <a href="artigos/artigo-pilula-18" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-17'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #0A192F 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">CHECKLISTS<br>DE AUDITORIA</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #17: Falhas operacionais por falta de padronização?</h3>
+                    <p class="blog-resumo">Gere checklists detalhados e técnicos baseados rigorosamente nos parâmetros críticos de qualidade do seu processo específico com IA.</p>
+                    <a href="artigos/artigo-pilula-17" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="reputacao" onclick="window.location.href='artigos/artigo-pilula-16'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">E-MAILS<br>DELICADOS</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(255, 107, 53, 0.12); color: var(--laranja-frame);">Reputação & ReAction</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #16: Travado na hora de escrever e-mails delicados?</h3>
+                    <p class="blog-resumo">Reescreva rascunhos brutos e ajuste o tom para ser mais diplomático, persuasivo ou executivo de forma instantânea.</p>
+                    <a href="artigos/artigo-pilula-16" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-15'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #00E676 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">DADOS DE<br>MANUTENÇÃO</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #15: Horas perdidas cruzando dados de manutenção?</h3>
+                    <p class="blog-resumo">Identifique padrões ocultos e correlações entre falhas de máquinas em grandes volumes de dados históricos instantaneamente com IA.</p>
+                    <a href="artigos/artigo-pilula-15" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-14'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #8A2BE2 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">IDEAÇÃO<br>COM IA</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #14: Reuniões de Kaizen sem novas ideias?</h3>
+                    <p class="blog-resumo">A criatividade humana tem limites. Descubra como utilizar a IA como parceiro de brainstorming incansável para sugerir dezenas de melhorias práticas.</p>
+                    <a href="artigos/artigo-pilula-14" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-13'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #003366 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">TRADUÇÃO<br>TÉCNICA</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #13: Manuais em outros idiomas a travar a operação?</h3>
+                    <p class="blog-resumo">Traduza PDFs inteiros de manuais técnicos de máquinas estrangeiras mantendo a formatação e os diagramas originais de forma instantânea com IA.</p>
+                    <a href="artigos/artigo-pilula-13" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-12'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #0A192F 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">PROGRAMAÇÃO<br>COM IA</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #12: Fim das horas perdidas a tentar programar</h3>
+                    <p class="blog-resumo">A barreira técnica já não é desculpa. Transforme as suas ideias em código pronto a usar em VBA ou Python apenas descrevendo o que precisa em linguagem natural.</p>
+                    <a href="artigos/artigo-pilula-12" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="financas" onclick="window.location.href='artigos/artigo-pilula-11'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">ORÇAMENTOS<br>RÁPIDOS</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(0, 230, 118, 0.12); color: #008744;">Finanças & Cash</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #11: Fim das horas perdidas a comparar compras</h3>
+                    <p class="blog-resumo">Como a IA pode extrair dados de múltiplos PDFs e consolidar tudo numa tabela comparativa de orçamentos de forma instantânea e sem custos ocultos.</p>
+                    <a href="artigos/artigo-pilula-11" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-10'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #00E676 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">APRESENTAÇÕES<br>INSTANTÂNEAS</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #10: Fim das horas perdidas a criar slides</h3>
+                    <p class="blog-resumo">Veja como a IA pode gerar slides profissionais e gráficos de alto impacto baseados apenas no texto bruto do seu relatório de gestão.</p>
+                    <a href="artigos/artigo-pilula-10" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-09'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #8A2BE2 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">INSPEÇÃO<br>VISUAL</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #09: Fim dos defeitos na linha de produção</h3>
+                    <p class="blog-resumo">Saiba como treinar modelos de Visão Computacional para identificar anomalias sem precisar de escrever uma única linha de código.</p>
+                    <a href="artigos/artigo-pilula-09" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-08'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #003366 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">NORMAS<br>TÉCNICAS</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #08: Fim das horas perdidas a caçar cláusulas</h3>
+                    <p class="blog-resumo">Transforme os seus PDFs estáticos em fontes de consulta inteligente. Encontre respostas em NRs e ISOs em segundos através de buscas semânticas.</p>
+                    <a href="artigos/artigo-pilula-08" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-07'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #0A192F 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">ESCALAS<br>AUTOMÁTICAS</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #07: Fim das horas a montar escalas de turno</h3>
+                    <p class="blog-resumo">Como algoritmos de otimização podem gerar escalas automáticas que respeitam leis trabalhistas e folgas, sem que perca horas em planilhas.</p>
+                    <a href="artigos/artigo-pilula-07" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-06'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">E-MAILS<br>PRIORIZADOS</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #06: Fim das horas perdidas na triagem de e-mails</h3>
+                    <p class="blog-resumo">Pare de ler e-mails de baixa prioridade. Descubra como a IA pode ler o sentimento de cada mensagem e enviar alertas apenas para o que é crítico.</p>
+                    <a href="artigos/artigo-pilula-06" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-05'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #00E676 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">LEITURA<br>MÁGICA</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #05: Chega de horas perdidas digitando dados</h3>
+                    <p class="blog-resumo">O fim da digitação dupla no chão de fábrica. Como usar Visão Computacional (OCR) para extrair dados de formulários de papel direto para o Excel.</p>
+                    <a href="artigos/artigo-pilula-05" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-04'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #8A2BE2 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">Causa Raiz<br>com IA</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #04: Acelerando a Análise de Causa Raiz</h3>
+                    <p class="blog-resumo">Chega de horas perdidas no diagrama de Ishikawa. Acelere a investigação de falhas e a técnica dos 5 Porquês usando Inteligência Artificial.</p>
+                    <a href="artigos/artigo-pilula-04" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-03'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #003366 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">POPs em Minutos</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #03: Criando POPs do Zero em Minutos</h3>
+                    <p class="blog-resumo">Documentar processos não precisa ser um pesadelo. Aprenda a estruturar Procedimentos Operacionais Padrão usando IA para garantir escala e qualidade.</p>
+                    <a href="artigos/artigo-pilula-03" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="produtividade" onclick="window.location.href='artigos/artigo-pilula-02'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #0A192F 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">Atas Automáticas</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(138, 43, 226, 0.1); color: #6C5CE7;">Produtividade</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #02: Fim das Horas Perdidas com Atas</h3>
+                    <p class="blog-resumo">Como a IA atua como seu ouvinte. Transforme reuniões em atas perfeitas e crie automações que lançam tarefas direto no Trello com responsáveis e prazos.</p>
+                    <a href="artigos/artigo-pilula-02" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="financas" onclick="window.location.href='artigos/artigo-pilula-01'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #004AAD 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">Dados Limpos</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(0, 230, 118, 0.12); color: #008744;">Finanças & Cash</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>Pílula #01: Pare de Formatar Planilhas Manualmente</h3>
+                    <p class="blog-resumo">Aprenda a usar o Jeito Rápido (Copilot) e o Profissional (Python) para formatar bases de dados brutas instantaneamente enquanto você toma café.</p>
+                    <a href="artigos/artigo-pilula-01" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="ia" onclick="window.location.href='artigos/artigo-automacao-8020'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #004AAD 0%, #00E676 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">A Regra 80/20</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(0, 74, 173, 0.1); color: var(--azul-tech);">IA na Prática</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>IA + Automação: Como Ganhar Tempo Livre Hoje</h3>
+                    <p class="blog-resumo">Pare de trabalhar duro, comece a trabalhar inteligente. Inverta a regra 80/20 do seu tempo descobrindo o poder de ferramentas combinadas como Fireflies, Copilot e Julius AI.</p>
+                    <a href="artigos/artigo-automacao-8020" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="card-blog fade-up" data-cat="ia" onclick="window.location.href='artigos/artigo-5-formas-praticas'">
+                <div class="blog-img-box">
+                    <div style="width:100%; height:100%; background: linear-gradient(135deg, #FF6B35 0%, #8A2BE2 100%); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+                        <span style="color:#FFF; font-family:'Poppins',sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25;">IA no Dia a Dia</span>
+                    </div>
+                </div>
+                <div class="blog-conteudo">
+                    <div class="blog-meta">
+                        <span class="blog-tag-badge" style="background: rgba(0, 74, 173, 0.1); color: var(--azul-tech);">IA na Prática</span>
+                        <div class="blog-data">
+                            <span>Julho 2026</span>
+                            <span>•</span>
+                            <span class="blog-tempo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 4 min de leitura</span>
+                        </div>
+                    </div>
+                    <h3>5 Formas Práticas de Usar IA no Dia a Dia</h3>
+                    <p class="blog-resumo">Muito além do ChatGPT. Conheça +15 ferramentas para descomplicar sua rotina, desde o Estudo Inteligente até Geração de Imagens exclusivas e Apresentações de Impacto.</p>
+                    <a href="artigos/artigo-5-formas-praticas" class="blog-link">Ler Artigo Completo <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="index.html"><img src="assets/logo-frameia-colorido.png?v=1.0.2" alt="Frame IA" class="logo-foter"></a>
+        <p style="color: var(--texto-corpo); font-size: 0.9rem; max-width: 500px; margin: 0 auto 20px;">Tecnologia prática e simples para o pequeno empreendedor prosperar.</p>
+        
+        <div style="margin-bottom: 30px;">
+            <a href="https://api.whatsapp.com/send?phone=5585992125971&text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20equipe%20da%20Frame%20%5BIA%5D" target="_blank" class="btn-whatsapp-sutil">
+                <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg> Falar no WhatsApp
+            </a>
+        </div>
+
+        <p style="color: #999; font-size: 0.85rem;">&copy; 2026 Frame [IA]. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function abrirModalPortal() { const m = document.getElementById('portalModal'); if(m) m.classList.add('ativo'); }
+        function fecharModalPortal() { const m = document.getElementById('portalModal'); if(m) m.classList.remove('ativo'); }
+        function abrirModalEsperaHubitat() { const m = document.getElementById('esperaHubitatModal'); if(m) m.classList.add('ativo'); }
+        function fecharModalEsperaHubitat() { const m = document.getElementById('esperaHubitatModal'); if(m) m.classList.remove('ativo'); }
+        function abrirModalEsperaReAction() { const m = document.getElementById('esperaReActionModal'); if(m) m.classList.add('ativo'); }
+        function fecharModalEsperaReAction() { const m = document.getElementById('esperaReActionModal'); if(m) m.classList.remove('ativo'); }
+
+        window.onclick = function(e) {
+            if (e.target === document.getElementById('esperaHubitatModal')) fecharModalEsperaHubitat();
+            if (e.target === document.getElementById('esperaReActionModal')) fecharModalEsperaReAction();
+            if (e.target === document.getElementById('portalModal')) fecharModalPortal();
+        }
+
+        function filtrar(categoria, btnElement) {
+            const filters = document.querySelectorAll('.tag-filter');
+            filters.forEach(f => f.classList.remove('ativo'));
+            
+            if (btnElement) {
+                btnElement.classList.add('ativo');
+            } else if (window.event && window.event.target) {
+                window.event.target.classList.add('ativo');
+            }
+
+            const cards = document.querySelectorAll('.card-blog');
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-cat');
+                if (categoria === 'todos' || cardCat === categoria) {
+                    card.style.display = 'flex';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            const h = document.getElementById('blog-header');
+            if (window.scrollY > 50) h.classList.add('scrolled');
+            else h.classList.remove('scrolled');
+        });
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

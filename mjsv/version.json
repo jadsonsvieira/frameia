@@ -2,16 +2,22 @@
     "site_id": "mjsv",
     "name": "MJSV Holding",
     "domain": "mjsv.com.br",
-    "version": "0.0.0",
-    "git_tag": "mjsv-v0.0.0",
-    "last_updated": "2026-08-01T22:24:07.264940",
-    "description": "Portal Institucional do Ecossistema MJSV Holding",
+    "version": "0.1.0",
+    "git_tag": "mjsv-v0.1.0",
+    "last_updated": "2026-10-02T16:40:00",
+    "description": "Versão 0.1.0: Inclusão dos dados cadastrais e fiscais da holding (Razão Social MJSV TECNOLOGIA E SOLUCOES DIGITAIS INOVA SIMPLES (I.S.), CNPJ 68.614.850/0001-13 e Sede em Eusébio - CE) no rodapé institucional.",
     "history": [
         {
             "version": "0.0.0",
             "tag": "mjsv-v0.0.0",
             "date": "2026-08-01T22:24:07.264960",
             "notes": "Versão estável v0.0.0 original restaurada e publicada no Hostinger."
+        },
+        {
+            "version": "0.1.0",
+            "tag": "mjsv-v0.1.0",
+            "date": "2026-10-02T16:40:00",
+            "notes": "Versão 0.1.0: Inclusão dos dados cadastrais e fiscais da holding (Razão Social MJSV TECNOLOGIA E SOLUCOES DIGITAIS INOVA SIMPLES (I.S.), CNPJ 68.614.850/0001-13 e Sede em Eusébio - CE) no rodapé institucional."
         }
     ]
 }
