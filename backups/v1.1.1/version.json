@@ -2,10 +2,10 @@
     "site_id": "frameia",
     "name": "Frame [IA]",
     "domain": "frameia.com.br",
-    "version": "1.1.1",
-    "git_tag": "frameia-v1.1.1",
-    "last_updated": "2026-10-02T16:05:00",
-    "description": "Versão 1.1.1: Inclusão oficial dos dados cadastrais e fiscais da empresa em conformidade com o Decreto nº 7.962/2013 e LGPD. Adicionada a Razão Social (MJSV TECNOLOGIA E SOLUCOES DIGITAIS INOVA SIMPLES (I.S.)), CNPJ (68.614.850/0001-13) e localização (Eusébio - CE, Brasil) no rodapé institucional de todas as páginas e no modal de contato.",
+    "version": "1.1.0",
+    "git_tag": "frameia-v1.1.0",
+    "last_updated": "2026-10-02T15:45:00",
+    "description": "Versão 1.1.0: Otimização responsiva completa e harmonização visual para mobile. Alinhamento central de botões de CTA no Hero ('Ver Soluções' e 'Falar no WhatsApp' com mesma largura), centralização da nota de resposta e trust-bar, ajuste proporcional da pílula do Hero com fonte fluida (clamp), compactação do cabeçalho fixo no mobile e uniformização de paddings em index, sobre e blog.",
     "history": [
         {
             "version": "0.0.0",
@@ -180,12 +180,6 @@
             "tag": "frameia-v1.1.0",
             "date": "2026-10-02T15:45:00",
             "notes": "Versão v1.1.0: Refatoração e alinhamento visual completo para dispositivos móveis. Centralização simétrica dos botões de ação e trust-bar no Hero, estilização proporcional da pílula com clamp para telas compactas, otimização da altura do cabeçalho fixo no mobile e uniformização de espaçamentos."
-        },
-        {
-            "version": "1.1.1",
-            "tag": "frameia-v1.1.1",
-            "date": "2026-10-02T16:05:00",
-            "notes": "Versão v1.1.1: Transparência e conformidade regulatória. Inclusão oficial dos dados cadastrais (MJSV TECNOLOGIA E SOLUCOES DIGITAIS INOVA SIMPLES (I.S.) - CNPJ: 68.614.850/0001-13) no rodapé de index, sobre e blog, e no modal de contato."
         }
     ]
 }
